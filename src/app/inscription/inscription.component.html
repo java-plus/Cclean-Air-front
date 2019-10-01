@@ -1,0 +1,89 @@
+<h1 class="p-3">S'inscrire</h1>
+
+<form #formInscription="ngForm">
+  <div class="form-group text-left">
+    <div class="row">
+      <label class="col-sm-4" for="nom">Nom</label>
+      <div class="col-sm-8">
+        <input class="w-100 text-dark" #nom="ngModel" [(ngModel)]="utilisateur.nom"
+               [ngModelOptions]="{updateOn: 'blur'}"
+               id="nom" name="nom" required placeholder="Holliway">
+        <p class="text-danger" *ngIf="nom.dirty && nom.invalid">{{champsInvalideMsg}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4" for="prenoms">Prénom</label>
+      <div class="col-sm-8">
+        <input class="w-100 text-dark" #prenoms="ngModel" [(ngModel)]="utilisateur.prenom"
+               [ngModelOptions]="{updateOn: 'blur'}"
+               id="prenoms" name="prenoms" required placeholder="Louis">
+        <p class="text-danger" *ngIf="prenoms.dirty && prenoms.invalid">{{champsInvalideMsg}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4" for="email">Email</label>
+      <div class="col-sm-8">
+        <input appEmailValidator class="w-100 text-dark" #email="ngModel" [(ngModel)]="utilisateur.email"
+               [ngModelOptions]="{updateOn: 'blur'}"
+               id="email" name="email" required placeholder="louis@mail.com">
+        <ng-container *ngIf="email.dirty && email.invalid">
+          <p class="text-danger" >{{champsInvalideMsg}}</p>
+          <ng-container *ngIf="email.errors.emailInvalide">
+            <p class="text-danger">Cet email est déjà utilisé.</p>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4" for="motDePasse">Mot de passe</label>
+      <div class="col-sm-8">
+        <input appUrlValidator class="w-100 text-dark" #mdp="ngModel" [(ngModel)]="utilisateur.motDePasse"
+               id="motDePasse" name="motDePasse" [ngModelOptions]="{updateOn: 'blur'}" placeholder="$$dsfIUH!è">
+        <ng-container *ngIf="mdp.dirty && mdp.invalid">
+          <p class="text-danger">
+            {{champsInvalideMsg}}
+          </p>
+        </ng-container>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4" for="motDePasse2">Valider le mot de passe</label>
+      <div class="col-sm-8">
+        <input appUrlValidator class="w-100 text-dark" #mdp2="ngModel" [(ngModel)]="utilisateur.motDePasse"
+               id="motDePasse2" name="motDePasse2" [ngModelOptions]="{updateOn: 'blur'}" placeholder="$$dsfIUH!è">
+        <ng-container *ngIf="mdp2.dirty && mdp2.invalid">
+          <p class="text-danger">
+            {{champsInvalideMsg}}
+          </p>
+        </ng-container>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4" for="commune">Commune</label>
+      <div class="col-sm-8">
+        <input appUrlValidator class="w-100 text-dark" #commune="ngModel" [(ngModel)]="utilisateur.commune"
+               id="commune" name="commune" [ngModelOptions]="{updateOn: 'blur'}" placeholder="$$dsfIUH!è">
+        <ng-container *ngIf="commune.dirty && commune.invalid">
+          <p class="text-danger">
+            {{champsInvalideMsg}}
+          </p>
+        </ng-container>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4" for="codePostal">Code postal</label>
+      <div class="col-sm-8">
+        <input appUrlValidator class="w-100 text-dark" #codePostal="ngModel" [(ngModel)]="utilisateur.codePostal"
+               id="codePostal" name="codePostal" [ngModelOptions]="{updateOn: 'blur'}" placeholder="$$dsfIUH!è">
+        <ng-container *ngIf="codePostal.dirty && codePostal.invalid">
+          <p class="text-danger">
+            {{champsInvalideMsg}}
+          </p>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <button (click)="creerCompte(formInscription)" type="submit" class="btn btn-warning float-right">Créer mon compte
+  </button>
+  <p class="text-danger" *ngIf="erreurCreerCollegueReqMsg">{{erreurCreerCollegueReqMsg}}</p>
+</form>
