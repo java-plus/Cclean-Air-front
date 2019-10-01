@@ -5,10 +5,12 @@ import { AppComponent } from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from "@angular/router";
 import {ROUTES} from "../../app.routes";
+import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProfilCompoComponent
   ],
   imports: [
     BrowserModule,

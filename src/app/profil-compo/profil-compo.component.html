@@ -1,0 +1,63 @@
+<section class="container p-5">
+  <div class="card bg-light text-dark">
+    <h1 class="p-3 card-header text-center">Mon Profil</h1>
+    <form class="card-body">
+      <div class="form-group text-left">
+        <div class="row p-2">
+          <label class="col-sm-4" for="nom">Nom</label>
+          <div class="col-sm-8">
+            <input class="w-100 text-dark" id="nom" name="nom" required placeholder="Votre nom">
+          </div>
+        </div>
+        <div class="row p-2">
+          <label class="col-sm-4" for="prenoms">Prénom</label>
+          <div class="col-sm-8">
+            <input class="w-100 text-dark" id="prenoms" name="prenoms" required placeholder="Votre prénom">
+          </div>
+        </div>
+        <div class="row p-2">
+          <label class="col-sm-4" for="email">Email</label>
+          <div class="col-sm-8">
+            <input type="email" class="w-100 text-dark" id="email" name="email" required
+              placeholder="Votre adresse mail">
+          </div>
+        </div>
+        <div class="row p-2">
+          <label class="col-sm-4" for="commune">Commune</label>
+          <div class="col-sm-8">
+            <input class="w-100 text-dark" id="commune" name="commune" required placeholder="Votre commune">
+          </div>
+        </div>
+        <div class="row p-2">
+          <label class="col-sm-4" for="alertes">Alertes</label>
+          <div class="col-sm-8">
+            <input type="checkbox" class="text-dark" id="alertes" name="alertes" required>
+            <label class="w-10 text-dark px-2">Commune</label>
+          </div>
+        </div>
+        <div class="row p-2">
+          <label class="col-sm-4" for="password">Mot de passe actuel</label>
+          <div class="col-sm-8">
+            <input type="password" class="w-100 text-dark" id="password" name="password" required
+              placeholder="Votre mot de passe">
+          </div>
+        </div>
+        <div class="row p-2">
+          <label class="col-sm-4" for="newPassword">Nouveau mot de passe</label>
+          <div class="col-sm-8">
+            <input type="password" class="w-100 text-dark" id="newPassword" name="newPassword" required
+              placeholder="Votre nouveau mot de passe">
+          </div>
+        </div>
+        <div class="row p-2">
+          <div class="col-sm-6">
+            <button type="submit" class="btn btn-primary float-right">Modifier Profil</button>
+          </div>
+          <div class="col-sm-auto">
+            <button type="submit" class="btn btn-primary float-right">Supprimer Profil</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
