@@ -1,4 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  backendUrl: 'https://ccleanair.cleverapps.io'
 
 };
