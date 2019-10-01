@@ -1,12 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from "@angular/router";
 import {ROUTES} from "./app.routes";
-import { InscriptionComponent } from './inscription/inscription.component';
+import {InscriptionComponent} from './inscription/inscription.component';
 import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -17,9 +18,11 @@ import {FormsModule} from "@angular/forms";
     BrowserModule,
     NgbModule,
     RouterModule.forRoot(ROUTES),
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
