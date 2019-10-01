@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "12"
+before_script:
+  - npm install
+script:
+  - npm run build
+  - cp dist/Cclean-Air-front/index.html dist/Cclean-Air-front/404.html
+deploy:
+  local-dir: dist/Cclean-Air-front
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  on:
+    branch: master
+notifications:
+  email: false
