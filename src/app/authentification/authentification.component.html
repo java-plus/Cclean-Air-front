@@ -12,6 +12,7 @@
         <div class="form-group">
           <label for="motDePasse">Mot de passe :</label>
           <input type="password" required #motDePasse id="motDePasse">
+          <p *ngIf="statutErreur==true" class="text-danger d-inline">Identifiants incorrects, <br> merci de réessayer.</p>
           <button class="btn-primary mt-3" (click)="authentifier(email.value, motDePasse.value)">Connexion</button>
         </div>
       </form>

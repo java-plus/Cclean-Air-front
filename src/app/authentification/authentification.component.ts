@@ -9,6 +9,8 @@ import {Router} from '@angular/router';
 })
 export class AuthentificationComponent implements OnInit {
 
+  statutErreur: boolean;
+
 
   constructor(private service: AuthentificationService, private router: Router) {
   }
@@ -16,6 +18,7 @@ export class AuthentificationComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
   /**
    * Fait appel a la méthode de service pour lui envoyer les informations de connexion,
@@ -28,6 +31,7 @@ export class AuthentificationComponent implements OnInit {
       this.router.navigate(['/recherche']);
     }, () => {
       this.router.navigate(['/connexion']);
+      this.statutErreur = true;
     });
   }
 
