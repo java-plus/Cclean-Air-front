@@ -8,11 +8,13 @@ import {ROUTES} from "./app.routes";
 import {InscriptionComponent} from './inscription/inscription.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {AuthentificationComponent} from "./authentification/authentification.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    AuthentificationComponent
   ],
   imports: [
     BrowserModule,
