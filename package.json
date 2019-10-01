@@ -2,7 +2,6 @@
   "name": "cclean-air-front",
   "version": "0.0.0",
   "scripts": {
-
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod --base-href https://java-plus.github.io/Cclean-Air-front/",
@@ -20,6 +19,7 @@
     "@angular/platform-browser": "~8.2.7",
     "@angular/platform-browser-dynamic": "~8.2.7",
     "@angular/router": "~8.2.7",
+    "@ng-bootstrap/ng-bootstrap": "^5.1.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
