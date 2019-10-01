@@ -17,11 +17,17 @@ export class AuthentificationComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Fait appel a la méthode de service pour lui envoyer les informations de connexion,
+   * redirige vers la page de login ou l'accueil selon la réponse
+   * @param email de l'utilisateur
+   * @param motDePasse de l'utilisateur
+   */
   authentifier(email: string, motDePasse: string): void {
     this.service.authentifier(email, motDePasse).subscribe(() => {
-      this.router.navigate(['/accueil']);
+      this.router.navigate(['/recherche']);
     }, () => {
-
+      this.router.navigate(['/connexion']);
     });
   }
 

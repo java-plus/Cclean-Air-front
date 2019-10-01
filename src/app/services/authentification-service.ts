@@ -12,7 +12,11 @@ export class AuthentificationService {
   constructor(private http: HttpClient) {
   }
 
-
+  /**
+   * Une requète est envoyée à l'application back, renvoie un observateur
+   * @param Email de l'utilisateur
+   * @param motDePasse de l'utilisateur
+   */
   authentifier(email: string, motDePasse: string): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
