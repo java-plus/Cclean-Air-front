@@ -10,6 +10,8 @@ import {AuthentificationComponent} from './authentification/authentification.com
 
 import {RouterModule} from '@angular/router';
 import {ROUTES} from '../../app.routes';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -20,7 +22,10 @@ import {ROUTES} from '../../app.routes';
   imports: [
     BrowserModule,
     NgbModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    FormsModule,
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
