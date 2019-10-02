@@ -1,24 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthentificationService} from '../services/authentification-service';
 import {Router} from '@angular/router';
 
+/**
+ * Composant gérant la page d'authentification.
+ */
 @Component({
   selector: 'app-authentification',
   templateUrl: './authentification.component.html',
-  styleUrls: ['./authentification.component.css']
+  styles: []
 })
-export class AuthentificationComponent implements OnInit {
+export class AuthentificationComponent {
 
   statutErreur: boolean;
 
-
   constructor(private service: AuthentificationService, private router: Router) {
   }
-
-
-  ngOnInit() {
-  }
-
 
   /**
    * Fait appel a la méthode de service pour lui envoyer les informations de connexion,

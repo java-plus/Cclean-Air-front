@@ -4,6 +4,9 @@ import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 const URL_BACKEND = environment.backendUrl;
 
+/**
+ * Classe des services de l'authentification.
+ */
 @Injectable({
   providedIn: 'root'
 })
