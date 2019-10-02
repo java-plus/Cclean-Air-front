@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Utilisateur} from "../entities/utilisateur";
+import {UtilisateurInscription} from "../entities/utilisateurInscription";
 import {InscriptionService} from "../services/inscription-service";
 import {NgForm} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -12,11 +12,11 @@ import {HttpErrorResponse} from "@angular/common/http";
   templateUrl: './inscription.component.html',
   styles: ['input.ng-dirty.ng-invalid {border-color: tomato}']
 })
-export class InscriptionComponent implements OnInit {
+export class InscriptionComponent {
 
   champsInvalideMsg: string = 'Champ invalide.';
   motDePasseDeConfirmation: string;
-  utilisateur: Utilisateur = new Utilisateur(null, null, null, null, ['MEMBRE'], null, null, false);
+  utilisateur: UtilisateurInscription = new UtilisateurInscription(null, null, null, null, ['MEMBRE'], null, null, false);
   isErreurCreation: boolean = false;
   isFormulaireValide: boolean = true;
   fonctionnalite = 'create';
@@ -27,10 +27,6 @@ export class InscriptionComponent implements OnInit {
    * @param inscriptionService : InscriptionService le service gérant les inscriptions
    */
   constructor(private inscriptionService: InscriptionService) {
-  }
-
-  checkAlert() {
-    this.utilisateur.statutNotification = true;
   }
 
   /**
@@ -46,16 +42,13 @@ export class InscriptionComponent implements OnInit {
         this.isFormulaireValide = true;
         this.isErreurCreation = false;
         this.fonctionnalite = 'read';
-        this.utilisateur = new Utilisateur(null, null, null, null, ['MEMBRE'], null, null, false);
+        this.utilisateur = new UtilisateurInscription(null, null, null, null, ['MEMBRE'], null, null, false);
         },
       (error: HttpErrorResponse) => {
         this.erreurMsg = error.error;
         this.isErreurCreation = true;
       }
     );
-  }
-
-  ngOnInit() {
   }
 
 }

@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Utilisateur} from "../entities/utilisateur";
+import {UtilisateurInscription} from "../entities/utilisateurInscription";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
@@ -24,9 +24,9 @@ export class InscriptionService {
 
   /**
    * Méthode effectuant la requête de création d'un utilisateur auprès de l'API.
-   * @param utilisateur : Utilisateur l'utilisateur à créer
+   * @param utilisateur : UtilisateurInscription l'utilisateur à créer
    */
-  creerCompte(utilisateur: Utilisateur): Observable<any> {
+  creerCompte(utilisateur: UtilisateurInscription): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
@@ -34,7 +34,7 @@ export class InscriptionService {
       withCredentials: true
     };
 
-    return this._http.post<Utilisateur>(`${URL_BACKEND}/comptes`,
+    return this._http.post<UtilisateurInscription>(`${URL_BACKEND}/comptes`,
       utilisateur, httpOptions)
   }
 }
