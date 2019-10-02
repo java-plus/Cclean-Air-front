@@ -1,0 +1,25 @@
+<div class="d-flex align-items-center h-100 container">
+
+  <div class="row">
+
+    <div class="col-6 ">
+
+      <form>
+        <div class="form-group">
+          <label for="email">Adresse email : </label>
+          <input type="text" required #email id="email">
+        </div>
+        <div class="form-group">
+          <label for="motDePasse">Mot de passe :</label>
+          <input type="password" required #motDePasse id="motDePasse">
+          <button class="btn-primary mt-3" (click)="authentifier(email.value, motDePasse.value)">Connexion</button>
+        </div>
+      </form>
+
+    </div>
+
+
+  </div>
+
+</div>
+
