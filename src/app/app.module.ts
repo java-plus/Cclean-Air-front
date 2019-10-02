@@ -12,12 +12,16 @@ import {RouterModule} from '@angular/router';
 import {ROUTES} from '../../app.routes';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { RechrcheComponent } from './rechrche/rechrche.component';
+import { RechercheComponent } from './recherche/recherche.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthentificationComponent
+    AuthentificationComponent,
+    RechrcheComponent,
+    RechercheComponent
   ],
   imports: [
     BrowserModule,
