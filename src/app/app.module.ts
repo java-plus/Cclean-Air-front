@@ -12,12 +12,14 @@ import {RouterModule} from '@angular/router';
 import {ROUTES} from '../../app.routes';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {RechercheComponent} from './recherche/recherche.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthentificationComponent
+    AuthentificationComponent,
+    RechercheComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,7 @@ import {HttpClientModule} from '@angular/common/http';
     RouterModule.forRoot(ROUTES),
     FormsModule,
     HttpClientModule
+
 
   ],
   providers: [],
