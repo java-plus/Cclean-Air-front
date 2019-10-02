@@ -1,5 +1,5 @@
 /**
- * Classe représentant un utilisateur.
+ * Classe représentant un utilisateur lors de l'inscription.
  */
 export class UtilisateurInscription {
 
