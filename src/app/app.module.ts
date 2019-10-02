@@ -31,6 +31,7 @@ import { AccueilComponent } from './accueil/accueil.component';
     RouterModule.forRoot(ROUTES),
     FormsModule,
     HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
