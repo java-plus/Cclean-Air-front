@@ -13,13 +13,15 @@ import {ROUTES} from '../../app.routes';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { CommuneComponent } from './commune/commune.component';
+import { CommuneResultatsComponent } from './commune/commune-resultats/commune-resultats.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthentificationComponent,
-    CommuneComponent
+    CommuneComponent,
+    CommuneResultatsComponent
   ],
   imports: [
     BrowserModule,

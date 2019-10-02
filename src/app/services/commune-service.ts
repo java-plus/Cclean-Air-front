@@ -27,7 +27,10 @@ export class CommuneService {
    */
   constructor(private http: HttpClient) { }
 
-
+  /**
+   * méthode qui récupère l'objet donneesLocalesDto pour la visualisation des données pour un indicateur à la dernière date d'enregistrement.
+   * @param codeInsee
+   */
   afficherDonneesLocales(codeInsee: string): Observable<DonneesLocalesDto> {
 
 
