@@ -1,0 +1,125 @@
+<section class="container p-5">
+  <div class="card bg-dark text-light">
+    <h1 class="p-3 card-header text-center">S'inscrire</h1>
+    <form *ngIf="fonctionnalite !== 'read'" #formInscription="ngForm" class="card-body">
+      <div class="form-group text-left">
+        <div class="row p-2">
+          <label class="col-sm-4" for="nom">Nom</label>
+          <div class="col-sm-8">
+            <input class="w-100 text-dark" #nom="ngModel" [(ngModel)]="utilisateur.nom"
+                   [ngModelOptions]="{updateOn: 'blur'}"
+                   id="nom" name="nom" required placeholder="Holliway">
+            <p class="text-danger" *ngIf="(nom.dirty && nom.invalid) || !isFormulaireValide">{{champsInvalideMsg}}</p>
+          </div>
+        </div>
+        <div class="row p-2">
+          <label class="col-sm-4" for="prenoms">Prénom</label>
+          <div class="col-sm-8">
+            <input class="w-100 text-dark" #prenoms="ngModel" [(ngModel)]="utilisateur.prenom"
+                   [ngModelOptions]="{updateOn: 'blur'}"
+                   id="prenoms" name="prenoms" required placeholder="Louis">
+            <p class="text-danger" *ngIf="(prenoms.dirty && prenoms.invalid) || !isFormulaireValide">{{champsInvalideMsg}}</p>
+          </div>
+        </div>
+        <div class="row p-2">
+          <label class="col-sm-4" for="email">Email</label>
+          <div class="col-sm-8">
+            <input type="email" class="w-100 text-dark" #email="ngModel"
+                   [(ngModel)]="utilisateur.email"
+                   [ngModelOptions]="{updateOn: 'blur'}"
+                   id="email" name="email" required placeholder="louis@mail.fr">
+            <ng-container *ngIf="(email.dirty && email.invalid) || !isFormulaireValide">
+              <p class="text-danger">
+                {{champsInvalideMsg}}
+              </p>
+            </ng-container>
+          </div>
+        </div>
+        <div class="row p-2">
+          <label class="col-sm-4" for="motDePasse">Mot de passe</label>
+          <div class="col-sm-8">
+            <input pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" type="password"
+                   class="w-100 text-dark" #mdp="ngModel"
+                   [(ngModel)]="utilisateur.motDePasse" aria-describedby="mdpAide"
+                   id="motDePasse" name="motDePasse" [ngModelOptions]="{updateOn: 'blur'}" placeholder="$5dsfIUH!è">
+            <small id="mdpAide" class="form-text text-muted">Doit comporter au moins 8 caractères dont 1
+              majuscule, 1 minuscule, 1 caractère spécial et 1 chiffre.</small>
+            <ng-container *ngIf="(mdp.dirty && mdp.invalid) || !isFormulaireValide">
+              <p class="text-danger">
+                {{champsInvalideMsg}}
+              </p>
+            </ng-container>
+          </div>
+        </div>
+        <div class="row p-2">
+          <label class="col-sm-4" for="motDePasse2">Valider le mot de passe</label>
+          <div class="col-sm-8">
+            <input type="password" class="w-100 text-dark" #mdp2="ngModel"
+                   [(ngModel)]="motDePasseDeConfirmation"
+                   id="motDePasse2" name="motDePasse2" [ngModelOptions]="{updateOn: 'blur'}" placeholder="$5dsfIUH!è">
+            <ng-container *ngIf="(mdp2.dirty && motDePasseDeConfirmation !== utilisateur.motDePasse) || !isFormulaireValide">
+              <p class="text-danger">
+                Les mots de passe ne correspondent pas.
+              </p>
+            </ng-container>
+          </div>
+        </div>
+        <div class="row p-2">
+          <label class="col-sm-4" for="commune">Commune</label>
+          <div class="col-sm-8">
+            <input class="w-100 text-dark" #commune="ngModel" [(ngModel)]="utilisateur.nomCommune"
+                   id="commune" name="commune" [ngModelOptions]="{updateOn: 'blur'}" placeholder="Nantes" required>
+            <ng-container *ngIf="(commune.dirty && commune.invalid) || !isFormulaireValide">
+              <p class="text-danger">
+                {{champsInvalideMsg}}
+              </p>
+            </ng-container>
+          </div>
+        </div>
+        <div class="row p-2">
+          <label class="col-sm-4" for="codePostal">Code postal</label>
+          <div class="col-sm-8">
+            <input class="w-100 text-dark" #codePostal="ngModel" [(ngModel)]="utilisateur.codePostal"
+                   id="codePostal" name="codePostal" [ngModelOptions]="{updateOn: 'blur'}" placeholder="44000" required>
+            <ng-container *ngIf="(codePostal.dirty && codePostal.invalid) || !isFormulaireValide">
+              <p class="text-danger">
+                {{champsInvalideMsg}}
+              </p>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="form-check p-2 ml-5">
+        <input class="form-check-input" name="alerteCheckbox" type="checkbox" id="checkboxAlerte"
+               [(ngModel)]="utilisateur.statutNotification">
+        <label class="form-check-label" for="checkboxAlerte">
+          Je souhaite recevoir des alertes pollution pour ma commune.
+        </label>
+      </div>
+      <div class="form-check p-2 ml-5">
+        <input class="form-check-input" type="checkbox" id="checkboxRGPD" required>
+        <label class="form-check-label" for="checkboxRGPD">
+          <span class="text-secondary">[Requis]</span> J'accepte que Cclean-Air traite les données reccueillies dans ce
+          formulaire.
+          Pour plus d'informations sur le traitement de ces données, consultez notre page :
+        </label>
+        <a class="text-primary" routerLink="/gestion-donnees">informations relatives à la gestion des données</a>
+        <ng-container *ngIf="!isFormulaireValide">
+          <p class="text-danger">
+            Cette case doit être cochée pour créer un compte.
+          </p>
+        </ng-container>
+      </div>
+      <button (click)="creerCompte(formInscription)" type="submit" class="btn btn-primary float-right">Créer mon compte
+      </button>
+      <p class="text-danger font-weight-bold" *ngIf="isErreurCreation">Une erreur est survenue dans la création du
+        compte. {{erreurMsg}}</p>
+      <p class="text-danger text-center font-weight-bold" *ngIf="!isFormulaireValide">Le formulaire n'est pas valide.
+        Merci de le corriger.</p>
+    </form>
+    <div *ngIf="fonctionnalite === 'read'" class="p-5">
+      <p class="text-success text-center">Votre compte a bien été créé.</p>
+      <a class="text-primary" routerLink="/recherche">Aller à la recherche.</a>
+    </div>
+  </div>
+</section>
