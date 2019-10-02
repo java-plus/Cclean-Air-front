@@ -1,7 +1,7 @@
 /**
  * Classe représentant un utilisateur.
  */
-export class Utilisateur {
+export class UtilisateurInscription {
   nom: string;
   prenom: string;
   email: string;
