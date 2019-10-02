@@ -6,17 +6,34 @@
         <h1 class="text-center">Se connecter</h1>
       </div>
       <div class="card-body p-3">
-        <form>
+        <form class="pt-3" #formAuthentification="ngForm">
           <div class="form-group row">
-            <label for="email" class="col-4">Email :</label>
-            <input type="text" placeholder="admin" class="col-8" required #email id="email">
+            <label for="email" class="col-md-4 col-12">Email :</label>
+            <div class="col-12 col-md-8">
+              <input type="email" placeholder="admin@mail.com / user@mail.com" class="w-100" required
+                     #email="ngModel" [(ngModel)]="utilisateur.email" name="email"
+                     id="email">
+              <ng-container *ngIf="(email.dirty && email.invalid)">
+                <p class="text-danger">
+                  Ce champ est invalide.
+                </p>
+              </ng-container>
+            </div>
           </div>
           <div class="form-group row">
-            <label for="motDePasse" class="col-4">Mot de passe :</label>
-            <input type="password" class="col-8" placeholder="admin@mail.com" required #motDePasse id="motDePasse">
+            <label for="motDePasse" class="col-md-4 col-12">Mot de passe :</label>
+            <div class="col-12 col-md-8">
+              <input type="password" class="w-100" placeholder="admin / user" required
+                     id="motDePasse" #motDePasse="ngModel" [(ngModel)]="utilisateur.motDePasse" name="motDePasse">
+              <ng-container *ngIf="(motDePasse.dirty && motDePasse.invalid)">
+                <p class="text-danger">
+                  Ce champ est invalide.
+                </p>
+              </ng-container>
+            </div>
           </div>
-          <div class="form-group text-center">
-            <button class="btn btn-primary" (click)="authentifier(email.value, motDePasse.value)">Valider</button>
+          <div class="form-group text-center pt-2">
+            <button class="btn btn-primary" (click)="authentifier(formAuthentification)">Valider</button>
           </div>
           <p *ngIf="statutErreur==true" class="text-danger font-weight-bold text-center">Identifiants incorrects, merci
             de réessayer.
@@ -27,4 +44,3 @@
   </div>
 
 </div>
-

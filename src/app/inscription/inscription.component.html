@@ -29,10 +29,10 @@
                    [ngModelOptions]="{updateOn: 'blur'}"
                    id="email" name="email" required placeholder="louis@mail.fr">
             <ng-container *ngIf="(email.dirty && email.invalid) || !isFormulaireValide">
-              <p class="text-danger">
-                {{champsInvalideMsg}}
-              </p>
-            </ng-container>
+            <p class="text-danger">
+              {{champsInvalideMsg}}
+            </p>
+          </ng-container>
           </div>
         </div>
         <div class="row p-2">
