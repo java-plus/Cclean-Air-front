@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { tap } from 'rxjs/operators';
 import { UtilisateurProfil } from '../entities/UtilisateurProfil';
 
 const URL_BACKEND = environment.backendUrl;
@@ -23,4 +22,16 @@ export class ProfilService {
   visualiserProfil(): Observable<UtilisateurProfil> {
     return this.http.get<UtilisateurProfil>(URL_BACKEND.concat('/profil'), { withCredentials: true });
     }
+
+  modifierProfil(utilisateur: UtilisateurProfil): Observable<any> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      withCredentials: true
+    };
+
+    return this.http.patch<any>(URL_BACKEND.concat('/profil/modification'), utilisateur, httpOptions);
+  }
 }

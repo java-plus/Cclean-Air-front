@@ -11,12 +11,18 @@ import { UtilisateurProfil } from '../entities/UtilisateurProfil';
 })
 export class ProfilCompoComponent implements OnInit {
 
-  utilisateur = new UtilisateurProfil('', '', '', '', [''], null, '');
-  email: string;
+  utilisateur = new UtilisateurProfil('', '', '', '', [''], null, '', '', '');
+  error: string;
 
   constructor(private route: ActivatedRoute, private profilService: ProfilService) { }
 
   ngOnInit() {
       this.profilService.visualiserProfil().subscribe(utilisateurCo => this.utilisateur = utilisateurCo);
     }
+
+  modifierProfil() {
+    this.profilService.modifierProfil(this.utilisateur).subscribe(result => { }, (err: any) => {
+      this.error = err.error.message;
+    });
+  }
 }

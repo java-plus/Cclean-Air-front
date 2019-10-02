@@ -6,52 +6,79 @@
         <div class="row p-2">
           <label class="col-sm-4" for="nom">Nom</label>
           <div class="col-sm-8">
-            <input class="w-100 text-dark" id="nom" name="nom" required placeholder="{{utilisateur.nom}}">{{utilisateur.nom}}
+            <input class="w-100 text-dark" id="nom" name="nom" [(ngModel)]="utilisateur.nom" #nom="ngModel"
+              value="{{utilisateur.nom}}">
           </div>
         </div>
         <div class="row p-2">
-          <label class="col-sm-4" for="prenoms">Prénom</label>
+          <label class="col-sm-4" for="prenom">Prénom</label>
           <div class="col-sm-8">
-            <input class="w-100 text-dark" id="prenoms" name="prenoms" required placeholder="Votre prénom">
+            <input class="w-100 text-dark" id="prenom" name="prenom" [(ngModel)]="utilisateur.prenom" #prenom="ngModel"
+              value="{{utilisateur.prenom}}">
           </div>
         </div>
         <div class="row p-2">
           <label class="col-sm-4" for="email">Email</label>
           <div class="col-sm-8">
-            <input type="email" class="w-100 text-dark" id="email" name="email" required
-              placeholder="Votre adresse mail">
+            <input type="email" class="w-100 text-dark" id="email" name="email" [(ngModel)]="utilisateur.email"
+              #email="ngModel" value="{{utilisateur.email}}">
           </div>
         </div>
         <div class="row p-2">
           <label class="col-sm-4" for="commune">Commune</label>
           <div class="col-sm-8">
-            <input class="w-100 text-dark" id="commune" name="commune" required placeholder="Votre commune">
+            <input class="w-100 text-dark" id="commune" name="commune" [(ngModel)]="utilisateur.commune"
+              #commune="ngModel" value="{{utilisateur.commune}}">
+          </div>
+        </div>
+        <div class="row p-2">
+          <label class="col-sm-4" for="statutNotification">Alerte ma commune</label>
+          <div class="col-sm-8">
+            <div class="row p-2">
+              <input type="checkbox" class="text-dark" id="statutNotification" name="statutNotification"
+                [(ngModel)]="utilisateur.statutNotification" #statutNotification="ngModel"
+                value="{{utilisateur.statutNotification}}">
+              <label class="w-10 text-dark px-2">{{utilisateur.commune}}</label>
+            </div>
           </div>
         </div>
         <div class="row p-2">
           <label class="col-sm-4" for="alertes">Alertes</label>
           <div class="col-sm-8">
-            <input type="checkbox" class="text-dark" id="alertes" name="alertes" required>
-            <label class="w-10 text-dark px-2">Commune</label>
+            <div class="row p-2" *ngFor="let indicateur of utilisateur.listeIndicateur">
+              <input type="checkbox" class="text-dark" id="alertes" name="alertes"
+                [(ngModel)]="utilisateur.listeIndicateur" #alertes="ngModel" value="{{utilisateur.listeIndicateur}}">
+              <label class="w-10 text-dark px-2">{{utilisateur.listeIndicateur}}</label>
+            </div>
           </div>
         </div>
         <div class="row p-2">
           <label class="col-sm-4" for="password">Mot de passe actuel</label>
           <div class="col-sm-8">
-            <input type="password" class="w-100 text-dark" id="password" name="password" required
-              placeholder="Votre mot de passe">
+            <input type="password" class="w-100 text-dark" id="password" name="password"
+              placeholder="Votre mot de passe actuel" #motDePasseActuel>
           </div>
         </div>
         <div class="row p-2">
           <label class="col-sm-4" for="newPassword">Nouveau mot de passe</label>
           <div class="col-sm-8">
-            <input type="password" class="w-100 text-dark" id="newPassword" name="newPassword" required
-              placeholder="Votre nouveau mot de passe">
+            <input type="password" class="w-100 text-dark" id="newPassword" name="newPassword"
+              placeholder="Votre nouveau mot de passe" #motDePasseNouveau>
+          </div>
+        </div>
+        <div class="row p-2">
+          <label class="col-sm-4" for="validationPassword">Retapez le nouveau mot de passe</label>
+          <div class="col-sm-8">
+            <input type="password" class="w-100 text-dark" id="validationPassword" name="validationPassword"
+              placeholder="Nouveau mot de passe" #getMotDePasseValidation>
           </div>
         </div>
         <div class="row p-2">
           <div class="col-sm-6">
-            <button type="submit" class="btn btn-primary float-right">Modifier Profil</button>
+            <button type="submit" class="btn btn-primary float-right"
+              [disabled]="nom.invalid || prenom.invalid || email.invalid || commune.invalid || motDePasseActuel.invalid || motDePasseNouveau.invalid || getMotDePasseValidation.invalid"
+              (click)="modifierProfil(utilisateur.nom, utilisateur.prenom, utilisateur.email, utilisateur.commune, utilisateur.listeIndicateur, utilisateur.motDePasseActuel, utilisateur.motDePasseNouveau, utilisateur.getMotDePasseNouveauValidation)">Modifier
+              Profil</button>
           </div>
           <div class="col-sm-auto">
             <button type="submit" class="btn btn-primary float-right">Supprimer Profil</button>

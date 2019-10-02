@@ -5,10 +5,12 @@ export class UtilisateurProfil {
   nom: string;
   prenom: string;
   email: string;
-  nomCommune: string;
+  commune: string;
   listeIndicateur: string[];
   statutNotification: boolean;
-  motDePasse: string;
+  motDePasseActuel: string;
+  motDePasseNouveau: string;
+  getMotDePasseNouveauValidation: string;
 
   /**
    * Constructeur.
@@ -19,15 +21,20 @@ export class UtilisateurProfil {
    * @param listeIndicateur : string[] liste des indicateurs de l'utilisateur
    * @param statutNotification : boolean statut des notifications pour la commune de l'utilisateur
    * @param motDePasse : string mot de passe de l'utilisateur
+   * @param motDePasseNouveau : string nouveau mot de passe de l'utilisateur
+   * @param getMotDePasseNouveauValidation : string validation du nouveau mot de passe
    */
-  constructor(nom: string, prenom: string, email: string, nomCommune: string,
-              listeIndicateur: string[], statutNotification: boolean, motDePasse: string) {
+  constructor(nom: string, prenom: string, email: string, commune: string,
+              listeIndicateur: string[], statutNotification: boolean, motDePasseActuel: string,
+              motDePasseNouveau: string, getMotDePasseNouveauValidation: string) {
     this.nom = nom;
     this.prenom = prenom;
     this.email = email;
-    this.nomCommune = nomCommune;
+    this.commune = commune;
     this.listeIndicateur = listeIndicateur;
     this.statutNotification = statutNotification;
-    this.motDePasse = motDePasse;
+    this.motDePasseActuel = motDePasseActuel;
+    this.motDePasseNouveau = motDePasseNouveau;
+    this.getMotDePasseNouveauValidation = getMotDePasseNouveauValidation;
   }
 }
