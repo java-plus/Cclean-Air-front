@@ -1,4 +1,5 @@
 #map_recherche{
   height: 600px;
-  width: 100%
+  width: 80%;
+  align-items: center;
 }
