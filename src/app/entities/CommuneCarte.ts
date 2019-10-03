@@ -1,3 +1,6 @@
+/**
+ * Classe représentant une commune sur la carte.
+ */
 export class CommuneCarte {
   public codeInsee: string;
   public codePostal: string;
