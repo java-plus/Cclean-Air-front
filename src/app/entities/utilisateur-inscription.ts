@@ -23,7 +23,9 @@ export class UtilisateurInscription {
    * @param codePostal : string code postal de la localisation de l'utilisateur
    * @param statutNotification : boolean statut des notifications pour la commune de l'utilisateur
    */
-  constructor(nom: string, prenom: string, email: string, motDePasse: string, statuts: string[], nomCommune: string, codePostal: string, statutNotification: boolean) {
+  constructor(nom: string, prenom: string, email: string, motDePasse: string,
+              statuts: string[], nomCommune: string, codePostal: string,
+              statutNotification: boolean) {
     this.nom = nom;
     this.prenom = prenom;
     this.email = email;
