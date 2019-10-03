@@ -13,6 +13,14 @@ export class VisualiserIndicateursComponent implements OnInit {
 
   indicateurVide = true;
 
+  affichageIndicateurs = true;
+
+  suppressionIndicateur = false;
+
+  creationIndicateur = false;
+
+  communeSuppression: CommuneIndicateur;
+
   constructor(private indicateursService: IndicateursService) { }
 
   ngOnInit() {
@@ -27,4 +35,22 @@ export class VisualiserIndicateursComponent implements OnInit {
         err => { });
   }
 
+  supprimerIndicateur(communeIndicateur: CommuneIndicateur) {
+    this.affichageIndicateurs = false;
+    this.suppressionIndicateur = true;
+    this.communeSuppression = communeIndicateur;
+
+  }
+
+
+  annulationSuppressionIndicateur() {
+    this.suppressionIndicateur = false;
+    this.affichageIndicateurs = true;
+  }
+
+  confirmationSuppressionIndicateur(communeSuppression) {
+    this.indicateursService.supprimerIndicateur(communeSuppression)
+      .subscribe(() => { }, () => { });
+
+  }
 }

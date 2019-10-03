@@ -1,10 +1,10 @@
 export class CommuneIndicateur {
-  commune: string;
-  alerte: boolean;
+  nomCommune: string;
+  codeInsee: string;
 
-  constructor(commune: string, alerte: boolean) {
-    this.commune = commune;
-    this.alerte = alerte;
+  constructor(nomCommune: string, codeInsee: string) {
+    this.nomCommune = nomCommune;
+    this.codeInsee = codeInsee;
 
   }
 

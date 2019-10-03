@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from "@angular/router";
@@ -14,16 +13,22 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { IndicateursComponent } from './indicateurs/indicateurs.component';
 import { VisualiserIndicateursComponent } from './indicateurs/visualiser-indicateurs/visualiser-indicateurs.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { RechercheComponent } from './recherche/recherche.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+
+    MenuComponent,
+    RechercheComponent,
     InscriptionComponent,
     AuthentificationComponent,
     InfosRGPDComponent,
     AccueilComponent,
     IndicateursComponent,
     VisualiserIndicateursComponent
+
   ],
   imports: [
     BrowserModule,
