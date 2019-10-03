@@ -2,7 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
 import {DataService} from '../services/data.service';
 
-
+/**
+ * Composant gérant la page de recherche des informations météorologiques d'une
+ * commune.
+ */
 @Component({
   selector: 'app-recherche',
   templateUrl: './recherche.component.html',
