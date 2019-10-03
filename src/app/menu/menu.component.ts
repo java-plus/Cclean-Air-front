@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit {
   isAdmin: boolean;
 
   /**
-   *variable qui permet de gérer l'affichage du menu en mode mobile   *
+   * Variable qui permet de gérer l'affichage du menu en mode mobile
    * @memberof MenuComponent
    */
   isCollapsed = true;
@@ -27,16 +27,18 @@ export class MenuComponent implements OnInit {
   constructor(private authentificationService: AuthentificationService) { }
 
   /**
-   *Permet l'affichage de la partie administration du menu de navigation, uniquement si on est connecté en admin
+   * Permet l'affichage de la partie administration du menu de navigation,
+   * uniquement si on est connecté en admin
    *
    * @memberof MenuComponent
    */
   ngOnInit() {
     this.authentificationService.isAdmin()
       .subscribe(
-        () => { this.isAdmin = true; },
-        () => { this.isAdmin = false; }
-      )
+        (value: boolean) => {
+          this.isAdmin = value;
+        }
+      );
 
   }
 

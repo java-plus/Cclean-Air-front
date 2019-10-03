@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { UtilisateurAuthentification } from "../entities/utilisateur-authentification";
+import { UtilisateurAuthentification } from '../entities/utilisateur-authentification';
 import { tap, catchError, map } from 'rxjs/operators';
 const URL_BACKEND = environment.backendUrl;
 
@@ -32,10 +32,9 @@ export class AuthentificationService {
     return this.http.post(URL_BACKEND.concat('/connexion'), utilisateur, httpOptions);
   }
 
-
   /**
-   *méthode qui valide si on est connecté en tant qu'admin ou non.
-   Elle retourne un observable de boolean.
+   * Méthode qui valide si on est connecté en tant qu'admin ou non. Elle
+   *  retourne un observable de boolean.
    *
    * @returns {Observable<boolean>}
    * @memberof AuthentificationService
@@ -44,7 +43,7 @@ export class AuthentificationService {
 
     return this.http.get(URL_BACKEND.concat('/profils/statut'), { withCredentials: true, responseType: 'text' })
       .pipe(map(() => true),
-        catchError(() => of(false)))
+        catchError(() => of(false)));
 
   }
 
