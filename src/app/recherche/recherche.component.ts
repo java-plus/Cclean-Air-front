@@ -15,17 +15,31 @@ export class RechercheComponent implements OnInit {
 
   ngOnInit() {
 
+    /**
+     * On initialise la carte et ses données dès le chargement de la page.
+     * On centre la carte sur les coordonnées de Nantes avec un zoom de 10
+     */
     const map = L.map('map_recherche').setView([47.218371, -1.553621], 10);
 
+    /**
+     * Titre de la carte
+     */
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: 'Carte de la qualité de l\'air',
     }).addTo(map);
 
+    /**
+     * Définition de l'icone
+     */
     const myIcon = L.icon({
       iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png',
       iconSize: [32, 32],
       iconAnchor: [32, 32]
     });
+
+    /**
+     * On récupère les données puis on crée un marqueur pour chaque donnée récupérée.
+     */
     this.service.recupererCommunesAvecNiveauAlerte().subscribe((communes) => {
       communes.forEach((commune) => {
 
