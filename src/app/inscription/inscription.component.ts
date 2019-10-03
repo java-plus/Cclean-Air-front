@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {UtilisateurInscription} from "../entities/utilisateurInscription";
+import {Component} from '@angular/core';
+import {UtilisateurInscription} from "../entities/utilisateur-inscription";
 import {InscriptionService} from "../services/inscription-service";
 import {NgForm} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";

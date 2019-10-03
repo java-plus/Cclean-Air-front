@@ -29,6 +29,7 @@ import {RechercheComponent} from './recherche/recherche.component';
     RouterModule.forRoot(ROUTES),
     FormsModule,
     HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
