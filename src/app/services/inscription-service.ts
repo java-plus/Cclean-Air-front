@@ -26,6 +26,9 @@ export class InscriptionService {
    */
   creerCompte(utilisateur: UtilisateurInscription): Observable<any> {
     const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
       withCredentials: true
     };
 
