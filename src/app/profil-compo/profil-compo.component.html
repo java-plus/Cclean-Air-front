@@ -56,32 +56,40 @@
           <label class="col-sm-4" for="password">Mot de passe actuel</label>
           <div class="col-sm-8">
             <input type="password" class="w-100 text-dark" id="password" name="password"
-              placeholder="Votre mot de passe actuel" #motDePasseActuel>
+              placeholder="Votre mot de passe actuel" [(ngModel)]="utilisateur.motDePasseActuel"
+              #motDePasseActuel="ngModel">
           </div>
         </div>
         <div class="row p-2">
           <label class="col-sm-4" for="newPassword">Nouveau mot de passe</label>
           <div class="col-sm-8">
             <input type="password" class="w-100 text-dark" id="newPassword" name="newPassword"
-              placeholder="Votre nouveau mot de passe" #motDePasseNouveau>
+              placeholder="Votre nouveau mot de passe" [(ngModel)]="utilisateur.motDePasseNouveau"
+              #motDePasseNouveau="ngModel">
+              <p *ngIf="error" style="color:crimson">Le mot de passe doit posséder 7 caractères (avec une majuscule, un chiffre et un caractère spécial)</p>
           </div>
         </div>
         <div class="row p-2">
           <label class="col-sm-4" for="validationPassword">Retapez le nouveau mot de passe</label>
           <div class="col-sm-8">
             <input type="password" class="w-100 text-dark" id="validationPassword" name="validationPassword"
-              placeholder="Nouveau mot de passe" #getMotDePasseValidation>
+              placeholder="Nouveau mot de passe" [(ngModel)]="utilisateur.getMotDePasseNouveauValidation"
+              #getMotDePasseValidation="ngModel">
           </div>
         </div>
         <div class="row p-2">
           <div class="col-sm-6">
             <button type="submit" class="btn btn-primary float-right"
-              [disabled]="nom.invalid || prenom.invalid || email.invalid || commune.invalid || motDePasseActuel.invalid || motDePasseNouveau.invalid || getMotDePasseValidation.invalid"
               (click)="modifierProfil(utilisateur.nom, utilisateur.prenom, utilisateur.email, utilisateur.commune, utilisateur.listeIndicateur, utilisateur.motDePasseActuel, utilisateur.motDePasseNouveau, utilisateur.getMotDePasseNouveauValidation)">Modifier
               Profil</button>
           </div>
           <div class="col-sm-auto">
             <button type="submit" class="btn btn-primary float-right">Supprimer Profil</button>
+          </div>
+          <div class="row p-2">
+            <div class="col-sm-12">
+              <p *ngIf="error" style="color:crimson">{{error}}</p>
+            </div>
           </div>
         </div>
       </div>

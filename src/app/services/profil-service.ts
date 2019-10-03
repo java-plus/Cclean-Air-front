@@ -23,7 +23,7 @@ export class ProfilService {
     return this.http.get<UtilisateurProfil>(URL_BACKEND.concat('/profil'), { withCredentials: true });
     }
 
-  modifierProfil(utilisateur: UtilisateurProfil): Observable<any> {
+  modifierProfil(utilisateur: UtilisateurProfil): Observable<UtilisateurProfil> {
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -32,6 +32,6 @@ export class ProfilService {
       withCredentials: true
     };
 
-    return this.http.patch<any>(URL_BACKEND.concat('/profil/modification'), utilisateur, httpOptions);
+    return this.http.patch<UtilisateurProfil>(URL_BACKEND.concat('/profil/modification'), utilisateur, httpOptions);
   }
 }

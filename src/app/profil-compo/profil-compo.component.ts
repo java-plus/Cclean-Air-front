@@ -22,7 +22,7 @@ export class ProfilCompoComponent implements OnInit {
 
   modifierProfil() {
     this.profilService.modifierProfil(this.utilisateur).subscribe(result => { }, (err: any) => {
-      this.error = err.error.message;
+      this.error = err.error;
     });
   }
 }
