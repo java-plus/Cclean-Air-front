@@ -1,0 +1,39 @@
+<div class="container">
+
+
+
+
+
+  <div class="card">
+
+    <div class="card-header">
+      <h2>Vos indicateurs</h2>
+    </div>
+    <div class="card-body">
+
+      <fa name="fas fa-pen">modifier</fa>
+      <i class="fas fa-pen"></i>
+
+
+      <div *ngIf="indicateurVide" class="mt-5">
+        <div>Vous n'avez pas encore d'indicateurs</div>
+      </div>
+
+      <div class="mt-5" *ngFor="let indicateur of listeIndicateurs">
+
+        <a href="">Indicateur pour la Commune {{indicateur.commune}}</a>
+
+        <fa name="fas fa-pen" animation="spin">modifier</fa>
+        <i class="fas fa-pen"></i>
+
+        <a href="">supprimer</a>
+
+      </div>
+      <button type="button" class="btn btn-primary mt-5">Ajouter un indicateur</button>
+
+    </div>
+
+  </div>
+
+
+</div>
