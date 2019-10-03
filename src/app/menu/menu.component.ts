@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthentificationService } from '../services/authentification-service';
 
 /**
- * Classe qui gère l'affichage de la barre de navigation
+ * Composant qui gère l'affichage de la barre de navigation
  */
 @Component({
   selector: 'app-menu',
@@ -9,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class MenuComponent implements OnInit {
+
+  isAdmin: boolean;
 
   /**
    *variable qui permet de gérer l'affichage du menu en mode mobile   *
@@ -18,10 +21,23 @@ export class MenuComponent implements OnInit {
 
   /**
    * constructeur
+   * @param {AuthentificationService} authentificationService
+   * @memberof MenuComponent
    */
-  constructor() { }
+  constructor(private authentificationService: AuthentificationService) { }
 
+  /**
+   *Permet l'affichage de la partie administration du menu de navigation, uniquement si on est connecté en admin
+   *
+   * @memberof MenuComponent
+   */
   ngOnInit() {
+    this.authentificationService.isAdmin()
+      .subscribe(
+        () => { this.isAdmin = true; },
+        () => { this.isAdmin = false; }
+      )
+
   }
 
 }
