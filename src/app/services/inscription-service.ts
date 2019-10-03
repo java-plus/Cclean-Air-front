@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {UtilisateurInscription} from '../entities/utilisateurInscription';
-import {HttpClient} from '@angular/common/http';
+import {UtilisateurInscription} from '../entities/utilisateur-inscription';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 
@@ -27,7 +27,7 @@ export class InscriptionService {
   creerCompte(utilisateur: UtilisateurInscription): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       }),
       withCredentials: true
     };

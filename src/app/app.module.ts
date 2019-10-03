@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
@@ -13,10 +11,9 @@ import { AuthentificationComponent } from './authentification/authentification.c
 import { InfosRGPDComponent } from './inscription/infos-rgpd/infos-rgpd.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { AdministrationComponent } from './administration/administration.component';
-import {AngularFontAwesomeModule} from "angular-font-awesome";
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import { RechercheComponent } from './recherche/recherche.component';
 import { MenuComponent } from './menu/menu.component';
-
 
 @NgModule({
   declarations: [
