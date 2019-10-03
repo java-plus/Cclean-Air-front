@@ -16,6 +16,7 @@ export class DataService {
 
   /**
    * Envoie une requete au back pour récupérer les données nécessaires à l'affichage des points sur la carte avec les différentes données
+   * Retourne un obervateur d'une liste de l'objet CommuneCarte.
    */
   recupererCommunesAvecNiveauAlerte(): Observable<Array<CommuneCarte>> {
     const httpOptions = {

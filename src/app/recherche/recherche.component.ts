@@ -43,6 +43,9 @@ export class RechercheComponent implements OnInit {
     this.service.recupererCommunesAvecNiveauAlerte().subscribe((communes) => {
       communes.forEach((commune) => {
 
+        /**
+         * Le contenu des popup de chaque marqueur
+         */
         const content = `
     <u>
         <b>${commune.nomCommune}</b>
@@ -50,6 +53,9 @@ export class RechercheComponent implements OnInit {
     <br/>
     <p>${commune.codePostal}</p>`;
 
+        /**
+         * Le statut d'alerte de chaque commune
+         */
         let alerte = '';
 
         if (commune.alerte != null) {
