@@ -22,9 +22,8 @@ export class ProfilCompoComponent implements OnInit {
     }
 
   modifierProfil() {
-    this.profilService.modifierProfil(this.utilisateur).subscribe(result => { }, (err: any) => {
+    this.profilService.modifierProfil(this.utilisateur).subscribe(result => { this.modif = true; }, (err: any) => {
       this.error = err.error;
-      this.modif = true;
     });
   }
 }
