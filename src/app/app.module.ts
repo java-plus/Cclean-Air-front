@@ -14,10 +14,12 @@ import { AdministrationComponent } from './administration/administration.compone
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import { RechercheComponent } from './recherche/recherche.component';
 import { MenuComponent } from './menu/menu.component';
+import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ProfilCompoComponent,
     MenuComponent,
     RechercheComponent,
     InscriptionComponent,
@@ -25,7 +27,6 @@ import { MenuComponent } from './menu/menu.component';
     InfosRGPDComponent,
     AccueilComponent,
     AdministrationComponent
-
   ],
   imports: [
     BrowserModule,
@@ -38,5 +39,6 @@ import { MenuComponent } from './menu/menu.component';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }
