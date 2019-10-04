@@ -68,6 +68,11 @@ export class VisualiserIndicateursComponent implements OnInit {
             if (this.listeIndicateurs.length > 0) {
               this.indicateurVide = false;
             }
+            if (this.listeIndicateurs.length >= 5) {
+              this.compteurIndicateurs = false;
+            } else {
+              this.compteurIndicateurs = true;
+            }
           },
             err => { });
 
