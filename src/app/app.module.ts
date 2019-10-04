@@ -16,10 +16,12 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AdministrationComponent } from './administration/administration.component';
 import { RechercheComponent } from './recherche/recherche.component';
 import { MenuComponent } from './menu/menu.component';
+import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ProfilCompoComponent,
     MenuComponent,
     RechercheComponent,
     InscriptionComponent,
@@ -29,7 +31,6 @@ import { MenuComponent } from './menu/menu.component';
     IndicateursComponent,
     VisualiserIndicateursComponent,
     AdministrationComponent
-
   ],
   imports: [
     BrowserModule,
@@ -42,5 +43,6 @@ import { MenuComponent } from './menu/menu.component';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }
