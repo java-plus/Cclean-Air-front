@@ -13,13 +13,13 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { IndicateursComponent } from './indicateurs/indicateurs.component';
 import { VisualiserIndicateursComponent } from './indicateurs/visualiser-indicateurs/visualiser-indicateurs.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AdministrationComponent } from './administration/administration.component';
 import { RechercheComponent } from './recherche/recherche.component';
 import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-
     MenuComponent,
     RechercheComponent,
     InscriptionComponent,
@@ -27,7 +27,8 @@ import { MenuComponent } from './menu/menu.component';
     InfosRGPDComponent,
     AccueilComponent,
     IndicateursComponent,
-    VisualiserIndicateursComponent
+    VisualiserIndicateursComponent,
+    AdministrationComponent
 
   ],
   imports: [
@@ -37,7 +38,6 @@ import { MenuComponent } from './menu/menu.component';
     FormsModule,
     HttpClientModule,
     AngularFontAwesomeModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]

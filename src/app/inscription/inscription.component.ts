@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {UtilisateurInscription} from "../entities/utilisateur-inscription";
-import {InscriptionService} from "../services/inscription-service";
-import {NgForm} from "@angular/forms";
-import {HttpErrorResponse} from "@angular/common/http";
+import {UtilisateurInscription} from '../entities/utilisateur-inscription';
+import {InscriptionService} from '../services/inscription-service';
+import {NgForm} from '@angular/forms';
+import {HttpErrorResponse} from '@angular/common/http';
 
 /**
  * Composant gérant la page d'inscription.
@@ -14,11 +14,11 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class InscriptionComponent {
 
-  champsInvalideMsg: string = 'Champ invalide.';
+  champsInvalideMsg = 'Champ invalide.';
   motDePasseDeConfirmation: string;
   utilisateur: UtilisateurInscription = new UtilisateurInscription(null, null, null, null, ['MEMBRE'], null, null, false);
-  isErreurCreation: boolean = false;
-  isFormulaireValide: boolean = true;
+  isErreurCreation = false;
+  isFormulaireValide = true;
   fonctionnalite = 'create';
   erreurMsg: string;
 
@@ -33,7 +33,7 @@ export class InscriptionComponent {
    * Méthode de création d'un compte qui appelle la méthode dans le service d'inscription.
    */
   creerCompte(formInscription: NgForm) {
-    if(formInscription.invalid) {
+    if (formInscription.invalid) {
       this.isFormulaireValide = false;
       return;
     }
