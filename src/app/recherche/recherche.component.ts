@@ -4,6 +4,7 @@ import {DataService} from '../services/data.service';
 import {CommuneRecherche} from '../entities/CommuneRecherche';
 import {ResultatRechercheCommune} from '../entities/ResultatRechercheCommune';
 import {CommuneCarte} from '../entities/CommuneCarte';
+import {Router} from '@angular/router';
 
 /**
  * Composant gérant la page de recherche des informations météorologiques d'une
@@ -23,7 +24,7 @@ export class RechercheComponent implements OnInit {
   public communeResultat: ResultatRechercheCommune = new ResultatRechercheCommune();
 
 
-  constructor(private service: DataService) {
+  constructor(private service: DataService, private router: Router) {
 
   }
 
