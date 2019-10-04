@@ -33,23 +33,37 @@ export class DataService {
 
   recupererDonneesCommune(commune: CommuneRecherche): Observable<ResultatRechercheCommune> {
 
+    console.log('commune recherchée : ' + commune);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      withCredentials: true
+    };
+
+
+
+    return this.http.post<ResultatRechercheCommune>(URL_BACKEND.concat('/details_commune'), {
+      codeInsee: commune.codeEtNom.codeInsee,
+      nomCommune: commune.codeEtNom.nomCommune,
+      polluant: commune.polluant,
+      date: commune.date,
+      heure: commune.heure,
+      alerte: commune.alerte
+    }, httpOptions);
+  }
+
+  /**
+   * Requete qui récupère les noms de tous les polluants sans doublons stockés dans la base.
+   */
+  recupererNomsPolluants(): Observable<Array<string>> {
 
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-type': 'application/json'
       }),
-      withCredentials: true,
-      body: {
-        codeInsee: commune.codeInsee,
-        nomCommune: commune.nomCommune,
-        polluant: commune.polluant,
-        date: commune.dateEtHeure,
-        heure: commune.dateEtHeure,
-        alerte: commune.alerte
-      }
-    };
-
-    return this.http.request<ResultatRechercheCommune>('GET', URL_BACKEND.concat('/details_communes'), httpOptions);
+      withCredentials: true};
+    return this.http.get<Array<string>>(URL_BACKEND.concat('/polluant/noms'), httpOptions);
   }
 
 

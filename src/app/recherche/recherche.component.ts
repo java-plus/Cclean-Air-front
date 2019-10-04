@@ -4,7 +4,6 @@ import {DataService} from '../services/data.service';
 import {CommuneRecherche} from '../entities/CommuneRecherche';
 import {ResultatRechercheCommune} from '../entities/ResultatRechercheCommune';
 import {CommuneCarte} from '../entities/CommuneCarte';
-import {PolluantDto} from '../entities/PolluantDto';
 
 /**
  * Composant gérant la page de recherche des informations météorologiques d'une
@@ -17,18 +16,21 @@ import {PolluantDto} from '../entities/PolluantDto';
 })
 export class RechercheComponent implements OnInit {
 
-  listeCommunes: Array<CommuneCarte>;
-  listePolluants: Array<PolluantDto>;
-  communeRecherche: CommuneRecherche;
-  communeResultat: ResultatRechercheCommune;
+  public listeCommunes: Array<CommuneCarte> = [];
+  public listePolluants = [];
+
+  public communeRecherche: CommuneRecherche = new CommuneRecherche();
+  public communeResultat: ResultatRechercheCommune = new ResultatRechercheCommune();
+
 
   constructor(private service: DataService) {
+
   }
 
   rechercheDetaillee(): void {
+    console.log(this.communeRecherche);
     this.service.recupererDonneesCommune(this.communeRecherche).subscribe((commune) => {
       this.communeResultat = commune;
-      console.log(this.communeResultat);
     });
   }
 
@@ -61,6 +63,11 @@ export class RechercheComponent implements OnInit {
      */
     this.service.recupererCommunesAvecNiveauAlerte().subscribe((communes) => {
       communes.forEach((commune) => {
+        /**
+         * On alimente la liste des communes
+         */
+        this.listeCommunes.push(commune);
+        console.log(commune);
 
         /**
          * Le contenu des popup de chaque marqueur
@@ -90,6 +97,15 @@ export class RechercheComponent implements OnInit {
     }, () => {
       alert('Erreur lors de la récupération des communes');
     });
+
+    /**
+     * Ici on initialise la liste des polluants
+     */
+    this.service.recupererNomsPolluants().subscribe((polluants) => {
+      polluants.forEach((polluant) => {
+        this.listePolluants.push(polluant);
+      });
+    }, () => alert('Erreur lors de la récupération des données de polluants.'));
   }
 
 }
