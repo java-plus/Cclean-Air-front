@@ -1,0 +1,47 @@
+<div class="container mt-5" *ngIf="affichageIndicateurs">
+  <div class="card">
+    <div class="card-header">
+      <h2>Vos indicateurs</h2>
+    </div>
+    <div class="card-body">
+      <div *ngIf="indicateurVide" class="mt-5">
+        <div>Vous n'avez pas encore d'indicateurs</div>
+      </div>
+      <div class="mt-5 d-flex row" *ngFor="let indicateur of listeIndicateurs">
+        <button type="button" class="btn btn-link col-2">{{indicateur.nomCommune}}</button>
+        <button type="button" class="btn col-2">
+          <fa name="pencil"></fa>
+        </button>
+        <button type="button" class="btn col-2">
+          <fa name="trash"></fa>
+        </button>
+      </div>
+      <button type="button" *ngIf="compteurIndicateurs" class="btn btn-primary mt-5">Ajouter un indicateur</button>
+      <div *ngIf="!compteurIndicateurs" class="mt-5">
+        <button type="button" class="btn btn-primary " disabled>Ajouter un
+          indicateur</button> (Vous avez atteint la limite de 5 indicateurs)
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5 " *ngIf="suppressionIndicateur">
+  <div class="card">
+
+    <div class="card-header">
+      Confirmez-vous la suppression de l'indicateur pour la commune : {{communeSuppression.nomCommune}} ?
+    </div>
+
+
+    <div class="card-body text-center mt-5">
+      <button type="button" (click)="annulationSuppressionIndicateur()" class="btn btn-primary mr-5">Annuler</button>
+      <button type="button" (click)="confirmationSuppressionIndicateur()"
+        class="btn btn-primary ml-5">Confirmer</button>
+
+    </div>
+
+
+  </div>
+
+
+</div>
