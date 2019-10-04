@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import {DataService} from '../services/data.service';
+import { DataService } from '../services/data.service';
 
 /**
  * Composant gérant la page de recherche des informations météorologiques d'une
@@ -68,7 +68,7 @@ export class RechercheComponent implements OnInit {
         } else {
           alerte = `<br><p class = "text-success">Aucune alerte pollution.</p>`;
         }
-        L.marker([commune.latitude, commune.longitude], {icon: myIcon}).bindPopup(content.concat(alerte)).addTo(map);
+        L.marker([commune.latitude, commune.longitude], { icon: myIcon }).bindPopup(content.concat(alerte)).addTo(map);
       });
     }, () => {
       alert('Erreur lors de la récupération des communes');
