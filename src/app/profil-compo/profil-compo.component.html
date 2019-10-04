@@ -95,7 +95,8 @@
             <button type="submit" class="btn btn-primary float-right">Supprimer Profil</button>
           </div>
         </div>
-        <p style="color: crimson">{{error}}</p>
+        <p style="color: forestgreen" *ngIf="modif">Modifications effectuées</p>
+        <p style="color: crimson" *ngIf="modif==false">{{error}}</p>
       </div>
     </form>
   </div>

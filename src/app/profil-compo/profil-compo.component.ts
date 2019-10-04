@@ -13,6 +13,7 @@ export class ProfilCompoComponent implements OnInit {
 
   utilisateur = new UtilisateurProfil('', '', '', '', [''], null, '', '', '');
   error: string;
+  modif: boolean = false;
 
   constructor(private route: ActivatedRoute, private profilService: ProfilService) { }
 
@@ -23,6 +24,7 @@ export class ProfilCompoComponent implements OnInit {
   modifierProfil() {
     this.profilService.modifierProfil(this.utilisateur).subscribe(result => { }, (err: any) => {
       this.error = err.error;
+      this.modif = true;
     });
   }
 }
