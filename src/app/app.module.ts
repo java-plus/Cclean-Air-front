@@ -14,6 +14,7 @@ import { AdministrationComponent } from './administration/administration.compone
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import { RechercheComponent } from './recherche/recherche.component';
 import { MenuComponent } from './menu/menu.component';
+import { AlerteComponent } from './administration/alerte/alerte.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MenuComponent } from './menu/menu.component';
     AuthentificationComponent,
     InfosRGPDComponent,
     AccueilComponent,
-    AdministrationComponent
+    AdministrationComponent,
+    AlerteComponent
 
   ],
   imports: [

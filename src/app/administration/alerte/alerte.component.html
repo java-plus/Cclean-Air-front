@@ -1,0 +1,75 @@
+<app-menu></app-menu>
+
+<section class="container p-5">
+
+  <div class="card mt-5 bg-dark text-light">
+    <div class="card-header">
+      <h1 class="text-center">Envoyer une alerte</h1>
+    </div>
+    <div class="card-body">
+      <form #formAlerte="ngForm" class="pt-3">
+        <div class="form-group row">
+          <label class="col-md-4 col-12"
+                 for="communeSelect">Commune</label>
+          <div class="col-12 col-md-8">
+            <select (ngModelChange)="onChangeSelect($event)"
+                    [ngModel]="alerte"
+                    class="form-control w-100"
+                    id="communeSelect" name="communeSelect" required>
+              <ng-container *ngFor="let commune of communes">
+                <option
+                  [value]="commune.codeInsee">{{commune.nom}}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-4 col-12" for="objetMsg">Objet du message</label>
+          <div class="col-12 col-md-8">
+            <input #objetMsg="ngModel" [(ngModel)]="alerte.objet"
+                   class="w-100 form-control"
+                   id="objetMsg" name="objetMsg" placeholder="Alerte prévue sur Abbaretz"
+                   required type="objetMsg">
+            <ng-container *ngIf="(objetMsg.dirty && objetMsg.invalid)">
+              <p class="text-danger">
+                Ce champ est invalide.
+              </p>
+            </ng-container>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-4 col-12"
+                 for="exampleFormControlTextarea1">Corps du message
+          </label>
+          <div class="col-12 col-md-8">
+            <textarea #corpsMsg="ngModel"
+                      [(ngModel)]="alerte.corpsMsg" class="form-control"
+                      id="exampleFormControlTextarea1" name="corpsMsg"
+                      placeholder="Les services météorologiques suspectent une forte pollution..."
+                      rows="3" required></textarea>
+            <ng-container *ngIf="(corpsMsg.dirty && corpsMsg.invalid)">
+              <p class="text-danger">
+                Ce champ est invalide.
+              </p>
+            </ng-container>
+          </div>
+        </div>
+        <div class="form-group text-center pt-2">
+          <button (click)="envoyerAlerte(formAlerte)"
+                  class="btn btn-primary">Envoyer
+          </button>
+        </div>
+        <p *ngIf="isErreurFormulaire"
+           class="text-danger font-weight-bold text-center">
+          Le formulaire n'est pas valide. Merci de le corriger. Tous les
+          champs doivent être complétés.
+        </p>
+        <p *ngIf="isErreurAlerte"
+           class="text-danger font-weight-bold text-center">Une erreur s'est
+          produite. Impossible d'envoyer l'alerte.
+        </p>
+      </form>
+
+    </div>
+  </div>
+</section>
