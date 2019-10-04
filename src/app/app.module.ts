@@ -10,24 +10,29 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { InfosRGPDComponent } from './inscription/infos-rgpd/infos-rgpd.component';
 import { AccueilComponent } from './accueil/accueil.component';
+import { IndicateursComponent } from './indicateurs/indicateurs.component';
+import { VisualiserIndicateursComponent } from './indicateurs/visualiser-indicateurs/visualiser-indicateurs.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AdministrationComponent } from './administration/administration.component';
-import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import { RechercheComponent } from './recherche/recherche.component';
 import { MenuComponent } from './menu/menu.component';
 import { AlerteComponent } from './administration/alerte/alerte.component';
+import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ProfilCompoComponent,
     MenuComponent,
     RechercheComponent,
     InscriptionComponent,
     AuthentificationComponent,
     InfosRGPDComponent,
     AccueilComponent,
+    IndicateursComponent,
+    VisualiserIndicateursComponent,
     AdministrationComponent,
     AlerteComponent
-
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {AuthentificationService} from '../services/authentification-service';
 import {Router} from '@angular/router';
-import {NgForm} from "@angular/forms";
-import {UtilisateurAuthentification} from "../entities/utilisateur-authentification";
+import {NgForm} from '@angular/forms';
+import {UtilisateurAuthentification} from '../entities/utilisateur-authentification';
 
 /**
  * Composant gérant la page d'authentification.
@@ -28,7 +28,7 @@ export class AuthentificationComponent {
   /**
    * Fait appel a la méthode de service pour lui envoyer les informations de connexion,
    * redirige vers la page de login ou l'accueil (la page de recherche) selon la réponse.
-   * @param formAuthentification
+   * @param formAuthentification form
    */
   authentifier(formAuthentification: NgForm): void {
     if (formAuthentification.invalid) {
