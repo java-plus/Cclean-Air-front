@@ -8,8 +8,7 @@
         <div>Vous n'avez pas encore d'indicateurs</div>
       </div>
       <div class="mt-5 d-flex row" *ngFor="let indicateur of listeIndicateurs">
-        <button type="button" (click)="afficherDonneesLocales(indicateur.codeInsee)"
-          class="btn btn-link col-2">{{indicateur.nomCommune}}</button>
+        <button type="button" class="btn btn-link col-2">{{indicateur.nomCommune}}</button>
         <button type="button" class="btn col-2" (click)="modifierIndicateur()">
           <fa name="pencil"></fa>
         </button>
@@ -17,7 +16,8 @@
           <fa name="trash"></fa>
         </button>
       </div>
-      <button type="button" *ngIf="compteurIndicateurs" class="btn btn-primary mt-5">Ajouter un indicateur</button>
+      <button type="button" *ngIf="compteurIndicateurs" class="btn btn-primary mt-5" (click)="creerIndicateur()">Ajouter
+        un indicateur</button>
       <div *ngIf="!compteurIndicateurs" class="mt-5">
         <button type="button" class="btn btn-primary " disabled>Ajouter un
           indicateur</button> (Vous avez atteint la limite de 5 indicateurs)

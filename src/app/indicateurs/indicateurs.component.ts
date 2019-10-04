@@ -7,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndicateursComponent implements OnInit {
 
+
+  _etat = 0;
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  get affichage(): number {
+    return this._etat;
+  }
+
+  changerEtat(event) {
+    this._etat = event;
+
+
+  }
+
+
 
 }

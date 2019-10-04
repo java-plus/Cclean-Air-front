@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { IndicateursService } from 'src/app/services/indicateurs-service';
 import { CommuneIndicateur } from 'src/app/entities/commune-indicateur';
 
@@ -23,7 +23,19 @@ export class VisualiserIndicateursComponent implements OnInit {
 
   communeSuppression: CommuneIndicateur;
 
+  @Output() childEvent: EventEmitter<number> = new EventEmitter<number>();
+
   constructor(private indicateursService: IndicateursService) { }
+
+  creerIndicateur() {
+    this.childEvent.emit(1);
+  }
+
+  modifierIndicateur() {
+    this.childEvent.emit(2);
+  }
+
+
 
   ngOnInit() {
 
@@ -79,7 +91,8 @@ export class VisualiserIndicateursComponent implements OnInit {
       }, (err) => {
         console.log(err);
       });
-
-
   }
+
+
+
 }
