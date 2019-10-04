@@ -17,7 +17,11 @@
           <fa name="trash"></fa>
         </button>
       </div>
-      <button type="button" class="btn btn-primary mt-5">Ajouter un indicateur</button>
+      <button type="button" *ngIf="compteurIndicateurs" class="btn btn-primary mt-5">Ajouter un indicateur</button>
+      <div *ngIf="!compteurIndicateurs" class="mt-5">
+        <button type="button" class="btn btn-primary " disabled>Ajouter un
+          indicateur</button> (Vous avez atteint la limite de 5 indicateurs)
+      </div>
     </div>
   </div>
 </div>
@@ -26,13 +30,14 @@
   <div class="card">
 
     <div class="card-header">
-      Confirmez-vous la suppression de l'indicateur pour la commune : {{communeIndicateur.nomCommune}} ?
+      Confirmez-vous la suppression de l'indicateur pour la commune : {{communeSuppression.nomCommune}} ?
     </div>
 
 
-    <div class="card-body">
-        <button type="button" (click)="annulationSuppressionIndicateur()" class="btn btn-primary mt-5">Annuler</button>
-        <button type="button" (click)="confirmationSuppressionIndicateur()" class="btn btn-primary mt-5">Confirmer</button>
+    <div class="card-body text-center mt-5">
+      <button type="button" (click)="annulationSuppressionIndicateur()" class="btn btn-primary mr-5">Annuler</button>
+      <button type="button" (click)="confirmationSuppressionIndicateur()"
+        class="btn btn-primary ml-5">Confirmer</button>
 
     </div>
 

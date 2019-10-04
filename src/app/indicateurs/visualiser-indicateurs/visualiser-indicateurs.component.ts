@@ -19,6 +19,8 @@ export class VisualiserIndicateursComponent implements OnInit {
 
   creationIndicateur = false;
 
+  compteurIndicateurs = true;
+
   communeSuppression: CommuneIndicateur;
 
   constructor(private indicateursService: IndicateursService) { }
@@ -30,6 +32,9 @@ export class VisualiserIndicateursComponent implements OnInit {
         this.listeIndicateurs = result;
         if (this.listeIndicateurs.length > 0) {
           this.indicateurVide = false;
+        }
+        if (this.listeIndicateurs.length >= 5) {
+          this.compteurIndicateurs = false;
         }
       },
         err => { });
@@ -48,9 +53,28 @@ export class VisualiserIndicateursComponent implements OnInit {
     this.affichageIndicateurs = true;
   }
 
-  confirmationSuppressionIndicateur(communeSuppression) {
-    this.indicateursService.supprimerIndicateur(communeSuppression)
-      .subscribe(() => { }, () => { });
+  confirmationSuppressionIndicateur() {
+    console.log(this.communeSuppression)
+    this.indicateursService.supprimerIndicateur(this.communeSuppression.nomCommune)
+      .subscribe((result) => {
+
+
+        this.suppressionIndicateur = false;
+        this.affichageIndicateurs = true;
+
+        this.indicateursService.getListeIndicateurs()
+          .subscribe((result) => {
+            this.listeIndicateurs = result;
+            if (this.listeIndicateurs.length > 0) {
+              this.indicateurVide = false;
+            }
+          },
+            err => { });
+
+      }, (err) => {
+        console.log(err);
+      });
+
 
   }
 }

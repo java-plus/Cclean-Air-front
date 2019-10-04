@@ -26,7 +26,7 @@ export class IndicateursService {
 
   }
 
-  supprimerIndicateur(communeIndicateur: CommuneIndicateur): Observable<void> {
+  supprimerIndicateur(nomCommune: string): Observable<any> {
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -35,7 +35,7 @@ export class IndicateursService {
       withCredentials: true
     };
 
-    return this._http.delete<void>(`${URL_BACKEND}/indicateurs`, httpOptions);
+    return this._http.delete(`${URL_BACKEND}/indicateurs/${nomCommune}`, httpOptions);
 
   }
 
