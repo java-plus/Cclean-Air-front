@@ -9,10 +9,10 @@
       </div>
       <div class="mt-5 d-flex row" *ngFor="let indicateur of listeIndicateurs">
         <button type="button" class="btn btn-link col-2">{{indicateur.nomCommune}}</button>
-        <button type="button" class="btn col-2" (click)="modifierIndicateur()">
+        <button type="button" class="btn col-2">
           <fa name="pencil"></fa>
         </button>
-        <button type="button" (click)="supprimerIndicateur(indicateur)" class="btn col-2">
+        <button type="button" class="btn col-2">
           <fa name="trash"></fa>
         </button>
       </div>
