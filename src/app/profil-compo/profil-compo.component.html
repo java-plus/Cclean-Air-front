@@ -8,6 +8,8 @@
           <div class="col-sm-8">
             <input class="w-100 text-dark" id="nom" name="nom" [(ngModel)]="utilisateur.nom" #nom="ngModel"
               value="{{utilisateur.nom}}">
+            <p *ngIf="nom.value ==''" style="color: crimson">Veuillez entrez votre nom actuel si vous ne souhaitez pas
+              le modifier</p>
           </div>
         </div>
         <div class="row p-2">
@@ -15,6 +17,8 @@
           <div class="col-sm-8">
             <input class="w-100 text-dark" id="prenom" name="prenom" [(ngModel)]="utilisateur.prenom" #prenom="ngModel"
               value="{{utilisateur.prenom}}">
+            <p *ngIf="prenom.value ==''" style="color: crimson">Veuillez entrer votre prénom actuel si vous ne souhaitez
+              pas le modifier</p>
           </div>
         </div>
         <div class="row p-2">
@@ -22,6 +26,8 @@
           <div class="col-sm-8">
             <input type="email" class="w-100 text-dark" id="email" name="email" [(ngModel)]="utilisateur.email"
               #email="ngModel" value="{{utilisateur.email}}">
+            <p *ngIf="email.value ==''" style="color: crimson">Veuillez entrer votre email actuel si vous ne souhaitez
+              pas le modifier</p>
           </div>
         </div>
         <div class="row p-2">
@@ -29,6 +35,8 @@
           <div class="col-sm-8">
             <input class="w-100 text-dark" id="commune" name="commune" [(ngModel)]="utilisateur.commune"
               #commune="ngModel" value="{{utilisateur.commune}}">
+            <p *ngIf="commune.value == ''" style="color: crimson">Veuillez entrer votre commune acutelle si vous ne
+              souhaitez pas la modifier</p>
           </div>
         </div>
         <div class="row p-2">
@@ -66,8 +74,6 @@
             <input type="password" class="w-100 text-dark" id="newPassword" name="newPassword"
               placeholder="Votre nouveau mot de passe" [(ngModel)]="utilisateur.motDePasseNouveau"
               #motDePasseNouveau="ngModel">
-            <p *ngIf="error" style="color:crimson">Le mot de passe doit posséder 7 caractères (avec une majuscule, un
-              chiffre et un caractère spécial)</p>
           </div>
         </div>
         <div class="row p-2">
@@ -80,18 +86,15 @@
         </div>
         <div class="row p-2">
           <div class="col-sm-6">
-            <button type="submit" class="btn btn-primary float-right" (click)="modifierProfil()">Modifier
+            <button type="submit" class="btn btn-primary float-right" (click)="modifierProfil()"
+              [disabled]="nom.value=='' || prenom.value=='' || email.value=='' || commune.value==''">Modifier
               Profil</button>
           </div>
           <div class="col-sm-auto">
             <button type="submit" class="btn btn-primary float-right">Supprimer Profil</button>
           </div>
-          <div class="row p-2">
-            <div class="col-sm-12">
-              <p *ngIf="error" style="color:crimson">{{error}}</p>
-            </div>
-          </div>
         </div>
+        <p style="color: crimson">{{error}}</p>
       </div>
     </form>
   </div>
