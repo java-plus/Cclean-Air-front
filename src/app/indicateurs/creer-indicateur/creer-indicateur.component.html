@@ -1,6 +1,5 @@
 <div class="container mt-5">
 
-
   <div class="card">
 
     <div class="card-header">
@@ -11,20 +10,18 @@
       <form>
         <div class="form-group">
           <label for="choixCommune">Choisir une commune : </label>
-          <select class="form-control" id="choixCommune">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <select class="form-control" id="choixCommune" name="nomCommune" #nomCommune="ngModel"
+            [(ngModel)]="indicateurCreation.commune">
+            <option *ngFor="let commune of listeCommunes">{{commune}}</option>
           </select>
         </div>
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="choixAlerte">
-          <label class="form-check-label" for="exampleCheck1">Je souhaite recevoir des alertes pollution pour cette
+          <input type="checkbox" class="form-check-input" id="choixAlerte" name="alerte"
+            [(ngModel)]="indicateurCreation.alerte" #alerte="ngModel">
+          <label class="form-check-label" for="choixAlerte">Je souhaite recevoir des alertes pollution pour cette
             commune</label>
         </div>
-        <button type="submit" class="btn btn-primary">Valider</button>
+        <button type="submit" class="btn btn-primary" (click)="creerIndicateur(indicateurCreation)">Valider</button>
       </form>
 
 

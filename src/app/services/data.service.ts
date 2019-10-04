@@ -1,8 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {CommuneCarte} from '../entities/CommuneCarte';
-import {environment} from '../../environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { CommuneCarte } from '../entities/CommuneCarte';
+import { environment } from '../../environments/environment';
+import { Commune } from '../entities/Commune';
 
 const URL_BACKEND = environment.backendUrl;
 
@@ -28,6 +29,20 @@ export class DataService {
 
     return this.http.get<Array<CommuneCarte>>(URL_BACKEND.concat('/donnees_carte'), httpOptions);
   }
-}
 
+  /**
+   * Méthode envoyant un requête GET pour récuperer la liste des communes de
+   * l'API.
+   */
+  recupererCommunes(): Observable<Commune[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      withCredentials: true,
+    };
+    return this.http.get<Commune[]>(URL_BACKEND.concat('/communes'), httpOptions);
+
+  }
+}
 

@@ -1,6 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { IndicateursService } from 'src/app/services/indicateurs-service';
 import { CommuneIndicateur } from 'src/app/entities/commune-indicateur';
+import { IndicateurCreation } from 'src/app/entities/Indicateur-creation';
+import { fromEvent } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-visualiser-indicateurs',
@@ -23,16 +26,20 @@ export class VisualiserIndicateursComponent implements OnInit {
 
   communeSuppression: CommuneIndicateur;
 
-  @Output() childEvent: EventEmitter<number> = new EventEmitter<number>();
+  ancienIndicateurEvent = fromEvent(document.getElementById('modif'), 'click');
+
+  @Output() childEvent: EventEmitter<{etat: number, indicateurCourant: IndicateurCreation}> = new EventEmitter<{etat: number, indicateurCourant: IndicateurCreation}>();
 
   constructor(private indicateursService: IndicateursService) { }
 
   creerIndicateur() {
-    this.childEvent.emit(1);
+    this.childEvent.emit({etat:1,indicateurCourant:null});
   }
 
-  modifierIndicateur() {
-    this.childEvent.emit(2);
+  modifierIndicateur(indicateur: IndicateurCreation) {
+
+    this.indicateursService.modifAncienIndicateur(indicateur);
+    this.childEvent.emit({etat: 2, indicateurCourant : indicateur});
   }
 
 
@@ -89,7 +96,6 @@ export class VisualiserIndicateursComponent implements OnInit {
             err => { });
 
       }, (err) => {
-        console.log(err);
       });
   }
 

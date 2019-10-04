@@ -7,23 +7,21 @@
       <form>
         <div class="form-group">
           <label for="choixCommune">Choisir une commune : </label>
-          <select class="form-control" id="choixCommune">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <select class="form-control" id="choixCommune" name="nomCommune" #nomCommune="ngModel"
+            [(ngModel)]="indicateurModification.commune">
+            <option *ngFor="let commune of listeCommunes">{{commune}}</option>
           </select>
         </div>
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="choixAlerte">
-          <label class="form-check-label" for="exampleCheck1">Je souhaite recevoir des alertes pollution pour cette
+          <input type="checkbox" class="form-check-input" id="choixAlerte" name="alerte"
+            [(ngModel)]="indicateurModification.alerte" #alerte="ngModel">
+          <label class="form-check-label" for="choixAlerte">Je souhaite recevoir des alertes pollution pour cette
             commune</label>
         </div>
         <button type="submit" class="btn btn-primary mr-5" (click)="retourIndicateur()">Annuler</button>
-        <button type="submit" class="btn btn-primary ml-5">Valider</button>
+        <button type="submit" class="btn btn-primary ml-5"
+          (click)="modifierIndicateur(indicateurModification)">Valider</button>
       </form>
-
 
     </div>
 
