@@ -1,76 +1,85 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import { ObservableLike, Observable, Subject } from 'rxjs';
-import { CommuneIndicateur } from '../entities/commune-indicateur';
-import { catchError, tap } from 'rxjs/operators';
-import { IndicateurCreation } from '../entities/Indicateur-creation';
+import { ObservableLike, Observable, Subject } from "rxjs";
+import { CommuneIndicateur } from "../entities/commune-indicateur";
+import { IndicateurCreation } from "../entities/Indicateur-creation";
 
 const URL_BACKEND = environment.backendUrl;
 
-
+/**
+ * Classe de service qui permet de gérer les indicateurs
+ */
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class IndicateursService {
+  constructor(private _http: HttpClient) {}
 
-  subAncienIndicateur = new Subject<IndicateurCreation>();
-
-
-  constructor(private _http: HttpClient) { }
-
-  get subAncienIndicateurObs(): Observable<IndicateurCreation> {
-    return this.subAncienIndicateur.asObservable()
-  }
-
+  /**
+   * Méthode qui retourne une liste d'indicateurs pour un utilisateur donné
+   */
   getListeIndicateurs(): Observable<CommuneIndicateur[]> {
-
-
-    return this._http.get<CommuneIndicateur[]>(`${URL_BACKEND}/indicateurs`, { withCredentials: true });
-
+    return this._http.get<CommuneIndicateur[]>(`${URL_BACKEND}/indicateurs`, {
+      withCredentials: true
+    });
   }
 
-  supprimerIndicateur(nomCommune: string): Observable<any> {
-
+  /**
+   * Méthode qui supprime un indicateur de la base
+   * @param nomCommune
+   */
+  supprimerIndicateur(nomCommune: string): Observable<Object> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-type': 'application/json'
+        "Content-type": "application/json"
       }),
       withCredentials: true
     };
 
-    return this._http.delete(`${URL_BACKEND}/indicateurs/${nomCommune}`, httpOptions);
-
+    return this._http.delete(
+      `${URL_BACKEND}/indicateurs/${nomCommune}`,
+      httpOptions
+    );
   }
 
+  /**
+   * Méthode qui enregistre un indicateur dans la base
+   * @param indicateurCreation
+   */
   enregistrerIndicateur(indicateurCreation: IndicateurCreation) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-type': 'application/json'
+        "Content-type": "application/json"
       }),
       withCredentials: true
     };
 
-    return this._http.post(`${URL_BACKEND}/indicateurs`, indicateurCreation, httpOptions);
-
-
+    return this._http.post(
+      `${URL_BACKEND}/indicateurs`,
+      indicateurCreation,
+      httpOptions
+    );
   }
 
-  modifierIndicateur(indicateurModif: IndicateurCreation, ancienIndicateur: IndicateurCreation) {
+  /**
+   * méthode qui permet de modifier un indicateur
+   */
+  modifierIndicateur(
+    indicateurModif: IndicateurCreation,
+    ancienIndicateur: string
+  ) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-type': 'application/json'
+        "Content-type": "application/json"
       }),
       withCredentials: true
     };
 
-    return this._http.patch(`${URL_BACKEND}/indicateurs`, indicateurModif, httpOptions);
+    return this._http.patch(
+      `${URL_BACKEND}/indicateurs/${ancienIndicateur}`,
+      indicateurModif,
+      httpOptions
+    );
   }
-
-  modifAncienIndicateur(indicateur: IndicateurCreation) {
-    this.subAncienIndicateur.next(indicateur)
-
-  }
-
-
 }

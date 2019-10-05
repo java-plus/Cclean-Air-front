@@ -1,17 +1,15 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { IndicateursService } from 'src/app/services/indicateurs-service';
-import { CommuneIndicateur } from 'src/app/entities/commune-indicateur';
-import { IndicateurCreation } from 'src/app/entities/Indicateur-creation';
-import { fromEvent } from 'rxjs';
-import { tap } from 'rxjs/operators';
-
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { IndicateursService } from "src/app/services/indicateurs-service";
+import { CommuneIndicateur } from "src/app/entities/commune-indicateur";
+/**
+ * Classe qui sert à gérer l'affichage des indicateurs, ainsi que leur suppression
+ */
 @Component({
-  selector: 'app-visualiser-indicateurs',
-  templateUrl: './visualiser-indicateurs.component.html',
+  selector: "app-visualiser-indicateurs",
+  templateUrl: "./visualiser-indicateurs.component.html",
   styles: []
 })
 export class VisualiserIndicateursComponent implements OnInit {
-
   listeIndicateurs: CommuneIndicateur[];
 
   indicateurVide = true;
@@ -26,28 +24,45 @@ export class VisualiserIndicateursComponent implements OnInit {
 
   communeSuppression: CommuneIndicateur;
 
-  ancienIndicateurEvent = fromEvent(document.getElementById('modif'), 'click');
+  /**
+   * variable qui sert à gérer l'affichage des composant enfant
+   */
+  @Output() childEvent: EventEmitter<{
+    etat: number;
+    indicateurCourant: CommuneIndicateur;
+  }> = new EventEmitter<{
+    etat: number;
+    indicateurCourant: CommuneIndicateur;
+  }>();
 
-  @Output() childEvent: EventEmitter<{etat: number, indicateurCourant: IndicateurCreation}> = new EventEmitter<{etat: number, indicateurCourant: IndicateurCreation}>();
+  /**
+   * constructeur
+   * @param indicateursService
+   */
+  constructor(private indicateursService: IndicateursService) {}
 
-  constructor(private indicateursService: IndicateursService) { }
-
+  /**
+   * méthode qui sert à passer à l'affichage de création d'un indicateur
+   */
   creerIndicateur() {
-    this.childEvent.emit({etat:1,indicateurCourant:null});
+    this.childEvent.emit({ etat: 1, indicateurCourant: null });
   }
 
-  modifierIndicateur(indicateur: IndicateurCreation) {
-
-    this.indicateursService.modifAncienIndicateur(indicateur);
-    this.childEvent.emit({etat: 2, indicateurCourant : indicateur});
+  /**
+   * méthode qui sert à passer à l'affichage de la modification d'un indicateur.
+   * Elle prend en paramètre l'indicateur à modifier.
+   * @param indicateur
+   */
+  modifierIndicateur(indicateur: CommuneIndicateur) {
+    this.childEvent.emit({ etat: 2, indicateurCourant: indicateur });
   }
 
-
-
+  /**
+   * A l'initialisation de la page, la liste des indicateurs se met à jour
+   */
   ngOnInit() {
-
-    this.indicateursService.getListeIndicateurs()
-      .subscribe((result) => {
+    this.indicateursService.getListeIndicateurs().subscribe(
+      result => {
         this.listeIndicateurs = result;
         if (this.listeIndicateurs.length > 0) {
           this.indicateurVide = false;
@@ -56,49 +71,54 @@ export class VisualiserIndicateursComponent implements OnInit {
           this.compteurIndicateurs = false;
         }
       },
-        err => { });
+      err => {}
+    );
   }
 
+  /**
+   * méthode qui sert à passer à l'affichage de la confirmation de suppression d'un indicateur.
+   * Elle prend en paramètre l'indicateur à supprimer
+   * @param communeIndicateur
+   */
   supprimerIndicateur(communeIndicateur: CommuneIndicateur) {
     this.affichageIndicateurs = false;
     this.suppressionIndicateur = true;
     this.communeSuppression = communeIndicateur;
-
   }
 
-
+  /**
+   * méthode qui permet d'annuler la suppression d'un indicateur et de revenir à l'affichage des indicateurs
+   */
   annulationSuppressionIndicateur() {
     this.suppressionIndicateur = false;
     this.affichageIndicateurs = true;
   }
 
+  /**
+   * Methode qui permet la suppression définitive d'un indicateur.
+   */
   confirmationSuppressionIndicateur() {
-    console.log(this.communeSuppression)
-    this.indicateursService.supprimerIndicateur(this.communeSuppression.nomCommune)
-      .subscribe((result) => {
+    this.indicateursService
+      .supprimerIndicateur(this.communeSuppression.nomCommune)
+      .subscribe(
+        result => {
+          this.suppressionIndicateur = false;
+          this.affichageIndicateurs = true;
 
-
-        this.suppressionIndicateur = false;
-        this.affichageIndicateurs = true;
-
-        this.indicateursService.getListeIndicateurs()
-          .subscribe((result) => {
-            this.listeIndicateurs = result;
-            if (this.listeIndicateurs.length > 0) {
-              this.indicateurVide = false;
-            }
-            if (this.listeIndicateurs.length >= 5) {
-              this.compteurIndicateurs = false;
-            } else {
-              this.compteurIndicateurs = true;
-            }
-          },
-            err => { });
-
-      }, (err) => {
-      });
+          this.indicateursService.getListeIndicateurs().subscribe(
+            result => {
+              this.listeIndicateurs = result;
+              if (this.listeIndicateurs.length == 0) {
+                this.indicateurVide = false;
+              }
+            },
+            err => {}
+          );
+        },
+        err => {
+          this.suppressionIndicateur = false;
+          this.affichageIndicateurs = true;
+        }
+      );
   }
-
-
-
 }
