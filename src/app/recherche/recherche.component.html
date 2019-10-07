@@ -7,21 +7,22 @@
     </div>
     <div class="card-body">
       <p class="font-weight-bold pb-2 pt-2">Sélectionner une commune sur la
-        carte
-        .</p>
+        carte.</p>
       <div id="map_recherche"></div>
     </div>
     <div class="card-footer">
       <h2 class="pt-2 pb-2">Recherche détaillée</h2>
-      <form class="mt-3">
+      <form #formRecherche="ngForm" class="mt-3">
         <div class="form-group row p-2">
           <div class="col-sm-4">
-            <label for="nomCommuneSelect">Commune</label>
+            <label for="nomCommuneSelect">Commune <span class="text-secondary">(requis)
+            </span>
+            </label>
           </div>
           <div class="col-sm-8">
-            <select #codeEtNom [(ngModel)]="communeRecherche.codeEtNom"
+            <select [(ngModel)]="communeRecherche.codeEtNom"
                     class="w-75 form-control"
-                    id="nomCommuneSelect" name="codeEtNom">
+                    id="nomCommuneSelect" name="codeEtNom" required>
               <option *ngFor="let commune of listeCommunes"
                       [ngValue]="{codeInsee: commune.codeINSEE, nomCommune: commune.nomCommune}">{{commune.nomCommune}}
                 - {{commune.codeINSEE}}</option>
@@ -33,8 +34,9 @@
             <label for="polluantSelect">Polluant</label>
           </div>
           <div class="col-sm-8">
-            <select #polluant [(ngModel)]="communeRecherche.polluant"
-                    class="w-75 form-control" id="polluantSelect" name="polluant">
+            <select [(ngModel)]="communeRecherche.polluant"
+                    class="w-75 form-control" id="polluantSelect"
+                    name="polluant">
               <option *ngFor="let polluant of listePolluants"
                       [ngValue]="polluant">{{polluant}}</option>
             </select>
@@ -47,9 +49,10 @@
             </div>
             <div class="col-sm-8 row">
               <div class="col-10">
-                <input #date [(ngModel)]="communeRecherche.date"
-                       class="form-control w-100"
-                       id="datepicker" name="date" required type="date">
+                <input [(ngModel)]="communeRecherche.date"
+                       aria-describedby="dateAide"
+                       class="form-control w-100" id="datepicker" name="date"
+                       type="date">
               </div>
               <div class="col-2 p-2">
                 <fa name="calendar"></fa>
@@ -58,18 +61,32 @@
           </div>
           <div class="form-group col-sm-6">
             <div class="col-sm-8 text-left row">
-              <input #heure [(ngModel)]="communeRecherche.heure" id="HeureInput"
-                     max="23" min="0" name="heure" required step="1"
-                     type="number" class="form-control w-auto">
+              <input [(ngModel)]="communeRecherche.heure" class="form-control w-auto"
+                     id="HeureInput" max="23" min="0" name="heure"
+                     step="1" type="number">
               <label class="p-2">h : 00 min</label>
             </div>
           </div>
         </div>
-        <div class="form-group text-center">
-          <button (click)="rechercheDetaillee()"
+        <small id="dateAide">Si vous précisez une date ou une heure, vous
+          devez aussi préciser l'heure ou la date correspondante.</small>
+        <div class="form-group text-center pt-3">
+          <button (click)="rechercheDetaillee(formRecherche)"
                   class="btn btn-primary">Valider
           </button>
         </div>
+        <p *ngIf="isErreurFormulaire"
+           class="text-center text-danger font-weight-bold pt-2">
+          La recherche détaillée n'est pas valide. Merci de la compléter ou
+          de la modifier.
+        </p>
+        <p *ngIf="isErreurRecuperationDonnees"
+           class="text-center text-danger font-weight-bold pt-2">
+          Aucune donnée n'a été récupérée.
+          <ng-container *ngIf="erreurRecuperationDonneesMsg">
+            {{erreurRecuperationDonneesMsg}}
+          </ng-container>
+        </p>
       </form>
     </div>
   </div>
