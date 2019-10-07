@@ -17,9 +17,10 @@ import { AdministrationComponent } from './administration/administration.compone
 import { RechercheComponent } from './recherche/recherche.component';
 import { MenuComponent } from './menu/menu.component';
 import { AlerteComponent } from './administration/alerte/alerte.component';
-import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
+import { ProfilCompoComponent } from './profil-compo/profil-compo.component'
 import { CreerIndicateurComponent } from './indicateurs/creer-indicateur/creer-indicateur.component';
 import { ModifierIndicateurComponent } from './indicateurs/modifier-indicateur/modifier-indicateur.component';
+import { ResultatIndicateurComponent } from './indicateurs/resultat-indicateur/resultat-indicateur.component';
 
 
 @NgModule({
@@ -37,7 +38,9 @@ import { ModifierIndicateurComponent } from './indicateurs/modifier-indicateur/m
     AdministrationComponent,
     CreerIndicateurComponent,
     ModifierIndicateurComponent,
-    AlerteComponent
+    AlerteComponent,
+    ResultatIndicateurComponent
+
   ],
   imports: [
     BrowserModule,

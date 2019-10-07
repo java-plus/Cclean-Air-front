@@ -11,7 +11,7 @@ import { CommuneIndicateur } from "src/app/entities/commune-indicateur";
   templateUrl: "./modifier-indicateur.component.html",
   styles: []
 })
-export class ModifierIndicateurComponent implements OnInit {
+export class ModifierIndicateurComponent {
   listeCommunes = [
     "Abbaretz",
     "Aigrefeuille-sur-Maine",
@@ -26,8 +26,6 @@ export class ModifierIndicateurComponent implements OnInit {
   ];
 
   indicateurModification: IndicateurCreation = new IndicateurCreation("", null);
-
-  ancienIndicateur: IndicateurCreation;
 
   messageErreur: string = null;
 
@@ -53,7 +51,7 @@ export class ModifierIndicateurComponent implements OnInit {
    */
   constructor(private indicateursService: IndicateursService) { }
 
-  ngOnInit() { }
+
 
   /**
    * méthode qui permet de revenir à l'affichage des indicateurs
