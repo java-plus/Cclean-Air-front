@@ -69,6 +69,10 @@ export class VisualiserIndicateursComponent implements OnInit {
           this.indicateurVide = false;
         }
 
+        if (this.listeIndicateurs.length >= 5) {
+          this.compteurIndicateurs = false;
+        }
+
       },
       err => { }
     );
@@ -117,6 +121,9 @@ export class VisualiserIndicateursComponent implements OnInit {
               this.listeIndicateurs = result;
               if (this.listeIndicateurs.length === 0) {
                 this.indicateurVide = true;
+              }
+              if (this.listeIndicateurs.length === 4) {
+                this.compteurIndicateurs = true;
               }
             },
             err => { }
