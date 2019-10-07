@@ -37,7 +37,6 @@ export class DataService {
 
   recupererDonneesCommune(commune: CommuneRecherche): Observable<ResultatRechercheCommune> {
 
-    console.log('commune recherchée : ' + commune);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-type': 'application/json'
