@@ -7,6 +7,7 @@ import { IndicateursComponent } from './indicateurs/indicateurs.component';
 import { RechercheComponent } from './recherche/recherche.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
+import {ResultatsRechercheComponent} from './resultats-recherche/resultats-recherche.component';
 
 
 export const ROUTES: Routes = [
@@ -17,6 +18,7 @@ export const ROUTES: Routes = [
   { path: 'indicateurs', component: IndicateursComponent },
   { path: 'admin', component: AdministrationComponent },
   { path: 'recherche', component: RechercheComponent },
-  { path: 'profil', component: ProfilCompoComponent }
+  { path: 'profil', component: ProfilCompoComponent },
+  { path: 'resultats', component: ResultatsRechercheComponent}
 
 ];
