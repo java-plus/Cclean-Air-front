@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {Injector, NgModule} from '@angular/core';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
@@ -18,6 +18,9 @@ import { RechercheComponent } from './recherche/recherche.component';
 import { MenuComponent } from './menu/menu.component';
 import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
 import { ResultatsRechercheComponent } from './resultats-recherche/resultats-recherche.component';
+import { RecherchePopupComponent } from './recherche-popup/recherche-popup.component';
+import { createCustomElement } from '@angular/elements';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { ResultatsRechercheComponent } from './resultats-recherche/resultats-rec
     IndicateursComponent,
     VisualiserIndicateursComponent,
     AdministrationComponent,
-    ResultatsRechercheComponent
+    ResultatsRechercheComponent,
+    RecherchePopupComponent
   ],
   imports: [
     BrowserModule,
@@ -43,8 +47,15 @@ import { ResultatsRechercheComponent } from './resultats-recherche/resultats-rec
     AngularFontAwesomeModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [RecherchePopupComponent]
 })
 
 export class AppModule {
+
+  constructor(private injector: Injector) {
+    const PopupElement = createCustomElement(RecherchePopupComponent, {injector});
+    // Register the custom element with the browser.
+    customElements.define('recherche-popup-element', PopupElement);
+  }
 }

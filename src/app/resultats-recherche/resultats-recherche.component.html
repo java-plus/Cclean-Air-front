@@ -1,1 +1,60 @@
-<p>resultats-recherche works!</p>
+<div class="container">
+<h3 class="text-center">Resultat pour la commune : {{communeResultat.nom}}</h3>
+<h4 class="text-center" *ngIf="communeResultat.date && communeResultat.heure">Le {{communeResultat.date | date:'dd/MM/yyyy'}} à {{communeResultat.heure}}h</h4>
+<h4 class="font-weight-bold">Alerte pollution :
+<p *ngIf="communeResultat.niveauAlerte === null" class="text-success">Aucune alerte</p>
+  <p *ngIf="communeResultat.niveauAlerte != null" class="text-danger">{{communeResultat.niveauAlerte}}</p>
+</h4>
+
+<div class="mt-4">
+  <h4 class="font-weight-bold">Polluants</h4>
+
+</div>
+<div class="row" *ngFor="let polluant of communeResultat.polluants">
+<div  class="col">
+  {{polluant.nom}}
+</div>
+  <div  class="col">
+    {{polluant.valeur}}
+  </div>
+  <div  class="col">
+    {{polluant.unite}}
+  </div>
+</div>
+
+  <div class="mt2 row">
+    <div class="col font-weight-bold">Nombre d'habitants :</div>
+    <div class="col">{{communeResultat.nbHabitants}}</div>
+    <div class="col"></div>
+  </div>
+
+  <div class="mt-4">
+    <h4 class="font-weight-bold">Conditions météo</h4>
+
+  </div>
+  <div class="row">
+    <div class="col">Température</div>
+    <div class="col">{{communeResultat.meteo.temperature}}°C</div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col">Humidité</div>
+    <div class="col">{{communeResultat.meteo.humidite}}%</div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col">Ensoleillement</div>
+    <div class="col">{{communeResultat.meteo.ensoleillement}}%</div>
+    <div class="col"></div>
+  </div>
+
+
+
+</div>
+
+
+
+
+
+
+

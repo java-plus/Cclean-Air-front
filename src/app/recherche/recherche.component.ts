@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
 import {DataService} from '../services/data.service';
 import {CommuneRecherche} from '../entities/CommuneRecherche';
-import {ResultatRechercheCommune} from '../entities/ResultatRechercheCommune';
 import {CommuneCarte} from '../entities/CommuneCarte';
 import {Router} from '@angular/router';
+import {NgElement, WithProperties} from '@angular/elements';
+import {RecherchePopupComponent} from '../recherche-popup/recherche-popup.component';
 
 
 /**
@@ -22,7 +23,6 @@ export class RechercheComponent implements OnInit {
   public listePolluants = [];
 
   public communeRecherche: CommuneRecherche = new CommuneRecherche();
-  public communeResultat: ResultatRechercheCommune = new ResultatRechercheCommune();
 
 
   constructor(private service: DataService, private router: Router) {
@@ -30,10 +30,19 @@ export class RechercheComponent implements OnInit {
   }
 
   rechercheDetaillee(): void {
-    console.log(this.communeRecherche);
-    this.service.recupererDonneesCommune(this.communeRecherche).subscribe((commune) => {
-      this.communeResultat = commune;
+
+
+    this.router.navigate(['resultats'], {
+      queryParams: {
+        code: this.communeRecherche.codeEtNom.codeInsee,
+        nom: this.communeRecherche.codeEtNom.nomCommune,
+        polluant: this.communeRecherche.polluant,
+        date: this.communeRecherche.date,
+        heure: this.communeRecherche.heure,
+        alerte: this.communeRecherche.alerte
+      }
     });
+
   }
 
   ngOnInit() {
@@ -65,21 +74,12 @@ export class RechercheComponent implements OnInit {
      */
     this.service.recupererCommunesAvecNiveauAlerte().subscribe((communes) => {
       communes.forEach((commune) => {
+        console.log(commune);
         /**
          * On alimente la liste des communes
          */
         this.listeCommunes.push(commune);
-        console.log(commune);
 
-        /**
-         * Le contenu des popup de chaque marqueur
-         */
-        const content = `
-    <u>
-        <b>${commune.nomCommune}</b>
-    </u>
-    <br/>
-    <p>${commune.codePostal}</p>`;
 
         /**
          * Le statut d'alerte de chaque commune
@@ -94,7 +94,16 @@ export class RechercheComponent implements OnInit {
           alerte = `<br><p class = "text-success">Aucune alerte pollution.</p>`;
         }
 
-        L.marker([commune.latitude, commune.longitude], {icon: myIcon}).bindPopup(content.concat(alerte)).addTo(map);
+        L.marker([commune.latitude, commune.longitude], {icon: myIcon}).bindPopup(fl => {
+          const popupEl: NgElement & WithProperties<RecherchePopupComponent> = document.createElement('recherche-popup-element') as any;
+          // Listen to the close event
+          popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
+
+          popupEl.commune = commune;
+          // Add to the DOM
+          document.body.appendChild(popupEl);
+          return popupEl;
+        }).addTo(map);
 
 
       });
