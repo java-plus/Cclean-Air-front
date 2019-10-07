@@ -19,13 +19,13 @@
             <label class="text-center">Du</label>
           </div>
           <div class="col-sm-3">
-            <input class="w-100 text-dark" type="date" id="dateDu" name="dateDu">
+            <input class="w-100 text-dark" type="date" id="dateDu" name="dateDu" [(ngModel)]="rechercheHistorique.dateDebut">{{rechercheHistorique.dateDebut}}
           </div>
           <div class="col-sm-2">
             <label class="text-center">Au</label>
           </div>
           <div class="col-sm-3">
-            <input class="w-100 text-dark" type="date" id="dateAu" name="dateAu">
+            <input class="w-100 text-dark" type="date" id="dateAu" name="dateAu" [(ngModel)]="rechercheHistorique.dateFin">
           </div>
         </div>
         <div class="row p-2">
@@ -33,25 +33,26 @@
             <label class="text-center">De</label>
           </div>
           <div class="col-sm-3">
-            <input class="w-100 text-dark" type="time" id="heureDe" name="heureDe">
+            <input class="w-100 text-dark" type="time" id="heureDe" name="heureDe" [(ngModel)]="rechercheHistorique.heureDebut">
           </div>
           <div class="col-sm-2">
             <label class="text-center">A</label>
           </div>
           <div class="col-sm-3">
-            <input class="w-100 text-dark" type="time" id="heureA" name="heureA">
+            <input class="w-100 text-dark" type="time" id="heureA" name="heureA" [(ngModel)]="rechercheHistorique.heureFin">{{rechercheHistorique.heureFin}}
           </div>
         </div>
         <div class="row p-2">
           <div class="col-sm-12">
-            <select name="polluants">
-              <option value="popo">Biggest polluant</option>
+            <select name="polluant" [(ngModel)]="rechercheHistorique.polluant">
+              <option *ngFor="let polluant of listePolluants" [ngValue]="polluant">{{polluant}}</option>
             </select>
           </div>
         </div>
         <div class="row p-2">
           <div class="col-sm-12">
-            <button type="submit" class="btn btn-primary">Rechercher</button>
+            <button type="submit" class="btn btn-primary" (click)="demanderHistorique(rechercheHistorique)">Rechercher</button>
+            <label>{{error|json}}</label>
           </div>
         </div>
       </div>

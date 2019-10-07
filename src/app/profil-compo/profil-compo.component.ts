@@ -13,7 +13,7 @@ import { UtilisateurProfil } from '../entities/UtilisateurProfil';
 })
 export class ProfilCompoComponent implements OnInit {
 
-  utilisateur = new UtilisateurProfil('', '', '', '', [''], null, '', '', '');
+  utilisateur = new UtilisateurProfil('', '', '', '', [], null, '', '', '');
   error: string;
   modif: boolean = false;
   suppression: boolean = false;

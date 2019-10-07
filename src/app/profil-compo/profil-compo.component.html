@@ -41,27 +41,6 @@
           </div>
         </div>
         <div class="row p-2">
-          <label class="col-sm-4" for="statutNotification">Alerte ma commune</label>
-          <div class="col-sm-8">
-            <div class="row p-2">
-              <input type="checkbox" class="text-dark" id="statutNotification" name="statutNotification"
-                [(ngModel)]="utilisateur.statutNotification" #statutNotification="ngModel"
-                value="{{utilisateur.statutNotification}}">
-              <label class="w-10 text-dark px-2">{{utilisateur.commune}}</label>
-            </div>
-          </div>
-        </div>
-        <div class="row p-2">
-          <label class="col-sm-4" for="alertes">Alertes</label>
-          <div class="col-sm-8">
-            <div class="row p-2" *ngFor="let indicateur of utilisateur.listeIndicateur">
-              <input type="checkbox" class="text-dark" id="alertes" name="alertes"
-                [(ngModel)]="utilisateur.listeIndicateur" #alertes="ngModel" value="{{utilisateur.listeIndicateur}}">
-              <label class="w-10 text-dark px-2">{{utilisateur.listeIndicateur}}</label>
-            </div>
-          </div>
-        </div>
-        <div class="row p-2">
           <label class="col-sm-4" for="password">Mot de passe actuel</label>
           <div class="col-sm-8">
             <input type="password" class="w-100 text-dark" id="password" name="password"

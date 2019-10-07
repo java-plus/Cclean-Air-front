@@ -18,7 +18,7 @@ export const ROUTES: Routes = [
   {path: 'admin', component: AdministrationComponent},
   {path: 'recherche', component: RechercheComponent},
   { path: 'indicateurs', component: IndicateursComponent },
-  { path: 'historique', component: HistoriqueComponent},
+  { path: 'historiques', component: HistoriqueComponent},
   { path: 'profil', component: ProfilCompoComponent },
   {path: 'admin/alerte', component: AlerteComponent},
   {path: '', component: AccueilComponent}

@@ -1,3 +1,5 @@
+import { IndicateurCreation } from './Indicateur-creation';
+
 /**
  * Classe représentant un utilisateur.
  */
@@ -6,7 +8,7 @@ export class UtilisateurProfil {
   prenom: string;
   email: string;
   commune: string;
-  listeIndicateur: string[];
+  listeIndicateurs: IndicateurCreation[];
   statutNotification: boolean;
   motDePasseActuel: string;
   motDePasseNouveau: string;
@@ -25,13 +27,13 @@ export class UtilisateurProfil {
    * @param getMotDePasseNouveauValidation : string validation du nouveau mot de passe
    */
   constructor(nom: string, prenom: string, email: string, commune: string,
-              listeIndicateur: string[], statutNotification: boolean, motDePasseActuel: string,
+              listeIndicateurs: IndicateurCreation[], statutNotification: boolean, motDePasseActuel: string,
               motDePasseNouveau: string, getMotDePasseNouveauValidation: string) {
     this.nom = nom;
     this.prenom = prenom;
     this.email = email;
     this.commune = commune;
-    this.listeIndicateur = listeIndicateur;
+    this.listeIndicateurs = listeIndicateurs;
     this.statutNotification = statutNotification;
     this.motDePasseActuel = motDePasseActuel;
     this.motDePasseNouveau = motDePasseNouveau;
