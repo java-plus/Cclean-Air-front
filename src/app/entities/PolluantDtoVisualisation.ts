@@ -1,6 +1,6 @@
 class PolluantDtoVisualisation {
 
-  constructor(private nom: string, private valeur: number, private unite: string) {
+  constructor(public nom: string, public valeur: number, public unite: string) {
 
   }
 }

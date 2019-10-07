@@ -1,6 +1,6 @@
 class CommuneDtoVisualisation {
 
-  constructor(private nom: string, private nbHabitants: number) { }
+  constructor(public nom: string, public nbHabitants: number) { }
 }
 
 export { CommuneDtoVisualisation };

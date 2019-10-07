@@ -1,12 +1,13 @@
 <div class="container pt-5" *ngIf="erreur == null">
 
+
   <div class="card">
 
 
     <div class="card-header">
       <h2 class="d-flex justify-content-center ">Résulats pour la commune :
-        {{donneesLocales?.communeDtoVisualisation?.nom}}</h2>
-      <h3 class="d-flex justify-content-center ">Le {{donneesLocales?.date | date:'dd/MM/yyyy à HH:mm'}}</h3>
+        {{donneesLocales.commune.nom}}</h2>
+      <h3 class="d-flex justify-content-center ">Le {{donneesLocales.date | date:'dd/MM/yyyy à HH:mm'}}</h3>
     </div>
 
     <div class="card-body">
@@ -20,13 +21,12 @@
 
       <div class="pt-5">
         <div class="row d-flex justify-content-center ">
-          <h4 class="col-6">Polluants</h4>
+          <h4 class="col-8">Polluants</h4>
         </div>
-        <div class="row d-flex justify-content-center "
-          *ngFor="let polluant of donneesLocales.listePolluantDtoVisualisation">
-          <div class="col-3">{{polluant?.nom}}:</div>
+        <div class="row d-flex justify-content-center " *ngFor="let polluant of donneesLocales.listePolluants">
+          <div class="col-3">{{polluant.nom}}:</div>
           <div class="col-5">
-            {{polluant?.valeur}} {{polluant?.unite}}
+            {{polluant.valeur}} {{polluant.unite}}
           </div>
 
         </div>
@@ -36,7 +36,7 @@
       <div class="mt-5 row d-flex justify-content-center ">
         <h4 class="col-3">Population:</h4>
         <div class="col-5">
-          {{donneesLocales?.communeDtoVisualisation?.nbHabitants}} habitants
+          {{donneesLocales?.commune?.nbHabitants}} habitants
         </div>
       </div>
 
@@ -46,15 +46,15 @@
         </div>
         <div class="row d-flex justify-content-center ">
           <div class="col-3">Humidité:</div>
-          <div class="col-5">{{donneesLocales?.conditionMeteoDtoVisualisation?.humidite}} %</div>
+          <div class="col-5">{{donneesLocales.conditionMeteo.humidite}} %</div>
         </div>
         <div class="row d-flex justify-content-center ">
           <div class="col-3">Température:</div>
-          <div class="col-5">{{donneesLocales?.conditionMeteoDtoVisualisation?.temperature}} °C</div>
+          <div class="col-5">{{donneesLocales.conditionMeteo.temperature}} °C</div>
         </div>
         <div class="row d-flex justify-content-center ">
           <div class="col-3">Ensoleillement:</div>
-          <div class="col-5">{{donneesLocales?.conditionMeteoDtoVisualisation?.ensoleillement}} %</div>
+          <div class="col-5">{{donneesLocales.conditionMeteo.ensoleillement}} %</div>
         </div>
 
 

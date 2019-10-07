@@ -3,8 +3,12 @@ import { PolluantDtoVisualisation } from './PolluantDtoVisualisation';
 import { ConditionMeteoDtoVisualisation } from './ConditionMeteoDtoVisualisation';
 
 class DonneesLocalesDto {
-  constructor(private commune: CommuneDtoVisualisation, private polluant: PolluantDtoVisualisation[],
-    private meteo: ConditionMeteoDtoVisualisation, private date: Date) { }
+  constructor(public commune: CommuneDtoVisualisation, public listePolluants: PolluantDtoVisualisation[],
+    public conditionMeteo: ConditionMeteoDtoVisualisation, public date: Date) { }
 }
 
 export { DonneesLocalesDto };
+
+
+
+

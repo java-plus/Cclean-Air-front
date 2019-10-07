@@ -1,6 +1,6 @@
 class ConditionMeteoDtoVisualisation {
 
-  constructor(private ensoleillement: number, private temperature: number, private humidite: number) {
+  constructor(public ensoleillement: number, public temperature: number, public humidite: number) {
   }
 }
 

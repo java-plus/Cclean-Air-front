@@ -16,8 +16,13 @@ export class ResultatIndicateurComponent implements OnInit {
 
   codeInsee: string;
 
-  donneesLocales: DonneesLocalesDto = new DonneesLocalesDto(new CommuneDtoVisualisation('', null),
-    [], new ConditionMeteoDtoVisualisation(null, null, null), null);
+  commune = new CommuneDtoVisualisation('', null);
+  meteo = new ConditionMeteoDtoVisualisation(null, null, null);
+  polluant: PolluantDtoVisualisation[] = [];
+
+
+  donneesLocales: DonneesLocalesDto = new DonneesLocalesDto(this.commune,
+    this.polluant, this.meteo, null);
 
   erreur: string;
 
