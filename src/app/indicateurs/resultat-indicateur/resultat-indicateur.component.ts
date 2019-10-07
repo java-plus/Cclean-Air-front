@@ -16,8 +16,6 @@ export class ResultatIndicateurComponent implements OnInit {
 
   codeInsee: string;
 
-
-
   donneesLocales: DonneesLocalesDto = new DonneesLocalesDto(new CommuneDtoVisualisation('', null),
     [], new ConditionMeteoDtoVisualisation(null, null, null), null);
 
@@ -66,6 +64,9 @@ export class ResultatIndicateurComponent implements OnInit {
     });
   }
 
+  /**
+   * méthode qui permet de retourner à l'affichage des indicateurs
+   */
   retourIndicateur() {
     this.childResultat.emit({ etat: 0, indicateurCourant: null });
   }
