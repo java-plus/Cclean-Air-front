@@ -10,5 +10,7 @@ export class ResultatRechercheCommune {
   public nbHabitants: number;
   public conditionsMeteo: ConditionMeteo;
   public  niveauAlerte: PolluantDto;
+  public date: Date;
+  public heure: number;
 
 }

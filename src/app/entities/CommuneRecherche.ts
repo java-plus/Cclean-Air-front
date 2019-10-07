@@ -9,4 +9,6 @@ export class CommuneRecherche {
   public date: Date;
   public heure: number;
   public alerte: PolluantDto;
+  public polluants: any;
+  public meteo: any;
 }
