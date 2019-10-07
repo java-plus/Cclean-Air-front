@@ -17,6 +17,7 @@ import { AdministrationComponent } from './administration/administration.compone
 import { RechercheComponent } from './recherche/recherche.component';
 import { MenuComponent } from './menu/menu.component';
 import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
+import { HistoriqueComponent } from './historique/historique.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
     AccueilComponent,
     IndicateursComponent,
     VisualiserIndicateursComponent,
-    AdministrationComponent
+    AdministrationComponent,
+    HistoriqueComponent
   ],
   imports: [
     BrowserModule,

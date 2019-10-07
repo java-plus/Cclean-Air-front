@@ -1,0 +1,60 @@
+<app-menu></app-menu>
+<section class="container p-5">
+  <form class="form-group">
+    <div class="form-group text-center">
+      <div class="row p-2">
+        <label class="col-sm-12 p-3 text-center">Historique pour la commune <span
+            style="color:crimson">XXX</span></label>
+        <div class="col-sm-6 ">
+          <button type="submit" class="btn btn-primary float-right">Retour</button>
+        </div>
+        <div class="col-sm-auto">
+          <button type="submit" class="btn btn-primary float-right">Prévision</button>
+        </div>
+      </div>
+      <div class="row p-2 form-control">
+        <label class="col-sm-12 text-center"><b>Période</b></label>
+        <div class="row p-2">
+          <div class="col-sm-2">
+            <label class="text-center">Du</label>
+          </div>
+          <div class="col-sm-3">
+            <input class="w-100 text-dark" type="date" id="dateDu" name="dateDu">
+          </div>
+          <div class="col-sm-2">
+            <label class="text-center">Au</label>
+          </div>
+          <div class="col-sm-3">
+            <input class="w-100 text-dark" type="date" id="dateAu" name="dateAu">
+          </div>
+        </div>
+        <div class="row p-2">
+          <div class="col-sm-2">
+            <label class="text-center">De</label>
+          </div>
+          <div class="col-sm-3">
+            <input class="w-100 text-dark" type="time" id="heureDe" name="heureDe">
+          </div>
+          <div class="col-sm-2">
+            <label class="text-center">A</label>
+          </div>
+          <div class="col-sm-3">
+            <input class="w-100 text-dark" type="time" id="heureA" name="heureA">
+          </div>
+        </div>
+        <div class="row p-2">
+          <div class="col-sm-12">
+            <select name="polluants">
+              <option value="popo">Biggest polluant</option>
+            </select>
+          </div>
+        </div>
+        <div class="row p-2">
+          <div class="col-sm-12">
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
