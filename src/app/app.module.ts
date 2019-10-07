@@ -16,6 +16,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AdministrationComponent } from './administration/administration.component';
 import { RechercheComponent } from './recherche/recherche.component';
 import { MenuComponent } from './menu/menu.component';
+import { AlerteComponent } from './administration/alerte/alerte.component';
 import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
     AccueilComponent,
     IndicateursComponent,
     VisualiserIndicateursComponent,
-    AdministrationComponent
+    AdministrationComponent,
+    AlerteComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,5 @@ import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-
 export class AppModule {
 }

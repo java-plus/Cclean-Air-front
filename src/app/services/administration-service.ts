@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {MembreAdministration} from '../entities/membre-administration';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AlerteAdministrateur} from "../entities/alerte-administeur";
 
 const URL_BACKEND = environment.backendUrl;
 
@@ -45,6 +46,22 @@ export class AdministrationService {
     };
 
     return this._http.delete(`${URL_BACKEND}/admin/membres/${emailASupprimer}`, httpOptions);
+  }
+
+  /**
+   * Méthode envoyer une requête post contenant le contenu de l'alerte à
+   * envoyer.
+   * @param alerte : AlerteAdministrateur l'alerte à traiter en back
+   */
+  envoyerAlerte(alerte: AlerteAdministrateur): Observable<void> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      withCredentials: true
+    };
+
+    return this._http.post<void>(`${URL_BACKEND}/admin/alertes`, alerte, httpOptions);
   }
 
 }

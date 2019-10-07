@@ -5,6 +5,7 @@ import {CommuneCarte} from '../entities/CommuneCarte';
 import {environment} from '../../environments/environment';
 import {CommuneRecherche} from '../entities/CommuneRecherche';
 import {ResultatRechercheCommune} from '../entities/ResultatRechercheCommune';
+import {Commune} from '../entities/commune';
 
 const URL_BACKEND = environment.backendUrl;
 
@@ -67,8 +68,21 @@ export class DataService {
   }
 
 
+
+  /**
+   * Méthode envoyant un requête GET pour récuperer la liste des communes de
+   * l'API.
+   */
+  recupererCommunes(): Observable<Commune[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      withCredentials: true,
+    };
+
+    return this.http.get<Commune[]>(URL_BACKEND.concat('/communes'), httpOptions);
+  }
 }
-
-
 
 
