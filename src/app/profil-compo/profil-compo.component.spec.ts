@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthentificationComponent } from './authentification.component';
+import { ProfilCompoComponent } from './profil-compo.component';
 
-describe('AuthentificationComponent', () => {
-  let component: AuthentificationComponent;
-  let fixture: ComponentFixture<AuthentificationComponent>;
+describe('ProfilCompoComponent', () => {
+  let component: ProfilCompoComponent;
+  let fixture: ComponentFixture<ProfilCompoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AuthentificationComponent ]
+      declarations: [ ProfilCompoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuthentificationComponent);
+    fixture = TestBed.createComponent(ProfilCompoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,34 +1,45 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthentificationService} from '../services/authentification-service';
 import {Router} from '@angular/router';
+import {NgForm} from "@angular/forms";
+import {UtilisateurAuthentification} from "../entities/utilisateur-authentification";
 
+/**
+ * Composant gérant la page d'authentification.
+ */
 @Component({
   selector: 'app-authentification',
   templateUrl: './authentification.component.html',
-  styleUrls: ['./authentification.component.css']
+  styles: []
 })
-export class AuthentificationComponent implements OnInit {
+export class AuthentificationComponent {
 
+  statutErreur: boolean;
+  utilisateur: UtilisateurAuthentification = new UtilisateurAuthentification(null, null);
 
+  /**
+   * Constructeur
+   * @param service : AuthentificationService
+   * @param router : Router
+   */
   constructor(private service: AuthentificationService, private router: Router) {
-  }
-
-
-  ngOnInit() {
   }
 
   /**
    * Fait appel a la méthode de service pour lui envoyer les informations de connexion,
-   * redirige vers la page de login ou l'accueil selon la réponse
-   * @param email de l'utilisateur
-   * @param motDePasse de l'utilisateur
+   * redirige vers la page de login ou l'accueil (la page de recherche) selon la réponse.
+   * @param formAuthentification
    */
-  authentifier(email: string, motDePasse: string): void {
-    this.service.authentifier(email, motDePasse).subscribe(() => {
+  authentifier(formAuthentification: NgForm): void {
+    if (formAuthentification.invalid) {
+      this.statutErreur = true;
+      return;
+    }
+    this.service.authentifier(this.utilisateur).subscribe(() => {
       this.router.navigate(['/recherche']);
     }, () => {
       this.router.navigate(['/connexion']);
+      this.statutErreur = true;
     });
   }
-
 }
