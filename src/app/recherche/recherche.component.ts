@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import {DataService} from '../services/data.service';
-import {CommuneRecherche} from '../entities/CommuneRecherche';
-import {ResultatRechercheCommune} from '../entities/ResultatRechercheCommune';
-import {CommuneCarte} from '../entities/CommuneCarte';
-import {Router} from '@angular/router';
-import {NgForm} from '@angular/forms';
+import { DataService } from '../services/data.service';
+import { CommuneRecherche } from '../entities/CommuneRecherche';
+import { ResultatRechercheCommune } from '../entities/ResultatRechercheCommune';
+import { CommuneCarte } from '../entities/CommuneCarte';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 
 /**
@@ -34,7 +34,7 @@ export class RechercheComponent implements OnInit {
    * @param service : DataService
    * @param router : Router
    */
-  constructor(private service: DataService, private router: Router) {}
+  constructor(private service: DataService, private router: Router) { }
 
   /**
    * Méthode appellant la méthode de récupération des données
@@ -52,8 +52,8 @@ export class RechercheComponent implements OnInit {
       this.isErreurRecuperationDonnees = false;
       this.isErreurFormulaire = false;
       this.service.recupererDonneesCommune(this.communeRecherche).subscribe((commune) => {
-          this.communeResultat = commune;
-        },
+        this.communeResultat = commune;
+      },
         error => {
           this.isErreurRecuperationDonnees = true;
           this.erreurRecuperationDonneesMsg = error.error;
@@ -94,7 +94,6 @@ export class RechercheComponent implements OnInit {
          * On alimente la liste des communes
          */
         this.listeCommunes.push(commune);
-        console.log(commune);
 
         /**
          * Le contenu des popup de chaque marqueur
@@ -119,7 +118,7 @@ export class RechercheComponent implements OnInit {
           alerte = `<br><p class = "text-success">Aucune alerte pollution.</p>`;
         }
 
-        L.marker([commune.latitude, commune.longitude], {icon: myIcon}).bindPopup(content.concat(alerte)).addTo(map);
+        L.marker([commune.latitude, commune.longitude], { icon: myIcon }).bindPopup(content.concat(alerte)).addTo(map);
 
 
       });

@@ -10,9 +10,8 @@
           <div class="form-group row">
             <label for="email" class="col-md-4 col-12">Email :</label>
             <div class="col-12 col-md-8">
-              <input type="email" placeholder="admin@mail.com / user@mail.com" class="w-100" required
-                     #email="ngModel" [(ngModel)]="utilisateur.email" name="email"
-                     id="email">
+              <input type="email" placeholder="admin@mail.com / user@mail.com" class="w-100" required #email="ngModel"
+                [(ngModel)]="utilisateur.email" name="email" id="email">
               <ng-container *ngIf="(email.dirty && email.invalid)">
                 <p class="text-danger">
                   Ce champ est invalide.
@@ -23,8 +22,8 @@
           <div class="form-group row">
             <label for="motDePasse" class="col-md-4 col-12">Mot de passe :</label>
             <div class="col-12 col-md-8">
-              <input type="password" class="w-100" placeholder="admin / user" required
-                     id="motDePasse" #motDePasse="ngModel" [(ngModel)]="utilisateur.motDePasse" name="motDePasse">
+              <input type="password" class="w-100" placeholder="admin / user" required id="motDePasse"
+                #motDePasse="ngModel" [(ngModel)]="utilisateur.motDePasse" name="motDePasse">
               <ng-container *ngIf="(motDePasse.dirty && motDePasse.invalid)">
                 <p class="text-danger">
                   Ce champ est invalide.

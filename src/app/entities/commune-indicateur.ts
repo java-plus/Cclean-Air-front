@@ -1,3 +1,9 @@
+
+/**
+ * Objet Dto d'indicateur qui gère la création et la modification d'indicateurs
+ * @export
+ * @class CommuneIndicateur
+ */
 export class CommuneIndicateur {
   nomCommune: string;
   codeInsee: string;

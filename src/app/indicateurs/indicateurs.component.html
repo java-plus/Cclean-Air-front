@@ -8,7 +8,13 @@
   </div>
 
   <div *ngIf="_etat === 2">
-    <app-modifier-indicateur [indicateurCourant]=this.indicateurCourant (childModif)="changerEtat($event)"></app-modifier-indicateur>
+    <app-modifier-indicateur [indicateurCourant]=this.indicateurCourant (childModif)="changerEtat($event)">
+    </app-modifier-indicateur>
+  </div>
+
+  <div *ngIf="_etat === 3">
+    <app-resultat-indicateur [indicateurCourant]=this.indicateurCourant (childResultat)="changerEtat($event)">
+    </app-resultat-indicateur>
   </div>
 
 </div>
