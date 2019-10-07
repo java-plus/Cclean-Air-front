@@ -1,31 +1,93 @@
 <app-menu></app-menu>
 
-<div class="container max-vh-100">
-  <u>
-    <h2 class="jumbotron mt-3">Choix de la commune</h2>
-  </u>
-  <div id="map_recherche"></div>
-</div>
-
-<div class="container">
-<form>
-  <div class="form-group">
-    <select #codeEtNom [(ngModel)]="communeRecherche.codeEtNom" name="codeEtNom">
-      <option *ngFor="let commune of listeCommunes" [ngValue]="{codeInsee: commune.codeINSEE, nomCommune: commune.nomCommune}">{{commune.nomCommune}} - {{commune.codeINSEE}}</option>
-    </select>
+<section class="container p-5">
+  <div class="card bg-dark text-light">
+    <div class="card-header">
+      <h1 class="text-center">Recherche d'une commune</h1>
+    </div>
+    <div class="card-body">
+      <p class="font-weight-bold pb-2 pt-2">Sélectionner une commune sur la
+        carte.</p>
+      <div id="map_recherche"></div>
+    </div>
+    <div class="card-footer">
+      <h2 class="pt-2 pb-2">Recherche détaillée</h2>
+      <form #formRecherche="ngForm" class="mt-3">
+        <div class="form-group row p-2">
+          <div class="col-sm-4">
+            <label for="nomCommuneSelect">Commune <span class="text-secondary">(requis)
+            </span>
+            </label>
+          </div>
+          <div class="col-sm-8">
+            <select [(ngModel)]="communeRecherche.codeEtNom"
+                    class="w-75 form-control"
+                    id="nomCommuneSelect" name="codeEtNom" required>
+              <option *ngFor="let commune of listeCommunes"
+                      [ngValue]="{codeInsee: commune.codeINSEE, nomCommune: commune.nomCommune}">{{commune.nomCommune}}
+                - {{commune.codeINSEE}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row p-2">
+          <div class="col-sm-4">
+            <label for="polluantSelect">Polluant</label>
+          </div>
+          <div class="col-sm-8">
+            <select [(ngModel)]="communeRecherche.polluant"
+                    class="w-75 form-control" id="polluantSelect"
+                    name="polluant">
+              <option *ngFor="let polluant of listePolluants"
+                      [ngValue]="polluant">{{polluant}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row p-2">
+          <div class="form-group row col-sm-6">
+            <div class="col-sm-4">
+              <label for="datepicker">Date et heure</label>
+            </div>
+            <div class="col-sm-8 row">
+              <div class="col-10">
+                <input [(ngModel)]="communeRecherche.date"
+                       aria-describedby="dateAide"
+                       class="form-control w-100" id="datepicker" name="date"
+                       type="date">
+              </div>
+              <div class="col-2 p-2">
+                <fa name="calendar"></fa>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <div class="col-sm-8 text-left row">
+              <input [(ngModel)]="communeRecherche.heure" class="form-control w-auto"
+                     id="HeureInput" max="23" min="0" name="heure"
+                     step="1" type="number">
+              <label class="p-2">h : 00 min</label>
+            </div>
+          </div>
+        </div>
+        <small id="dateAide">Si vous précisez une date ou une heure, vous
+          devez aussi préciser l'heure ou la date correspondante.</small>
+        <div class="form-group text-center pt-3">
+          <button (click)="rechercheDetaillee(formRecherche)"
+                  class="btn btn-primary">Valider
+          </button>
+        </div>
+        <p *ngIf="isErreurFormulaire"
+           class="text-center text-danger font-weight-bold pt-2">
+          La recherche détaillée n'est pas valide. Merci de la compléter ou
+          de la modifier.
+        </p>
+        <p *ngIf="isErreurRecuperationDonnees"
+           class="text-center text-danger font-weight-bold pt-2">
+          Aucune donnée n'a été récupérée.
+          <ng-container *ngIf="erreurRecuperationDonneesMsg">
+            {{erreurRecuperationDonneesMsg}}
+          </ng-container>
+        </p>
+      </form>
+    </div>
   </div>
-  <div class="form-group">
-    <select #polluant [(ngModel)]="communeRecherche.polluant" name="polluant">
-      <option *ngFor="let polluant of listePolluants" [ngValue]="polluant">{{polluant}}</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <input type = "date" [(ngModel)]="communeRecherche.date" class="mr-2" #date name="date">
-    <fa name="calendar"></fa>
-    <input [(ngModel)]="communeRecherche.heure" type="number" min="0" max="24" step="1" #heure name="heure">
-  </div>
-  <div class="form-group">
-    <button class="btn-info" (click)="rechercheDetaillee()">Recherche personnalisée</button>
-  </div>
-</form>
-</div>
+</section>

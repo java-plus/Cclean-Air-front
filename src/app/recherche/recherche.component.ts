@@ -7,6 +7,8 @@ import {Router} from '@angular/router';
 import {NgElement, WithProperties} from '@angular/elements';
 import {RecherchePopupComponent} from '../recherche-popup/recherche-popup.component';
 
+import {NgForm} from '@angular/forms';
+
 
 /**
  * Composant gérant la page de recherche des informations météorologiques d'une
@@ -25,12 +27,37 @@ export class RechercheComponent implements OnInit {
   public communeRecherche: CommuneRecherche = new CommuneRecherche();
 
 
-  constructor(private service: DataService, private router: Router) {
+  isErreurFormulaire: boolean;
+  isErreurRecuperationDonnees: boolean;
+  erreurRecuperationDonneesMsg: string;
 
+
+  /**
+   * Constructeur
+   * @param service : DataService
+   * @param router : Router
+   */
+  constructor(private service: DataService, private router: Router) {
   }
 
-  rechercheDetaillee(): void {
+  /**
+   * Méthode appellant la méthode de récupération des données
+   * météorologiques de la commune saisie dans le champs de recherche détaillée.
+   */
+  rechercheDetaillee(formRecherche: NgForm): void {
+    if (formRecherche.invalid || (this.communeRecherche.heure !== undefined && !this.communeRecherche.date)
+      || (this.communeRecherche.heure === undefined && this.communeRecherche.date)) {
+      this.isErreurFormulaire = true;
+      this.isErreurRecuperationDonnees = false;
+    } else {
+      if (this.communeRecherche.date === undefined) {
+        this.communeRecherche.date = new Date();
+        this.communeRecherche.heure = 0;
+      }
+      this.isErreurRecuperationDonnees = false;
+      this.isErreurFormulaire = false;
 
+    }
 
     this.router.navigate(['resultats'], {
       queryParams: {
@@ -45,7 +72,7 @@ export class RechercheComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     /**
      * On initialise la carte et ses données dès le chargement de la page.
