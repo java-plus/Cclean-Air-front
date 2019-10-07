@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
 import {DataService} from '../services/data.service';
 import {CommuneRecherche} from '../entities/CommuneRecherche';
 import {ResultatRechercheCommune} from '../entities/ResultatRechercheCommune';
 import {CommuneCarte} from '../entities/CommuneCarte';
 import {Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 
 /**
@@ -24,19 +25,43 @@ export class RechercheComponent implements OnInit {
   public communeRecherche: CommuneRecherche = new CommuneRecherche();
   public communeResultat: ResultatRechercheCommune = new ResultatRechercheCommune();
 
+  isErreurFormulaire: boolean;
+  isErreurRecuperationDonnees: boolean;
+  erreurRecuperationDonneesMsg: string;
 
-  constructor(private service: DataService, private router: Router) {
+  /**
+   * Constructeur
+   * @param service : DataService
+   * @param router : Router
+   */
+  constructor(private service: DataService, private router: Router) {}
 
+  /**
+   * Méthode appellant la méthode de récupération des données
+   * météorologiques de la commune saisie dans le champs de recherche détaillée.
+   */
+  rechercheDetaillee(formRecherche: NgForm): void {
+    if (formRecherche.invalid || (this.communeRecherche.heure !== undefined && !this.communeRecherche.date) || (this.communeRecherche.heure === undefined && this.communeRecherche.date)) {
+      this.isErreurFormulaire = true;
+      this.isErreurRecuperationDonnees = false;
+    } else {
+      if (this.communeRecherche.date === undefined) {
+        this.communeRecherche.date = new Date();
+        this.communeRecherche.heure = 0;
+      }
+      this.isErreurRecuperationDonnees = false;
+      this.isErreurFormulaire = false;
+      this.service.recupererDonneesCommune(this.communeRecherche).subscribe((commune) => {
+          this.communeResultat = commune;
+        },
+        error => {
+          this.isErreurRecuperationDonnees = true;
+          this.erreurRecuperationDonneesMsg = error.error;
+        });
+    }
   }
 
-  rechercheDetaillee(): void {
-    console.log(this.communeRecherche);
-    this.service.recupererDonneesCommune(this.communeRecherche).subscribe((commune) => {
-      this.communeResultat = commune;
-    });
-  }
-
-  ngOnInit() {
+  ngOnInit(): void {
 
     /**
      * On initialise la carte et ses données dès le chargement de la page.
