@@ -18,6 +18,9 @@ import { RechercheComponent } from './recherche/recherche.component';
 import { MenuComponent } from './menu/menu.component';
 import { AlerteComponent } from './administration/alerte/alerte.component';
 import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
+import { CreerIndicateurComponent } from './indicateurs/creer-indicateur/creer-indicateur.component';
+import { ModifierIndicateurComponent } from './indicateurs/modifier-indicateur/modifier-indicateur.component';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
     IndicateursComponent,
     VisualiserIndicateursComponent,
     AdministrationComponent,
+    CreerIndicateurComponent,
+    ModifierIndicateurComponent,
     AlerteComponent
   ],
   imports: [
