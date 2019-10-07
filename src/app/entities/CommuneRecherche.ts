@@ -12,6 +12,4 @@ export class CommuneRecherche {
   // A CORRIGER
   public heure: number;
   public date: Date;
-  public polluants: any;
-  public meteo: any;
 }
