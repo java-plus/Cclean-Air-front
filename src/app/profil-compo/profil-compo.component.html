@@ -1,5 +1,5 @@
 <app-menu></app-menu>
-<section class="container p-5">
+<section class="container p-5" *ngIf="suppression == false">
   <div class="card bg-light text-dark">
     <h1 class="p-3 card-header text-center">Mon Profil</h1>
     <form class="card-body">
@@ -72,31 +72,62 @@
         <div class="row p-2">
           <label class="col-sm-4" for="newPassword">Nouveau mot de passe</label>
           <div class="col-sm-8">
-            <input type="password" class="w-100 text-dark" id="newPassword" name="newPassword"
-              placeholder="Votre nouveau mot de passe" [(ngModel)]="utilisateur.motDePasseNouveau"
-              #motDePasseNouveau="ngModel">
+            <input pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" type="password"
+              class="w-100 text-dark" #mdp="ngModel" [(ngModel)]="utilisateur.motDePasseNouveau"
+              aria-describedby="mdpAide" id="newPassword" name="newPassword" [ngModelOptions]="{updateOn: 'blur'}"
+              placeholder="$5dsfIUH!è" [disabled]="motDePasseActuel.value=='' || motDePasseActuel.pristine">
+            <small id="mdpAide" class="form-text text-muted">Doit comporter au moins 8 caractères dont 1
+              majuscule, 1 minuscule, 1 caractère spécial et 1 chiffre.</small>
+            <ng-container *ngIf="(mdp.dirty && mdp.invalid)">
+              <p class="text-danger">
+                Champs Invalide
+              </p>
+            </ng-container>
           </div>
         </div>
         <div class="row p-2">
           <label class="col-sm-4" for="validationPassword">Retapez le nouveau mot de passe</label>
           <div class="col-sm-8">
             <input type="password" class="w-100 text-dark" id="validationPassword" name="validationPassword"
-              placeholder="Nouveau mot de passe" [(ngModel)]="utilisateur.getMotDePasseNouveauValidation"
-              #getMotDePasseValidation="ngModel">
+              [(ngModel)]="utilisateur.getMotDePasseNouveauValidation" #getMotDePasseValidation="ngModel"
+              [disabled]="mdp.isDisabled">
           </div>
         </div>
         <div class="row p-2">
           <div class="col-sm-6">
             <button type="submit" class="btn btn-primary float-right" (click)="modifierProfil()"
-              [disabled]="nom.value=='' || prenom.value=='' || email.value=='' || commune.value==''">Modifier
+              [disabled]="nom.value=='' || prenom.value=='' || email.value=='' || commune.value=='' || (mdp.dirty && mdp.invalid)">Modifier
               Profil</button>
           </div>
           <div class="col-sm-auto">
-            <button type="submit" class="btn btn-primary float-right">Supprimer Profil</button>
+            <button type="submit" class="btn btn-primary float-right" (click)="demanderSuppression()">Supprimer
+              Profil</button>
           </div>
         </div>
         <p style="color: forestgreen" *ngIf="modif">Modifications effectuées</p>
         <p style="color: crimson" *ngIf="modif==false">{{error}}</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="container p-5" *ngIf="suppression == true">
+  <div class="card bg-light text-dark">
+    <h1 class="p-3 card-header text-center">Supprimer mon compte</h1>
+    <form class="card-body">
+      <div class="form-group text-center">
+        <div class="row p-2">
+          <label class="col-sm-12" for="messageSuppression">Êtes vous sûr de vouloir supprimer votre compte
+            ?<br><b>Cette action est irréversible.</b></label>
+        </div>
+        <div class="row p-2">
+          <div class="col-sm-6">
+            <button type="submit" class="btn btn-primary float-right" (click)="validerSuppression()">Confirmer</button>
+          </div>
+          <div class="col-sm-auto">
+            <button type="submit" class="btn btn-primary float-right" (click)="annulerSuppression()">Annuler</button>
+          </div>
+        </div>
       </div>
     </form>
   </div>

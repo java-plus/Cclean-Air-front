@@ -1,6 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import {DataService} from '../services/data.service';
+import {CommuneRecherche} from '../entities/CommuneRecherche';
+import {ResultatRechercheCommune} from '../entities/ResultatRechercheCommune';
+import {CommuneCarte} from '../entities/CommuneCarte';
+import {Router} from '@angular/router';
+
 
 /**
  * Composant gérant la page de recherche des informations météorologiques d'une
@@ -13,7 +18,22 @@ import {DataService} from '../services/data.service';
 })
 export class RechercheComponent implements OnInit {
 
-  constructor(private service: DataService) {
+  public listeCommunes: Array<CommuneCarte> = [];
+  public listePolluants = [];
+
+  public communeRecherche: CommuneRecherche = new CommuneRecherche();
+  public communeResultat: ResultatRechercheCommune = new ResultatRechercheCommune();
+
+
+  constructor(private service: DataService, private router: Router) {
+
+  }
+
+  rechercheDetaillee(): void {
+    console.log(this.communeRecherche);
+    this.service.recupererDonneesCommune(this.communeRecherche).subscribe((commune) => {
+      this.communeResultat = commune;
+    });
   }
 
   ngOnInit() {
@@ -45,6 +65,11 @@ export class RechercheComponent implements OnInit {
      */
     this.service.recupererCommunesAvecNiveauAlerte().subscribe((communes) => {
       communes.forEach((commune) => {
+        /**
+         * On alimente la liste des communes
+         */
+        this.listeCommunes.push(commune);
+        console.log(commune);
 
         /**
          * Le contenu des popup de chaque marqueur
@@ -68,11 +93,23 @@ export class RechercheComponent implements OnInit {
         } else {
           alerte = `<br><p class = "text-success">Aucune alerte pollution.</p>`;
         }
+
         L.marker([commune.latitude, commune.longitude], {icon: myIcon}).bindPopup(content.concat(alerte)).addTo(map);
+
+
       });
     }, () => {
       alert('Erreur lors de la récupération des communes');
     });
+
+    /**
+     * Ici on initialise la liste des polluants
+     */
+    this.service.recupererNomsPolluants().subscribe((polluants) => {
+      polluants.forEach((polluant) => {
+        this.listePolluants.push(polluant);
+      });
+    }, () => alert('Erreur lors de la récupération des données de polluants.'));
   }
 
 }

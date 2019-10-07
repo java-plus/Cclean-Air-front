@@ -10,13 +10,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { InfosRGPDComponent } from './inscription/infos-rgpd/infos-rgpd.component';
 import { AccueilComponent } from './accueil/accueil.component';
-import { AdministrationComponent } from './administration/administration.component';
+import { IndicateursComponent } from './indicateurs/indicateurs.component';
+import { VisualiserIndicateursComponent } from './indicateurs/visualiser-indicateurs/visualiser-indicateurs.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AdministrationComponent } from './administration/administration.component';
 import { RechercheComponent } from './recherche/recherche.component';
 import { MenuComponent } from './menu/menu.component';
-import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
-import { CommuneComponent } from './commune/commune.component';
-import { CommuneResultatsComponent } from './commune/commune-resultats/commune-resultats.component';
+import { AlerteComponent } from './administration/alerte/alerte.component';
+import { ProfilCompoComponent } from './profil-compo/profil-compo.component'
+import { CreerIndicateurComponent } from './indicateurs/creer-indicateur/creer-indicateur.component';
+import { ModifierIndicateurComponent } from './indicateurs/modifier-indicateur/modifier-indicateur.component';
+import { ResultatIndicateurComponent } from './indicateurs/resultat-indicateur/resultat-indicateur.component';
+
 
 @NgModule({
   declarations: [
@@ -28,9 +33,14 @@ import { CommuneResultatsComponent } from './commune/commune-resultats/commune-r
     AuthentificationComponent,
     InfosRGPDComponent,
     AccueilComponent,
+    IndicateursComponent,
+    VisualiserIndicateursComponent,
     AdministrationComponent,
-    CommuneComponent,
-    CommuneResultatsComponent
+    CreerIndicateurComponent,
+    ModifierIndicateurComponent,
+    AlerteComponent,
+    ResultatIndicateurComponent
+
   ],
   imports: [
     BrowserModule,
@@ -43,6 +53,5 @@ import { CommuneResultatsComponent } from './commune/commune-resultats/commune-r
   providers: [],
   bootstrap: [AppComponent]
 })
-
 export class AppModule {
 }

@@ -1,0 +1,20 @@
+<app-menu></app-menu>
+<div>
+  <div *ngIf="_etat === 1">
+    <app-creer-indicateur (childCrea)="changerEtat($event)"></app-creer-indicateur>
+  </div>
+  <div *ngIf="_etat === 0">
+    <app-visualiser-indicateurs (childEvent)="changerEtat($event)"></app-visualiser-indicateurs>
+  </div>
+
+  <div *ngIf="_etat === 2">
+    <app-modifier-indicateur [indicateurCourant]=this.indicateurCourant (childModif)="changerEtat($event)">
+    </app-modifier-indicateur>
+  </div>
+
+  <div *ngIf="_etat === 3">
+    <app-resultat-indicateur [indicateurCourant]=this.indicateurCourant (childResultat)="changerEtat($event)">
+    </app-resultat-indicateur>
+  </div>
+
+</div>

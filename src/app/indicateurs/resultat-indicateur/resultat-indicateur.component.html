@@ -16,7 +16,10 @@
           <h4 class="col-6">Polluants</h4>
 
           <div class="col-2">
-            <button type="button" class="btn btn-primary">Historique</button>
+
+            <button type="button" class="btn btn-primary mb-3">Historique</button>
+            <button type="button" class="btn btn-primary mt-3" (click)="retourIndicateur()">Retour</button>
+
           </div>
         </div>
         <div class="row d-flex justify-content-center "
@@ -72,7 +75,7 @@
       la raison suivante : </div>
     <div class="card-body text-danger">
       <div>{{erreur}}</div>
-      <button type="button" class="btn btn-link mx-auto">Retour</button>
+      <button type="button" class="btn btn-primary mt-3" (click)="retourIndicateur()">Retour</button>
 
     </div>
 
