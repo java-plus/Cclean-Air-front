@@ -28,7 +28,7 @@
           <div class="col-12 col-md-8">
             <input #objetMsg="ngModel" [(ngModel)]="alerte.objet"
                    class="w-100 form-control"
-                   id="objetMsg" name="objetMsg" placeholder="Alerte prévue sur Abbaretz"
+                   id="objetMsg" name="objetMsg" placeholder="Alerte prévue sur ..."
                    required type="objetMsg">
             <ng-container *ngIf="(objetMsg.dirty && objetMsg.invalid)">
               <p class="text-danger">
