@@ -4,7 +4,7 @@
 import {PolluantDto} from './PolluantDto';
 
 export class CommuneCarte {
-  public codeInsee: string;
+  public codeINSEE: string;
   public codePostal: string;
   public nomCommune: string;
   public latitude: number;

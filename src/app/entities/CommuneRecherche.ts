@@ -6,8 +6,10 @@ export class CommuneRecherche {
     codeInsee: string
   };
   public polluant: string;
-  public dateEtHeure: Date;
-  public date: Date;
-  public heure: number;
   public alerte: PolluantDto;
+
+
+  // A CORRIGER
+  public heure: number;
+  public date: Date;
 }
