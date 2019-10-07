@@ -39,7 +39,7 @@ export class VisualiserIndicateursComponent implements OnInit {
    * constructeur
    * @param indicateursService
    */
-  constructor(private indicateursService: IndicateursService) {}
+  constructor(private indicateursService: IndicateursService) { }
 
   /**
    * méthode qui sert à passer à l'affichage de création d'un indicateur
@@ -67,11 +67,9 @@ export class VisualiserIndicateursComponent implements OnInit {
         if (this.listeIndicateurs.length > 0) {
           this.indicateurVide = false;
         }
-        if (this.listeIndicateurs.length >= 5) {
-          this.compteurIndicateurs = false;
-        }
+
       },
-      err => {}
+      err => { }
     );
   }
 
@@ -105,14 +103,18 @@ export class VisualiserIndicateursComponent implements OnInit {
           this.suppressionIndicateur = false;
           this.affichageIndicateurs = true;
 
+          if (this.listeIndicateurs.length === 1) {
+            this.indicateurVide = false;
+          }
+
           this.indicateursService.getListeIndicateurs().subscribe(
             result => {
               this.listeIndicateurs = result;
-              if (this.listeIndicateurs.length == 0) {
-                this.indicateurVide = false;
+              if (this.listeIndicateurs.length === 0) {
+                this.indicateurVide = true;
               }
             },
-            err => {}
+            err => { }
           );
         },
         err => {

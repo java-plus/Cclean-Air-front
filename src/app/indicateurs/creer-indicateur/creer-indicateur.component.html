@@ -11,7 +11,7 @@
         <div class="form-group">
           <label for="choixCommune">Choisir une commune : </label>
           <select class="form-control" id="choixCommune" name="nomCommune" #nomCommune="ngModel"
-            [(ngModel)]="indicateurCreation.commune">
+            [(ngModel)]="indicateurCreation.commune" required>
             <option *ngFor="let commune of listeCommunes">{{commune}}</option>
           </select>
         </div>
@@ -21,7 +21,10 @@
           <label class="form-check-label" for="choixAlerte">Je souhaite recevoir des alertes pollution pour cette
             commune</label>
         </div>
-        <button type="submit" class="btn btn-primary" (click)="creerIndicateur(indicateurCreation)">Valider</button>
+        <div class="text-danger mb-5" *ngIf="messageErreur !=null">{{messageErreur}}</div>
+        <button type="submit" class="btn btn-primary mr-5" (click)="retourIndicateur()">Annuler</button>
+        <button type="submit" class="btn btn-primary" (click)="creerIndicateur(indicateurCreation)"
+          [disabled]="nomCommune.invalid ">Valider</button>
       </form>
 
 

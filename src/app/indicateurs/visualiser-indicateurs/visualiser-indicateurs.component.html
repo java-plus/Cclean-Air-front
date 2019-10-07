@@ -8,6 +8,10 @@
         <div>Vous n'avez pas encore d'indicateurs</div>
       </div>
       <div class="mt-5 d-flex row" *ngFor="let indicateur of listeIndicateurs">
+
+        <div class="col-1">
+          <fa name="bell" *ngIf="indicateur.alerte"></fa>
+        </div>
         <button type="button" class="btn btn-link col-2">{{indicateur.nomCommune}}</button>
         <button type="button" class="btn col-2" id="modif" (click)="modifierIndicateur(indicateur)">
           <fa name="pencil"></fa>

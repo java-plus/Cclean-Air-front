@@ -31,6 +31,8 @@ export class CreerIndicateurComponent implements OnInit {
 
   indicateurCreation: IndicateurCreation = new IndicateurCreation("", null);
 
+  messageErreur: string = null;
+
   /**
    * variable qui permet de changer l'affichage
    */
@@ -50,9 +52,9 @@ export class CreerIndicateurComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private indicateursService: IndicateursService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   /**
    * méthode qui permet de créer un indicateur
@@ -66,7 +68,17 @@ export class CreerIndicateurComponent implements OnInit {
       () => {
         this.childCrea.emit({ etat: 0, indicateurCourant: null });
       },
-      err => {}
+      err => {
+
+        this.messageErreur = err.error;
+      }
     );
+  }
+
+  /**
+  * méthode qui permet de revenir à l'affichage des indicateurs
+  */
+  retourIndicateur() {
+    this.childCrea.emit({ etat: 0, indicateurCourant: null });
   }
 }

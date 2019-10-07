@@ -29,6 +29,8 @@ export class ModifierIndicateurComponent implements OnInit {
 
   ancienIndicateur: IndicateurCreation;
 
+  messageErreur: string = null;
+
   /**
    * indicateur à modifier récupérer depuis la page de visualisation
    */
@@ -49,9 +51,9 @@ export class ModifierIndicateurComponent implements OnInit {
    * constructeur
    * @param indicateursService
    */
-  constructor(private indicateursService: IndicateursService) {}
+  constructor(private indicateursService: IndicateursService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   /**
    * méthode qui permet de revenir à l'affichage des indicateurs
@@ -78,7 +80,11 @@ export class ModifierIndicateurComponent implements OnInit {
         () => {
           this.childModif.emit({ etat: 0, indicateurCourant: null });
         },
-        err => {}
+        err => {
+          this.messageErreur = err.error;
+
+
+        }
       );
   }
 }
