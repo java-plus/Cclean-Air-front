@@ -6,7 +6,6 @@ import {CommuneCarte} from '../entities/CommuneCarte';
 import {Router} from '@angular/router';
 import {NgElement, WithProperties} from '@angular/elements';
 import {RecherchePopupComponent} from '../recherche-popup/recherche-popup.component';
-
 import {NgForm} from '@angular/forms';
 
 
@@ -56,7 +55,6 @@ export class RechercheComponent implements OnInit {
       }
       this.isErreurRecuperationDonnees = false;
       this.isErreurFormulaire = false;
-
     }
 
     this.router.navigate(['resultats'], {
@@ -106,20 +104,6 @@ export class RechercheComponent implements OnInit {
          * On alimente la liste des communes
          */
         this.listeCommunes.push(commune);
-
-
-        /**
-         * Le statut d'alerte de chaque commune
-         */
-        let alerte = '';
-
-        if (commune.alerte != null) {
-          alerte = `<br/><p class = "text-danger"> Alerte pollution :</p><br/> <p>  ${commune.alerte.nomPolluant} :
-           ${commune.alerte.valeur} microg/m3.`;
-
-        } else {
-          alerte = `<br><p class = "text-success">Aucune alerte pollution.</p>`;
-        }
 
         L.marker([commune.latitude, commune.longitude], {icon: myIcon}).bindPopup(fl => {
           const popupEl: NgElement & WithProperties<RecherchePopupComponent> = document.createElement('recherche-popup-element') as any;

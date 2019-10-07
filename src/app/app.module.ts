@@ -1,3 +1,6 @@
+import {ResultatsRechercheComponent} from './resultats-recherche/resultats-recherche.component';
+import {RecherchePopupComponent} from './recherche-popup/recherche-popup.component';
+import {createCustomElement} from '@angular/elements';
 import {BrowserModule} from '@angular/platform-browser';
 import {Injector, NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
@@ -18,11 +21,9 @@ import {RechercheComponent} from './recherche/recherche.component';
 import {MenuComponent} from './menu/menu.component';
 import {AlerteComponent} from './administration/alerte/alerte.component';
 import {ProfilCompoComponent} from './profil-compo/profil-compo.component';
-import {ResultatsRechercheComponent} from './resultats-recherche/resultats-recherche.component';
-import {RecherchePopupComponent} from './recherche-popup/recherche-popup.component';
-import {createCustomElement} from '@angular/elements';
 import {CreerIndicateurComponent} from './indicateurs/creer-indicateur/creer-indicateur.component';
 import {ModifierIndicateurComponent} from './indicateurs/modifier-indicateur/modifier-indicateur.component';
+import {ResultatIndicateurComponent} from './indicateurs/resultat-indicateur/resultat-indicateur.component';
 
 
 @NgModule({
@@ -38,14 +39,12 @@ import {ModifierIndicateurComponent} from './indicateurs/modifier-indicateur/mod
     IndicateursComponent,
     VisualiserIndicateursComponent,
     AdministrationComponent,
-
     ResultatsRechercheComponent,
     RecherchePopupComponent,
-
     CreerIndicateurComponent,
     ModifierIndicateurComponent,
-    AlerteComponent
-
+    AlerteComponent,
+    ResultatIndicateurComponent
   ],
   imports: [
     BrowserModule,

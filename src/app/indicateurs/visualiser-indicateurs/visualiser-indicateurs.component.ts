@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { IndicateursService } from "src/app/services/indicateurs-service";
 import { CommuneIndicateur } from "src/app/entities/commune-indicateur";
+import { CommuneService } from 'src/app/services/commune-service';
 /**
  * Classe qui sert à gérer l'affichage des indicateurs, ainsi que leur suppression
  */
@@ -68,6 +69,10 @@ export class VisualiserIndicateursComponent implements OnInit {
           this.indicateurVide = false;
         }
 
+        if (this.listeIndicateurs.length >= 5) {
+          this.compteurIndicateurs = false;
+        }
+
       },
       err => { }
     );
@@ -92,6 +97,10 @@ export class VisualiserIndicateursComponent implements OnInit {
     this.affichageIndicateurs = true;
   }
 
+  afficherDonnees(indicateur: CommuneIndicateur) {
+    this.childEvent.emit({ etat: 3, indicateurCourant: indicateur })
+  }
+
   /**
    * Methode qui permet la suppression définitive d'un indicateur.
    */
@@ -112,6 +121,9 @@ export class VisualiserIndicateursComponent implements OnInit {
               this.listeIndicateurs = result;
               if (this.listeIndicateurs.length === 0) {
                 this.indicateurVide = true;
+              }
+              if (this.listeIndicateurs.length === 4) {
+                this.compteurIndicateurs = true;
               }
             },
             err => { }

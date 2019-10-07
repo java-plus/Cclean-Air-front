@@ -23,4 +23,5 @@ export const ROUTES: Routes = [
   {path: 'admin/alerte', component: AlerteComponent},
   {path: '', component: AccueilComponent}
 
+
 ];
