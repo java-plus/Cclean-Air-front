@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
-import { DataService } from '../services/data.service';
-import { CommuneRecherche } from '../entities/CommuneRecherche';
-import { ResultatRechercheCommune } from '../entities/ResultatRechercheCommune';
-import { CommuneCarte } from '../entities/CommuneCarte';
-import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import {DataService} from '../services/data.service';
+import {CommuneRecherche} from '../entities/CommuneRecherche';
+import {CommuneCarte} from '../entities/CommuneCarte';
+import {Router} from '@angular/router';
+import {NgElement, WithProperties} from '@angular/elements';
+import {RecherchePopupComponent} from '../recherche-popup/recherche-popup.component';
+import {NgForm} from '@angular/forms';
 
 
 /**
@@ -23,25 +24,28 @@ export class RechercheComponent implements OnInit {
   public listePolluants = [];
 
   public communeRecherche: CommuneRecherche = new CommuneRecherche();
-  public communeResultat: ResultatRechercheCommune = new ResultatRechercheCommune();
+
 
   isErreurFormulaire: boolean;
   isErreurRecuperationDonnees: boolean;
   erreurRecuperationDonneesMsg: string;
+
 
   /**
    * Constructeur
    * @param service : DataService
    * @param router : Router
    */
-  constructor(private service: DataService, private router: Router) { }
+  constructor(private service: DataService, private router: Router) {
+  }
 
   /**
    * Méthode appellant la méthode de récupération des données
    * météorologiques de la commune saisie dans le champs de recherche détaillée.
    */
   rechercheDetaillee(formRecherche: NgForm): void {
-    if (formRecherche.invalid || (this.communeRecherche.heure !== undefined && !this.communeRecherche.date) || (this.communeRecherche.heure === undefined && this.communeRecherche.date)) {
+    if (formRecherche.invalid || (this.communeRecherche.heure !== undefined && !this.communeRecherche.date)
+      || (this.communeRecherche.heure === undefined && this.communeRecherche.date)) {
       this.isErreurFormulaire = true;
       this.isErreurRecuperationDonnees = false;
     } else {
@@ -51,14 +55,19 @@ export class RechercheComponent implements OnInit {
       }
       this.isErreurRecuperationDonnees = false;
       this.isErreurFormulaire = false;
-      this.service.recupererDonneesCommune(this.communeRecherche).subscribe((commune) => {
-        this.communeResultat = commune;
-      },
-        error => {
-          this.isErreurRecuperationDonnees = true;
-          this.erreurRecuperationDonneesMsg = error.error;
-        });
     }
+
+    this.router.navigate(['resultats'], {
+      queryParams: {
+        code: this.communeRecherche.codeEtNom.codeInsee,
+        nom: this.communeRecherche.codeEtNom.nomCommune,
+        polluant: this.communeRecherche.polluant,
+        date: this.communeRecherche.date,
+        heure: this.communeRecherche.heure,
+        alerte: this.communeRecherche.alerte
+      }
+    });
+
   }
 
   ngOnInit(): void {
@@ -90,35 +99,22 @@ export class RechercheComponent implements OnInit {
      */
     this.service.recupererCommunesAvecNiveauAlerte().subscribe((communes) => {
       communes.forEach((commune) => {
+        console.log(commune);
         /**
          * On alimente la liste des communes
          */
         this.listeCommunes.push(commune);
 
-        /**
-         * Le contenu des popup de chaque marqueur
-         */
-        const content = `
-    <u>
-        <b>${commune.nomCommune}</b>
-    </u>
-    <br/>
-    <p>${commune.codePostal}</p>`;
+        L.marker([commune.latitude, commune.longitude], {icon: myIcon}).bindPopup(fl => {
+          const popupEl: NgElement & WithProperties<RecherchePopupComponent> = document.createElement('recherche-popup-element') as any;
+          // Listen to the close event
+          popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
 
-        /**
-         * Le statut d'alerte de chaque commune
-         */
-        let alerte = '';
-
-        if (commune.alerte != null) {
-          alerte = `<br/><p class = "text-danger"> Alerte pollution :</p><br/> <p>  ${commune.alerte.nomPolluant} :
-           ${commune.alerte.valeur} microg/m3.`;
-
-        } else {
-          alerte = `<br><p class = "text-success">Aucune alerte pollution.</p>`;
-        }
-
-        L.marker([commune.latitude, commune.longitude], { icon: myIcon }).bindPopup(content.concat(alerte)).addTo(map);
+          popupEl.commune = commune;
+          // Add to the DOM
+          document.body.appendChild(popupEl);
+          return popupEl;
+        }).addTo(map);
 
 
       });
