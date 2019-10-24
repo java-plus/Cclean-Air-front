@@ -1,15 +1,15 @@
-import {Routes} from '@angular/router';
-import {InscriptionComponent} from './inscription/inscription.component';
-import {AuthentificationComponent} from './authentification/authentification.component';
-import {InfosRGPDComponent} from './inscription/infos-rgpd/infos-rgpd.component';
-import {AccueilComponent} from './accueil/accueil.component';
-import {IndicateursComponent} from './indicateurs/indicateurs.component';
-import {RechercheComponent} from './recherche/recherche.component';
-import {AdministrationComponent} from './administration/administration.component';
-import {ProfilCompoComponent} from './profil-compo/profil-compo.component';
-import {ResultatsRechercheComponent} from './resultats-recherche/resultats-recherche.component';
-import {AlerteComponent} from './administration/alerte/alerte.component';
-import {ConnexionGuard} from "./connexion-guard";
+import { Routes } from '@angular/router';
+import { InscriptionComponent } from './inscription/inscription.component';
+import { AuthentificationComponent } from './authentification/authentification.component';
+import { AccueilComponent } from './accueil/accueil.component';
+import { IndicateursComponent } from './indicateurs/indicateurs.component';
+import { RechercheComponent } from './recherche/recherche.component';
+import { AdministrationComponent } from './administration/administration.component';
+import { ProfilCompoComponent } from './profil-compo/profil-compo.component';
+import { ResultatsRechercheComponent } from './resultats-recherche/resultats-recherche.component';
+import { AlerteComponent } from './administration/alerte/alerte.component';
+import { ConnexionGuard } from "./connexion-guard";
+import { HistoriqueComponent } from './historique/historique.component';
 
 
 export const ROUTES: Routes = [
@@ -24,10 +24,6 @@ export const ROUTES: Routes = [
   {
     path: 'connexion',
     component: AuthentificationComponent
-  },
-  {
-    path: 'gestion-donnees',
-    component: InfosRGPDComponent
   },
   {
     path: 'recherche',
@@ -47,6 +43,11 @@ export const ROUTES: Routes = [
   {
     path: 'resultats',
     component: ResultatsRechercheComponent,
+    canActivate: [ConnexionGuard]
+  },
+  {
+    path: 'historique/:codeInsee',
+    component: HistoriqueComponent,
     canActivate: [ConnexionGuard]
   },
   {

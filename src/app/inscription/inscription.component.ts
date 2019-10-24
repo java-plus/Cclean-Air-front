@@ -6,6 +6,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {DataService} from '../services/data.service';
 import {Commune} from '../entities/commune';
 import {CommuneCarte} from '../entities/CommuneCarte';
+import {CommuneService} from "../services/commune-service";
 
 
 /**
@@ -27,42 +28,69 @@ export class InscriptionComponent implements OnInit {
   isFormulaireValide = true;
   fonctionnalite = 'create';
   erreurMsg: string;
+  isRGPDCoche: boolean;
+  listeCommunes: Commune[];
+  isErreurRecuperationCommunes: boolean;
 
   /**
    * Constructeur
    * @param inscriptionService : InscriptionService le service gérant les inscriptions
+   * @param communeService : CommuneService
    */
-  constructor(private inscriptionService: InscriptionService, private dataService: DataService) {
+  constructor(private inscriptionService: InscriptionService, private dataService: DataService, private communeService: CommuneService) {
   }
+
 
   /**
    * Méthode de création d'un compte qui appelle la méthode dans le service d'inscription.
    */
   creerCompte(formInscription: NgForm) {
-    if (formInscription.invalid) {
+    if (formInscription.invalid || !this.isRGPDCoche) {
       this.isFormulaireValide = false;
       return;
     }
-    console.log(this.utilisateur);
     this.inscriptionService.creerCompte(this.utilisateur).subscribe(
       () => {
         this.isFormulaireValide = true;
         this.isErreurCreation = false;
         this.fonctionnalite = 'read';
-        this.utilisateur = new UtilisateurInscription(null, null, null, null, ['MEMBRE'], null, null, false);
-        },
+        this.utilisateur = new UtilisateurInscription(null, null, null, null, ['MEMBRE'], null, '', false);
+      },
       (error: HttpErrorResponse) => {
+        this.isFormulaireValide = true;
         this.erreurMsg = error.error;
         this.isErreurCreation = true;
       }
     );
   }
 
-  ngOnInit(): void {
+  /**
+   * Affiche sur la page les informations sur la gestion des données.
+   */
+  afficherRGPD() {
+    this.fonctionnalite = 'rgpd';
+  }
+
+  /**
+   * Affiche sur la page le formulaire de création de compte.
+   */
+  retourAuClic() {
+    this.fonctionnalite = 'create';
+  }
+
+  ngOnInit() {
+    this.communeService.recupererCommunes()
+      .subscribe(
+        liste => {
+          this.isErreurRecuperationCommunes = false;
+          this.listeCommunes = liste;
+        },
+        () => this.isErreurRecuperationCommunes = true
+      );
+
     this.dataService.recupererCommunesAvecNiveauAlerte().subscribe((communes) => {
       this.listeCommunes = communes;
     });
-
   }
 
   modifierSelection(): void {
@@ -73,5 +101,4 @@ export class InscriptionComponent implements OnInit {
       }
     });
   }
-
 }

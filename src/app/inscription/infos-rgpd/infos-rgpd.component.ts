@@ -16,11 +16,4 @@ export class InfosRGPDComponent {
    * @param _location : Location
    */
   constructor(private _location: Location) { }
-
-  /**
-   * Méthode faisant que le navigateur retourne à la page précédente.
-   */
-    retourAuClic() {
-      this._location.back();
-    }
 }
