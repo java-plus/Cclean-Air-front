@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { DonneesLocalesDto } from '../entities/DonneesLocalesDto';
 import { tap, catchError, map } from 'rxjs/operators';
@@ -51,12 +51,13 @@ export class CommuneService {
   }
 
   /**
-    *méthode qui récupère l'objet à afficher pour l'historique
-    *
-    * @param {string} codeInsee
-    * @returns {Observable<DonneesLocalesHistorique>}
-    * @memberof CommuneService
-    */
+   *méthode qui récupère l'objet à afficher pour l'historique
+   *
+   * @param {string} codeInsee
+   * @param donneesRecherchees
+   * @returns {Observable<DonneesLocalesHistorique>}
+   * @memberof CommuneService : DonneesLocalesRecherchees
+   */
   afficherHistorique(codeInsee: string, donneesRecherchees: DonneesLocalesRecherchees): Observable<DonneesLocalesHistorique[]> {
     const httpOptions = {
       headers: new HttpHeaders({
