@@ -1,8 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UtilisateurInscription} from '../entities/utilisateur-inscription';
 import {InscriptionService} from '../services/inscription-service';
 import {NgForm} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
+import {DataService} from '../services/data.service';
+import {Commune} from '../entities/commune';
 
 /**
  * Composant gérant la page d'inscription.
@@ -12,8 +14,9 @@ import {HttpErrorResponse} from '@angular/common/http';
   templateUrl: './inscription.component.html',
   styles: ['input.ng-dirty.ng-invalid {border-color: tomato}']
 })
-export class InscriptionComponent {
+export class InscriptionComponent implements OnInit {
 
+  listeCommunes: Array<Commune>;
   champsInvalideMsg = 'Champ invalide.';
   motDePasseDeConfirmation: string;
   utilisateur: UtilisateurInscription = new UtilisateurInscription(null, null, null, null, ['MEMBRE'], null, null, false);
@@ -26,7 +29,7 @@ export class InscriptionComponent {
    * Constructeur
    * @param inscriptionService : InscriptionService le service gérant les inscriptions
    */
-  constructor(private inscriptionService: InscriptionService) {
+  constructor(private inscriptionService: InscriptionService, private dataService: DataService) {
   }
 
   /**
@@ -49,6 +52,13 @@ export class InscriptionComponent {
         this.isErreurCreation = true;
       }
     );
+  }
+
+  ngOnInit(): void {
+    this.dataService.recupererCommunes().subscribe((communes) => {
+      this.listeCommunes = communes;
+    });
+
   }
 
 }

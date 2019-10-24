@@ -14,6 +14,9 @@ const URL_BACKEND = environment.backendUrl;
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Class eutilisée pour la récupération de données variées
+ */
 export class DataService {
 
   constructor(private http: HttpClient) {
@@ -36,16 +39,12 @@ export class DataService {
 
 
   recupererDonneesCommune(commune: CommuneRecherche): Observable<ResultatRechercheCommune> {
-
-    console.log('commune recherchée : ' + commune);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-type': 'application/json'
       }),
       withCredentials: true
     };
-
-
 
     return this.http.post<ResultatRechercheCommune>(URL_BACKEND.concat('/details_commune'), {
       codeInsee: commune.codeEtNom.codeInsee,
