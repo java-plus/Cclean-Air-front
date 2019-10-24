@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ResultatRechercheCommune} from '../entities/ResultatRechercheCommune';
-import {ActivatedRoute} from '@angular/router';
-import {DataService} from '../services/data.service';
-import {CommuneRecherche} from '../entities/CommuneRecherche';
+import { Component, OnInit } from '@angular/core';
+import { ResultatRechercheCommune } from '../entities/ResultatRechercheCommune';
+import { ActivatedRoute } from '@angular/router';
+import { DataService } from '../services/data.service';
+import { CommuneRecherche } from '../entities/CommuneRecherche';
 
 @Component({
   selector: 'app-resultats-recherche',
@@ -20,7 +20,7 @@ export class ResultatsRechercheComponent implements OnInit {
   ngOnInit() {
     this.activatedroute.queryParams.subscribe(params => {
 
-      this.communeRecherche.codeEtNom = {nomCommune: params.nom, codeInsee: params.code};
+      this.communeRecherche.codeEtNom = { nomCommune: params.nom, codeInsee: params.code };
       this.communeRecherche.polluant = params.polluant;
       this.communeRecherche.date = params.date;
       this.communeRecherche.heure = params.heure;
@@ -29,6 +29,8 @@ export class ResultatsRechercheComponent implements OnInit {
 
       this.service.recupererDonneesCommune(this.communeRecherche).subscribe((commune) => {
         this.communeResultat = commune;
+
+        console.log(this.communeResultat)
 
       });
     });

@@ -16,6 +16,8 @@ export class ResultatIndicateurComponent implements OnInit {
 
   codeInsee: string;
 
+  icon: string;
+
   commune = new CommuneDtoVisualisation('', null);
   meteo = new ConditionMeteoDtoVisualisation(null, null, null);
   polluant: PolluantDtoVisualisation[] = [];
@@ -60,6 +62,17 @@ export class ResultatIndicateurComponent implements OnInit {
         donnees => {
 
           this.donneesLocales = donnees;
+
+
+          if (this.donneesLocales.conditionMeteo.humidite > 66) {
+            this.icon = 'http://openweathermap.org/img/wn/09d@2x.png';
+          } else {
+            this.icon = 'http://openweathermap.org/img/wn/02d@2x.png';
+          }
+          if (this.donneesLocales.conditionMeteo.ensoleillement > 66) {
+            this.icon = 'http://openweathermap.org/img/wn/01d@2x.png';
+          }
+
         }, err => {
           this.erreur = err.error;
 

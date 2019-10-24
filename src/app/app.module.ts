@@ -26,6 +26,8 @@ import { ModifierIndicateurComponent } from './indicateurs/modifier-indicateur/m
 import { ResultatIndicateurComponent } from './indicateurs/resultat-indicateur/resultat-indicateur.component';
 import { HistoriqueComponent } from './historique/historique.component';
 import { DatePipe } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 
 @NgModule({
@@ -55,7 +57,9 @@ import { DatePipe } from '@angular/common';
     RouterModule.forRoot(ROUTES),
     FormsModule,
     HttpClientModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    FontAwesomeModule
+
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
