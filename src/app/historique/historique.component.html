@@ -1,0 +1,70 @@
+<app-menu></app-menu>
+
+<script src="node_modules/chart.js/Chart.min.js"></script>
+<script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+
+
+<div class="container pt-5">
+  <div class="d-flex justify-content-center pb-5">
+    <h1>Historique pour la commune : {{ donneesLocales.commune.nom}}</h1>
+  </div>
+
+  <form #formulaire="ngForm" name="formulaire" class="form-group d-flex justify-content-center">
+
+    <div>
+      <h3 class="pb-5">Veuilez sélectionner la période et le polluant</h3>
+
+      <div class="form-group row ">
+        <label for="dateDebut" class="col-6 col-form-label">Date de début </label>
+        <div class="col-6">
+          <input class="form-control" type="date" step="0.001" id="dateDebut" value="{{ myDate }}" #dateDebut="ngModel"
+            name="dateDebut" [(ngModel)]="donneesRecherchees.dateDebut" [min]="myLastDate" [max]="myDate"
+            ngDefaultControl>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="dateFin" class="col-6 col-form-label">Date de fin</label>
+        <div class="col-6">
+          <input class="form-control" type="date" step="0.001" id="dateFin" value="{{ myDate }}" #dateFin="ngModel"
+            name="dateFin" [(ngModel)]="donneesRecherchees.dateFin" [min]="myLastDate" [max]="myDate" ngDefaultControl>
+        </div>
+      </div>
+
+      <div class="form-group row pb-4">
+        <label for="polluant" class="col-6 col-form-label">Polluant</label>
+        <div class="col-6">
+          <select class="custom-select" id="polluant" #polluant="ngModel" name="polluant"
+            [(ngModel)]="donneesRecherchees.polluant">
+            <option selected>Polluant</option>
+            <option *ngFor="let polluant of listePolluants" value="{{ polluant }}" name="polluant" ngDefaultControl>
+              {{polluant}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-primary" (click)="rechercheHistorique()" [disabled]="
+    dateDebut.pristine || dateFin.pristine || polluant.pristine
+  ">Rechercher</button>
+      </div>
+
+      <p *ngIf="polluantVide" class="text-danger text-center pt-3"> Désolé, nous n'avons pas de données enregistrées
+        pour ce
+        polluant
+        sur cette commune</p>
+      <p *ngIf="erreur != null" class="text-danger text-center pt-3">{{ erreur}}</p>
+
+
+    </div>
+  </form>
+
+  <div class="pt-5">
+
+    <h2 class="d-flex justify-content-center pb-5" *ngIf="!affichageFormulaire"> {{ donneesLocales.commune.nom }} -
+      {{ nomPolluant }} en {{ unite }}
+    </h2>
+
+    <div class="d-flex justify-content-center pb-5"><canvas #lineCanvas></canvas></div>
+
+
+  </div>
+</div>

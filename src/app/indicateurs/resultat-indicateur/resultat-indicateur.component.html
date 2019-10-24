@@ -14,7 +14,8 @@
 
       <div class="row d-flex justify-content-center">
         <button type="button" class="btn btn-primary mr-5" (click)="retourIndicateur()">Retour</button>
-        <button type="button" class="btn btn-primary ml-5" hidden>Historique</button>
+        <button type="button" class="btn btn-primary ml-5"
+          routerLink="/historique/{{indicateurCourant.codeInsee}}">Historique</button>
 
 
       </div>
