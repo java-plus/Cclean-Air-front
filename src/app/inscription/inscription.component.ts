@@ -5,6 +5,8 @@ import {NgForm} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
 import {DataService} from '../services/data.service';
 import {Commune} from '../entities/commune';
+import {CommuneCarte} from '../entities/CommuneCarte';
+
 
 /**
  * Composant gérant la page d'inscription.
@@ -16,7 +18,8 @@ import {Commune} from '../entities/commune';
 })
 export class InscriptionComponent implements OnInit {
 
-  listeCommunes: Array<Commune>;
+  listeCommunes: Array<CommuneCarte>;
+  communeSelectionne =  '';
   champsInvalideMsg = 'Champ invalide.';
   motDePasseDeConfirmation: string;
   utilisateur: UtilisateurInscription = new UtilisateurInscription(null, null, null, null, ['MEMBRE'], null, null, false);
@@ -40,6 +43,7 @@ export class InscriptionComponent implements OnInit {
       this.isFormulaireValide = false;
       return;
     }
+    console.log(this.utilisateur);
     this.inscriptionService.creerCompte(this.utilisateur).subscribe(
       () => {
         this.isFormulaireValide = true;
@@ -55,10 +59,19 @@ export class InscriptionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.recupererCommunes().subscribe((communes) => {
+    this.dataService.recupererCommunesAvecNiveauAlerte().subscribe((communes) => {
       this.listeCommunes = communes;
     });
 
+  }
+
+  modifierSelection(): void {
+    this.listeCommunes.forEach(c => {
+      if (c.nomCommune === this.communeSelectionne) {
+        this.utilisateur.nomCommune = c.nomCommune;
+        this.utilisateur.codePostal = c.codePostal;
+      }
+    });
   }
 
 }

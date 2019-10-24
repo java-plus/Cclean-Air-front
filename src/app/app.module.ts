@@ -8,7 +8,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
 import {ROUTES} from './app.routes';
 import {InscriptionComponent} from './inscription/inscription.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthentificationComponent} from './authentification/authentification.component';
 import {InfosRGPDComponent} from './inscription/infos-rgpd/infos-rgpd.component';
@@ -52,7 +52,8 @@ import {ResultatIndicateurComponent} from './indicateurs/resultat-indicateur/res
     RouterModule.forRoot(ROUTES),
     FormsModule,
     HttpClientModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
