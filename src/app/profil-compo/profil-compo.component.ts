@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfilService } from '../services/profil-service';
-import { ParamMap, Router } from '@angular/router';
+import { ParamMap, Router, NavigationEnd } from '@angular/router';
 import { UtilisateurProfil } from '../entities/UtilisateurProfil';
+import { Commune } from '../entities/commune';
+import { DataService } from '../services/data.service';
 
 /**
  * Composant qui gère l'affichage, la modification et la suppression du profil
@@ -17,26 +19,37 @@ export class ProfilCompoComponent implements OnInit {
   error: string;
   modif: boolean = false;
   suppression: boolean = false;
+  listeCommunes: Commune[];
+  isErreurRecuperationCommune: boolean;
 
   /**
    * Constructeur
    * @param profilService : ProfilService
    * @param router : Router
    */
-  constructor(private router: Router, private profilService: ProfilService) { }
+  constructor(private router: Router, private profilService: ProfilService, private dataService: DataService) { }
 
   /**
    * Permet d'afficher les données de l'utilisateur à l'initialisation de la page Profil.
    */
   ngOnInit() {
     this.profilService.visualiserProfil().subscribe(utilisateurCo => this.utilisateur = utilisateurCo);
+    this.dataService.recupererCommunes().subscribe(liste => {
+      this.isErreurRecuperationCommune = false;
+      this.listeCommunes = liste;
+    },
+    () => this.isErreurRecuperationCommune = true);
   }
 
   /**
    * Permet de modifier les informations de l'utilisateur connecté.
    */
   modifierProfil() {
-    this.profilService.modifierProfil(this.utilisateur).subscribe(result => { this.modif = true; }, (err: any) => {
+    this.profilService.modifierProfil(this.utilisateur).subscribe(result => {
+      this.modif = true;
+      window.setTimeout(() => this.router.navigate(['recherche']), 1000);
+      //this.router.navigate(['/recherche']);
+    }, (err: any) => {
       this.error = err.error;
     });
   }
