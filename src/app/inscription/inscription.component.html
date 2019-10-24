@@ -99,9 +99,9 @@
         <div class="row p-2">
           <label class="col-sm-4" for="commune">Commune</label>
           <div class="col-sm-8">
-            <input list="listeCommunes" [(ngModel)]="communeSelectionne" class="w-100 text-dark"  type= "text" #commune="ngModel"
+            <input list="listeCommunes" [(ngModel)]="communeSelectionne" class="w-100 text-dark form-control"  type= "text" #commune="ngModel"
                    id="commune" name="commune" [ngModelOptions]="{updateOn: 'blur'}" value="{{communeSelectionne}}" (ngModelChange)="modifierSelection()" required>
-            <ng-container *ngIf="(commune.dirty && commune.invalid) || !isFormulaireValide">
+            <ng-container *ngIf="(commune.dirty && commune.invalid)">
               <p class="text-danger">
                 {{champsInvalideMsg}}
               </p>

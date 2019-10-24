@@ -29,7 +29,6 @@ export class InscriptionComponent implements OnInit {
   fonctionnalite = 'create';
   erreurMsg: string;
   isRGPDCoche: boolean;
-  listeCommunes: Commune[];
   isErreurRecuperationCommunes: boolean;
 
   /**
@@ -79,18 +78,12 @@ export class InscriptionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.communeService.recupererCommunes()
-      .subscribe(
-        liste => {
-          this.isErreurRecuperationCommunes = false;
-          this.listeCommunes = liste;
-        },
-        () => this.isErreurRecuperationCommunes = true
-      );
+
 
     this.dataService.recupererCommunesAvecNiveauAlerte().subscribe((communes) => {
+      this.isErreurRecuperationCommunes = false;
       this.listeCommunes = communes;
-    });
+    }, () => this.isErreurRecuperationCommunes = true);
   }
 
   modifierSelection(): void {
