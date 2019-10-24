@@ -25,7 +25,8 @@ export class RechercheComponent implements OnInit {
 
   public communeRecherche: CommuneRecherche = new CommuneRecherche();
 
-
+  isErreurChargementCarte: boolean;
+  isErreurChargementDonnees: boolean;
   isErreurFormulaire: boolean;
   isErreurRecuperationDonnees: boolean;
   erreurRecuperationDonneesMsg: string;
@@ -44,33 +45,44 @@ export class RechercheComponent implements OnInit {
    * météorologiques de la commune saisie dans le champs de recherche détaillée.
    */
   rechercheDetaillee(formRecherche: NgForm): void {
+    if ((this.communeRecherche.date !== undefined && this.communeRecherche.date === null)
+      || (this.communeRecherche.date !== null
+        && this.communeRecherche.date !== undefined && this.communeRecherche.date.toString() === '')) {
+      this.communeRecherche.date = undefined;
+    }
+    if (this.communeRecherche.heure === null) {
+      this.communeRecherche.heure = undefined;
+    }
+    this.isErreurFormulaire = false;
     if (formRecherche.invalid || (this.communeRecherche.heure !== undefined && !this.communeRecherche.date)
-      || (this.communeRecherche.heure === undefined && this.communeRecherche.date)) {
+      || (this.communeRecherche.date !== undefined && !this.communeRecherche.heure)) {
       this.isErreurFormulaire = true;
       this.isErreurRecuperationDonnees = false;
     } else {
-      if (this.communeRecherche.date === undefined) {
-        this.communeRecherche.date = new Date();
-        this.communeRecherche.heure = 0;
-      }
+
       this.isErreurRecuperationDonnees = false;
       this.isErreurFormulaire = false;
+
+
+      this.router.navigate(['resultats'], {
+        queryParams: {
+          code: this.communeRecherche.codeEtNom.codeInsee,
+          nom: this.communeRecherche.codeEtNom.nomCommune,
+          polluant: this.communeRecherche.polluant,
+          date: this.communeRecherche.date,
+          heure: this.communeRecherche.heure,
+          alerte: this.communeRecherche.alerte
+        }
+      });
     }
 
-    this.router.navigate(['resultats'], {
-      queryParams: {
-        code: this.communeRecherche.codeEtNom.codeInsee,
-        nom: this.communeRecherche.codeEtNom.nomCommune,
-        polluant: this.communeRecherche.polluant,
-        date: this.communeRecherche.date,
-        heure: this.communeRecherche.heure,
-        alerte: this.communeRecherche.alerte
-      }
-    });
 
   }
 
   ngOnInit(): void {
+
+    this.communeRecherche.date = undefined;
+    this.communeRecherche.heure = undefined;
 
     /**
      * On initialise la carte et ses données dès le chargement de la page.
@@ -98,8 +110,8 @@ export class RechercheComponent implements OnInit {
      * On récupère les données puis on crée un marqueur pour chaque donnée récupérée.
      */
     this.service.recupererCommunesAvecNiveauAlerte().subscribe((communes) => {
+      this.isErreurChargementCarte = false;
       communes.forEach((commune) => {
-        console.log(commune);
         /**
          * On alimente la liste des communes
          */
@@ -119,17 +131,18 @@ export class RechercheComponent implements OnInit {
 
       });
     }, () => {
-      alert('Erreur lors de la récupération des communes');
+      this.isErreurChargementCarte = true;
     });
 
     /**
      * Ici on initialise la liste des polluants
      */
     this.service.recupererNomsPolluants().subscribe((polluants) => {
+      this.isErreurChargementDonnees = false;
       polluants.forEach((polluant) => {
         this.listePolluants.push(polluant);
       });
-    }, () => alert('Erreur lors de la récupération des données de polluants.'));
+    }, () => this.isErreurChargementDonnees = true);
   }
 
 }
