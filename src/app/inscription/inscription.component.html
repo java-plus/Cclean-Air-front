@@ -1,6 +1,14 @@
 <section *ngIf="fonctionnalite != 'rgpd'" class="container p-5">
   <div class="card bg-dark text-light">
     <h1 class="p-3 card-header text-center">S'inscrire</h1>
+    <ng-container *ngIf="isErreurRecuperationCommunes">
+      <p class="text-danger font-weight-bold text-center pt-4">
+        Une erreur est survenue dans la récupération des données.
+      </p>
+      <p class="text-danger font-weight-bold text-center">
+        Merci de vérifier votre connexion ou de réessayer plus tard.
+      </p>
+    </ng-container>
     <form #formInscription="ngForm" *ngIf="fonctionnalite !== 'read'"
           class="card-body">
       <div class="form-group text-left">
@@ -9,7 +17,7 @@
           <div class="col-sm-8">
             <input #nom="ngModel" [(ngModel)]="utilisateur.nom"
                    [ngModelOptions]="{updateOn: 'blur'}"
-                   class="w-100 text-dark"
+                   class="w-100 text-dark form-control"
                    id="nom" name="nom" placeholder="Holliway" required>
             <p *ngIf="(nom.dirty && nom.invalid)"
                class="text-danger">{{champsInvalideMsg}}</p>
@@ -20,7 +28,7 @@
           <div class="col-sm-8">
             <input #prenoms="ngModel" [(ngModel)]="utilisateur.prenom"
                    [ngModelOptions]="{updateOn: 'blur'}"
-                   class="w-100 text-dark"
+                   class="w-100 text-dark form-control"
                    id="prenoms" name="prenoms" placeholder="Louis" required>
             <p *ngIf="(prenoms.dirty && prenoms.invalid)"
                class="text-danger">{{champsInvalideMsg}}</p>
@@ -31,7 +39,7 @@
           <div class="col-sm-8">
             <input #email="ngModel" [(ngModel)]="utilisateur.email"
                    [ngModelOptions]="{updateOn: 'blur'}"
-                   class="w-100 text-dark"
+                   class="w-100 text-dark form-control"
                    id="email"
                    name="email"
                    pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
@@ -52,7 +60,7 @@
               #mdp="ngModel"
               [(ngModel)]="utilisateur.motDePasse"
               [ngModelOptions]="{updateOn: 'blur'}" aria-describedby="mdpAide"
-              class="w-100 text-dark" id="motDePasse"
+              class="w-100 text-dark form-control" id="motDePasse"
               name="motDePasse"
               pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
               placeholder="$5dsfIUH!è" type="password">
@@ -76,7 +84,7 @@
           <div class="col-sm-8">
             <input #mdp2="ngModel" [(ngModel)]="motDePasseDeConfirmation"
                    [ngModelOptions]="{updateOn: 'blur'}"
-                   class="w-100 text-dark"
+                   class="w-100 text-dark form-control"
                    id="motDePasse2" name="motDePasse2"
                    placeholder="$5dsfIUH!è"
                    type="password">
@@ -91,11 +99,14 @@
         <div class="row p-2">
           <label class="col-sm-4" for="commune">Commune</label>
           <div class="col-sm-8">
-            <input #commune="ngModel" [(ngModel)]="utilisateur.nomCommune"
-                   [ngModelOptions]="{updateOn: 'blur'}"
-                   class="w-100 text-dark" id="commune"
-                   name="commune" placeholder="Nantes"
-                   required>
+            <select #commune="ngModel" [(ngModel)]="utilisateur.nomCommune"
+                    class="text-dark form-control" id="commune" name="commune"
+                    required>
+              <option *ngFor="let commune of listeCommunes" ngDefaultControl
+                      value="{{commune.nom}}">
+                {{commune.nom}}
+              </option>
+            </select>
             <ng-container
               *ngIf="(commune.dirty && commune.invalid)">
               <p class="text-danger">
@@ -109,7 +120,7 @@
           <div class="col-sm-8">
             <input #codePostal="ngModel" [(ngModel)]="utilisateur.codePostal"
                    [ngModelOptions]="{updateOn: 'blur'}"
-                   class="w-100 text-dark" id="codePostal"
+                   class="w-100 text-dark form-control" id="codePostal"
                    name="codePostal" placeholder="44000"
                    required>
             <ng-container

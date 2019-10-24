@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { DonneesLocalesDto } from '../entities/DonneesLocalesDto';
 import { tap, catchError, map } from 'rxjs/operators';
+import {Commune} from "../entities/commune";
 const URL_BACKEND = environment.backendUrl;
 
 /**
@@ -43,6 +44,21 @@ export class CommuneService {
           this.subDonneesLocales.next(donnees);
         })
       )
+  }
+
+  /**
+   * Méthode envoyant un requête GET pour récuperer la liste des communes de
+   * l'API.
+   */
+  recupererCommunes(): Observable<Commune[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      withCredentials: true,
+    };
+
+    return this.http.get<Commune[]>(URL_BACKEND.concat('/communes'), httpOptions);
   }
 
 
