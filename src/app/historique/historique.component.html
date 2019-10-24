@@ -47,9 +47,11 @@
   ">Rechercher</button>
       </div>
 
-      <p *ngIf="polluantVide" class="text-danger"> Désolé, nous n'avons pas de données enregistrées pour ce polluant
+      <p *ngIf="polluantVide" class="text-danger text-center pt-3"> Désolé, nous n'avons pas de données enregistrées
+        pour ce
+        polluant
         sur cette commune</p>
-      <p *ngIf="erreur != null" class="text-danger">{{ erreur}}</p>
+      <p *ngIf="erreur != null" class="text-danger text-center pt-3">{{ erreur}}</p>
 
 
     </div>

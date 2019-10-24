@@ -106,7 +106,7 @@ export class HistoriqueComponent implements OnInit {
  * @memberof HistoriqueCommunePage
  */
   rechercheHistorique() {
-    if (this.donneesRecherchees.dateDebut.toString > this.donneesRecherchees.dateFin.toString) {
+    if (this.donneesRecherchees.dateDebut > this.donneesRecherchees.dateFin) {
       this.erreur = "Veuillez vérifier les dates saisies";
     } else {
 
