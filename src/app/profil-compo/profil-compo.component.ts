@@ -4,6 +4,7 @@ import { ParamMap, Router, NavigationEnd } from '@angular/router';
 import { UtilisateurProfil } from '../entities/UtilisateurProfil';
 import { Commune } from '../entities/commune';
 import { DataService } from '../services/data.service';
+import { DeconnexionService } from '../services/deconnexion-service';
 
 /**
  * Composant qui gère l'affichage, la modification et la suppression du profil
@@ -21,6 +22,7 @@ export class ProfilCompoComponent implements OnInit {
   suppression: boolean = false;
   listeCommunes: Commune[];
   isErreurRecuperationCommune: boolean;
+  email: string;
 
   /**
    * Constructeur
@@ -33,12 +35,15 @@ export class ProfilCompoComponent implements OnInit {
    * Permet d'afficher les données de l'utilisateur à l'initialisation de la page Profil.
    */
   ngOnInit() {
-    this.profilService.visualiserProfil().subscribe(utilisateurCo => this.utilisateur = utilisateurCo);
+    this.profilService.visualiserProfil().subscribe(utilisateurCo => {
+      this.utilisateur = utilisateurCo;
+      this.email = this.utilisateur.email;
+    });
     this.dataService.recupererCommunes().subscribe(liste => {
       this.isErreurRecuperationCommune = false;
       this.listeCommunes = liste;
     },
-    () => this.isErreurRecuperationCommune = true);
+      () => this.isErreurRecuperationCommune = true);
   }
 
   /**
@@ -47,8 +52,11 @@ export class ProfilCompoComponent implements OnInit {
   modifierProfil() {
     this.profilService.modifierProfil(this.utilisateur).subscribe(result => {
       this.modif = true;
-      window.setTimeout(() => this.router.navigate(['recherche']), 1000);
-      //this.router.navigate(['/recherche']);
+      if (this.utilisateur.email === this.email) {
+        window.setTimeout(() => this.router.navigate(['/recherche']), 1000);
+      } else {
+        window.setTimeout(() => this.router.navigate(['/']), 1000);
+      }
     }, (err: any) => {
       this.error = err.error;
     });
