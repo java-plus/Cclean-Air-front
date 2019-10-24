@@ -10,7 +10,7 @@
           <div class="form-group row">
             <label for="email" class="col-md-4 col-12">Email :</label>
             <div class="col-12 col-md-8">
-              <input type="email" placeholder="admin@mail.com / user@mail.com" class="w-100" required #email="ngModel"
+              <input type="email" placeholder="exemple@mail.com" class="w-100" required #email="ngModel"
                 [(ngModel)]="utilisateur.email" name="email" id="email">
               <ng-container *ngIf="(email.dirty && email.invalid)">
                 <p class="text-danger">
@@ -22,8 +22,8 @@
           <div class="form-group row">
             <label for="motDePasse" class="col-md-4 col-12">Mot de passe :</label>
             <div class="col-12 col-md-8">
-              <input type="password" class="w-100" placeholder="admin / user" required id="motDePasse"
-                #motDePasse="ngModel" [(ngModel)]="utilisateur.motDePasse" name="motDePasse">
+              <input type="password" class="w-100" placeholder="Abcd123$" required id="motDePasse" #motDePasse="ngModel"
+                [(ngModel)]="utilisateur.motDePasse" name="motDePasse">
               <ng-container *ngIf="(motDePasse.dirty && motDePasse.invalid)">
                 <p class="text-danger">
                   Ce champ est invalide.
@@ -31,8 +31,13 @@
               </ng-container>
             </div>
           </div>
-          <div class="form-group text-center pt-2">
-            <button class="btn btn-primary" (click)="authentifier(formAuthentification)">Valider</button>
+          <div class="row p-2 text-center">
+            <div class="col-sm-6">
+              <button class="btn btn-primary float-right" (click)="authentifier(formAuthentification)">Valider</button>
+            </div>
+            <div class="col-sm-auto">
+              <button class="btn btn-primary float-right" routerLink="">Annuler</button>
+            </div>
           </div>
           <p *ngIf="statutErreur==true" class="text-danger font-weight-bold text-center">Identifiants incorrects, merci
             de réessayer.

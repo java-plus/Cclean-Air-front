@@ -1,10 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="navbar-brand">Cclean-Air</div>
-  <button class="navbar-toggler" type="button" (click)="isCollapsed= !isCollapsed" data-toggle="collapse"
-    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-    aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <a class="btn btn-default" routerLink="/recherche">
+    <img class="img-fluid border-none bord center-block" src="assets/img/logo.png" alt="">
+  </a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
     <ul class="navbar-nav mr-auto">
@@ -32,8 +29,8 @@
       </p>
     </ng-container>
     <form class="form-inline my-2 my-lg-0">
-      <button type="btn btn-primary" class="btn btn-primary my-2 my-sm-0"
-        (click)="deconnecter()">Se déconnecter</button>
+      <button type="btn btn-primary" class="btn btn-primary my-2 my-sm-0" (click)="deconnecter()">Se
+        déconnecter</button>
     </form>
   </div>
 </nav>
