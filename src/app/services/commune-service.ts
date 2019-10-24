@@ -1,10 +1,12 @@
-import {Injectable} from '@angular/core';
-import {environment} from 'src/environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, Subject} from 'rxjs';
-import {DonneesLocalesDto} from '../entities/DonneesLocalesDto';
-import {tap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
+import { DonneesLocalesDto } from '../entities/DonneesLocalesDto';
+import { tap, catchError, map } from 'rxjs/operators';
 import {Commune} from "../entities/commune";
+import { DonneesLocalesRecherchees } from '../entities/DonneesLocalesRecherchees';
+import { DonneesLocalesHistorique } from '../entities/DonneesLocalesHistorique';
 
 const URL_BACKEND = environment.backendUrl;
 
@@ -15,6 +17,7 @@ const URL_BACKEND = environment.backendUrl;
   providedIn: 'root'
 })
 export class CommuneService {
+
 
   private subDonneesLocales = new Subject<DonneesLocalesDto>();
 
@@ -35,15 +38,36 @@ export class CommuneService {
    */
   afficherDonneesLocales(codeInsee: string): Observable<DonneesLocalesDto> {
 
+
     const URL = URL_BACKEND + '/communes/' + codeInsee;
 
-    return this.http.get<DonneesLocalesDto>(URL, {withCredentials: true})
+    return this.http.get<DonneesLocalesDto>(URL, { withCredentials: true })
       .pipe(
         tap(donnees => {
 
           this.subDonneesLocales.next(donnees);
         })
       )
+  }
+
+  /**
+    *méthode qui récupère l'objet à afficher pour l'historique
+    *
+    * @param {string} codeInsee
+    * @returns {Observable<DonneesLocalesHistorique>}
+    * @memberof CommuneService
+    */
+  afficherHistorique(codeInsee: string, donneesRecherchees: DonneesLocalesRecherchees): Observable<DonneesLocalesHistorique[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      withCredentials: true
+    };
+
+    const URL = URL_BACKEND + '/communes/historiques/' + codeInsee;
+
+    return this.http.post<DonneesLocalesHistorique[]>(URL, donneesRecherchees, httpOptions);
   }
 
   /**

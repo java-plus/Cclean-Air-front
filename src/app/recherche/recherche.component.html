@@ -6,6 +6,12 @@
       <h1 class="text-center">Recherche d'une commune</h1>
     </div>
     <div class="card-body">
+      <p *ngIf="isErreurChargementCarte" class="font-weight-bold text-danger">
+        Erreur lors de la récupération des communes.
+      </p>
+      <p *ngIf="!isErreurChargementCarte && isErreurChargementDonnees">
+        Erreur lors de la récupération des données de pollution.
+      </p>
       <p class="font-weight-bold pb-2 pt-2">Sélectionner une commune sur la
         carte.</p>
       <div id="map_recherche"></div>

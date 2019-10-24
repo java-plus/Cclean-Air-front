@@ -4,7 +4,7 @@
   </a>
 </u>
 <br/>
-<div *ngIf="commune.alerte"> <br> <p class = "text-danger"> Alerte pollution :<br/> <p>  {{commune.alerte.nomPolluant}} :
+<div *ngIf="commune.alerte"> <br> <p class = "text-danger"> Alerte pollution :<br/> <p>  {{commune.alerte.nom}} :
   {{commune.alerte.valeur}} microg/m3.</p></div>
 <div *ngIf="commune.alerte == null"> <br><p class = "text-success">Aucune alerte pollution.</p></div>
 

@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { UtilisateurAuthentification } from '../entities/utilisateur-authentification';
-import { tap, catchError, map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {environment} from '../../environments/environment';
+import {UtilisateurAuthentification} from '../entities/utilisateur-authentification';
+import {catchError, map} from 'rxjs/operators';
+
 const URL_BACKEND = environment.backendUrl;
 
 /**
@@ -41,10 +42,23 @@ export class AuthentificationService {
    */
   isAdmin(): Observable<boolean> {
 
-    return this.http.get(URL_BACKEND.concat('/profils/statut'), { withCredentials: true, responseType: 'text' })
+    return this.http.get(URL_BACKEND.concat('/profils/statut'), {
+      withCredentials: true,
+      responseType: 'text'
+    })
       .pipe(map(() => true),
         catchError(() => of(false)));
 
+  }
+
+  /**
+   * Méthode envoyant une requête pour savoir en réponse si l'utilisateur est
+   * déjà authentifié.
+   * @return Observable<void>
+   */
+  verificationEstAuthentifie(): Observable<any> {
+    return this.http.get<void>(URL_BACKEND.concat('/connexion'),
+      {withCredentials: true});
   }
 
 }
