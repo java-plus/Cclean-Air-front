@@ -31,16 +31,12 @@
               </ng-container>
             </div>
           </div>
-          <div class="row p-2 text-center">
-            <div class="col-sm-6">
-              <button class="btn btn-primary float-right" (click)="authentifier(formAuthentification)">Valider</button>
-            </div>
-            <div class="col-sm-auto">
-              <button class="btn btn-primary float-right" routerLink="">Annuler</button>
-            </div>
-          </div>
-          <p *ngIf="statutErreur==true" class="text-danger font-weight-bold text-center">Identifiants incorrects, merci
-            de réessayer.
+              <button class="btn btn-primary float-right"
+                      (click)="authentifier(formAuthentification)">Valider</button>
+          <button class="btn btn-dark text-primary float-right"
+                  routerLink="/inscription">Je n'ai pas de compte</button>
+          <p *ngIf="statutErreur==true" class="text-danger font-weight-bold text-center">
+            Identifiants incorrects, merci de réessayer.
           </p>
         </form>
       </div>

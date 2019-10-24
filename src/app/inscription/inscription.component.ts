@@ -21,6 +21,7 @@ export class InscriptionComponent {
   isFormulaireValide = true;
   fonctionnalite = 'create';
   erreurMsg: string;
+  isRGPDCoche: boolean;
 
   /**
    * Constructeur
@@ -33,7 +34,7 @@ export class InscriptionComponent {
    * Méthode de création d'un compte qui appelle la méthode dans le service d'inscription.
    */
   creerCompte(formInscription: NgForm) {
-    if (formInscription.invalid) {
+    if (formInscription.invalid || !this.isRGPDCoche) {
       this.isFormulaireValide = false;
       return;
     }
@@ -42,13 +43,28 @@ export class InscriptionComponent {
         this.isFormulaireValide = true;
         this.isErreurCreation = false;
         this.fonctionnalite = 'read';
-        this.utilisateur = new UtilisateurInscription(null, null, null, null, ['MEMBRE'], null, null, false);
+        this.utilisateur = new UtilisateurInscription(null, null, null, null, ['MEMBRE'], null, '', false);
         },
       (error: HttpErrorResponse) => {
+        this.isFormulaireValide = true;
         this.erreurMsg = error.error;
         this.isErreurCreation = true;
       }
     );
+  }
+
+  /**
+   * Affiche sur la page les informations sur la gestion des données.
+   */
+  afficherRGPD() {
+    this.fonctionnalite = 'rgpd';
+  }
+
+  /**
+   * Affiche sur la page le formulaire de création de compte.
+   */
+  retourAuClic() {
+    this.fonctionnalite = 'create';
   }
 
 }
