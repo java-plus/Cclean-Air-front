@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import {Injectable} from '@angular/core';
+import {environment} from 'src/environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
-import { DonneesLocalesDto } from '../entities/DonneesLocalesDto';
-import { tap, catchError, map } from 'rxjs/operators';
+import {Observable, Subject} from 'rxjs';
+import {DonneesLocalesDto} from '../entities/DonneesLocalesDto';
+import {tap} from 'rxjs/operators';
 import {Commune} from "../entities/commune";
+
 const URL_BACKEND = environment.backendUrl;
 
 /**
@@ -14,7 +15,6 @@ const URL_BACKEND = environment.backendUrl;
   providedIn: 'root'
 })
 export class CommuneService {
-
 
   private subDonneesLocales = new Subject<DonneesLocalesDto>();
 
@@ -26,7 +26,8 @@ export class CommuneService {
    * constructeur
    * @param http
    */
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   /**
    * méthode qui récupère l'objet donneesLocalesDto pour la visualisation des données pour un indicateur à la dernière date d'enregistrement.
@@ -34,10 +35,9 @@ export class CommuneService {
    */
   afficherDonneesLocales(codeInsee: string): Observable<DonneesLocalesDto> {
 
-
     const URL = URL_BACKEND + '/communes/' + codeInsee;
 
-    return this.http.get<DonneesLocalesDto>(URL, { withCredentials: true })
+    return this.http.get<DonneesLocalesDto>(URL, {withCredentials: true})
       .pipe(
         tap(donnees => {
 
@@ -60,6 +60,4 @@ export class CommuneService {
 
     return this.http.get<Commune[]>(URL_BACKEND.concat('/communes'), httpOptions);
   }
-
-
 }
