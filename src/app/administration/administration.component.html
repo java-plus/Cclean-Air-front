@@ -3,19 +3,17 @@
 <section class="container p-5">
   <h1 class="text-center">Administration</h1>
 
-  <button routerLink="/admin/alerte"
-          class="btn btn-outline-primary mt-5">Envoyer une alerte</button>
+  <button routerLink="/admin/alerte" class="btn btn-outline-primary mt-5">Envoyer une alerte</button>
 
-  <div class="card mt-5">
+  <div class="card border-dark mb-3">
 
     <ng-container *ngIf="fonctionnalite==='delete'">
-      <div class="card-header">
-        <h2>Supprimer un membre</h2>
+      <div class="card-header text-white bg-dark mb-3">
+        <h2 class="text-center">Supprimer un membre</h2>
       </div>
       <div class="card-body text-center">
         <p>Etes-vous sûr de vouloir <span class="font-weight-bold">supprimer</span> le
-          membre qui a l'adresse <span
-            class="font-weight-bold">{{emailMembreASupprimer}}</span>
+          membre qui a l'adresse <span class="font-weight-bold">{{emailMembreASupprimer}}</span>
           ?</p>
         <ng-container *ngIf="isErreurSuppressionMembre">
           <p class="text-danger pt-4">Echec de la suppression du membre.
@@ -25,47 +23,44 @@
 
       </div>
       <div class="card-footer d-flex justify-content-center">
-        <button (click)="fonctionnalite = 'read'"
-                class="mr-1 btn btn-primary">Annuler
+        <button (click)="fonctionnalite = 'read'" class="mr-1 btn btn-primary">Annuler
         </button>
-        <button (click)="validerSuppression()"
-                class="btn btn-danger ml-1">Confirmer
+        <button (click)="validerSuppression()" class="btn btn-danger ml-1">Confirmer
         </button>
       </div>
     </ng-container>
 
     <ng-container *ngIf="fonctionnalite==='read'">
-      <div class="card-header">
-        <h2>Liste des membres</h2>
+      <div class="card-header text-white bg-dark mb-3">
+        <h2 class="text-center">Liste des membres</h2>
       </div>
       <div class="card-body">
         <table class="table text-center">
           <thead class="thead-dark">
-          <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Prénom</th>
-            <th scope="col">Message</th>
-            <th scope="col">Suppression</th>
-          </tr>
+            <tr>
+              <th scope="col">Nom</th>
+              <th scope="col">Prénom</th>
+              <th scope="col">Message</th>
+              <th scope="col">Suppression</th>
+            </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let membre of tableauDesMembres">
-            <th scope="row">{{membre.nom | uppercase}}</th>
-            <td>{{membre.prenom}}</td>
-            <td>
-              <a href="mailto:{{membre.email}}">
-                <button class="btn btn-outline-primary">
-                  <fa name="envelope"></fa>
+            <tr *ngFor="let membre of tableauDesMembres">
+              <th scope="row">{{membre.nom | uppercase}}</th>
+              <td>{{membre.prenom}}</td>
+              <td>
+                <a href="mailto:{{membre.email}}">
+                  <button class="btn btn-outline-primary">
+                    <fa name="envelope"></fa>
+                  </button>
+                </a>
+              </td>
+              <td>
+                <button class="btn btn-outline-danger" (click)="demanderSuppression(membre.email)">
+                  <fa name="trash"></fa>
                 </button>
-              </a>
-            </td>
-            <td>
-              <button class="btn btn-outline-danger"
-                      (click)="demanderSuppression(membre.email)">
-                <fa name="trash"></fa>
-              </button>
-            </td>
-          </tr>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -73,4 +68,3 @@
   </div>
 
 </section>
-
