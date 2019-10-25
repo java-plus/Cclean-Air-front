@@ -48,16 +48,12 @@ export class ResultatsRechercheComponent implements OnInit {
               this.icon = "http://openweathermap.org/img/wn/01d@2x.png";
             }
 
-            console.log(this.communeResultat)
-
             if (this.communeResultat == null) {
               this.erreur = "Désolés, nous n'avons pas de données pour cette recherche"
             }
           },
             err => {
               this.erreur = err.error;
-
-              console.log(err)
             });
       }
     );
