@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import {DataService} from '../services/data.service';
-import {CommuneRecherche} from '../entities/CommuneRecherche';
-import {CommuneCarte} from '../entities/CommuneCarte';
-import {Router} from '@angular/router';
-import {NgElement, WithProperties} from '@angular/elements';
-import {RecherchePopupComponent} from '../recherche-popup/recherche-popup.component';
-import {NgForm} from '@angular/forms';
+import { DataService } from '../services/data.service';
+import { CommuneRecherche } from '../entities/CommuneRecherche';
+import { CommuneCarte } from '../entities/CommuneCarte';
+import { Router } from '@angular/router';
+import { NgElement, WithProperties } from '@angular/elements';
+import { RecherchePopupComponent } from '../recherche-popup/recherche-popup.component';
+import { NgForm } from '@angular/forms';
 
 
 /**
@@ -30,7 +30,11 @@ export class RechercheComponent implements OnInit {
   isErreurFormulaire: boolean;
   isErreurRecuperationDonnees: boolean;
   erreurRecuperationDonneesMsg: string;
+  myDate = new Date().toISOString().substr(0, 10);
+  datePassee = new Date();
+  date = new Date();
 
+  myLastDate: string;
 
   /**
    * Constructeur
@@ -81,6 +85,8 @@ export class RechercheComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.datePassee.setDate(this.date.getDate() - 7);
+    this.myLastDate = this.datePassee.toISOString().substr(0, 10);
     this.communeRecherche.date = undefined;
     this.communeRecherche.heure = undefined;
 
@@ -117,7 +123,7 @@ export class RechercheComponent implements OnInit {
          */
         this.listeCommunes.push(commune);
 
-        L.marker([commune.latitude, commune.longitude], {icon: myIcon}).bindPopup(fl => {
+        L.marker([commune.latitude, commune.longitude], { icon: myIcon }).bindPopup(fl => {
           const popupEl: NgElement & WithProperties<RecherchePopupComponent> = document.createElement('recherche-popup-element') as any;
           // Listen to the close event
           popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));

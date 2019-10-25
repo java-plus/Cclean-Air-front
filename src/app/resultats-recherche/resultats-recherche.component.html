@@ -4,7 +4,7 @@
   <div class="card border-dark">
     <div class="card-header  text-white bg-dark mb-3">
       <h2 class="d-flex justify-content-center ">
-        Résulats pour la commune : {{ communeResultat.nom | uppercase }}
+        Résultats pour la commune : {{ communeResultat.nom | uppercase }}
       </h2>
       <h3 class="d-flex justify-content-center ">
         ({{ communeResultat.nbHabitants }} habitants)
@@ -76,9 +76,9 @@
 </div>
 
 <div class="container pt-5" *ngIf="erreur != null">
-  <div class="card">
-    <div class="card-header">
-      Nous sommes vraiment désolé, nous ne pouvons afficher les données de cette
+  <div class="card border-dark mb-3">
+    <div class="card-header text-white bg-dark mb-3">
+      Nous sommes vraiment désolés, nous ne pouvons pas afficher les données de cette
       commune pour la raison suivante :
     </div>
     <div class="card-body text-danger">

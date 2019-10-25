@@ -47,10 +47,14 @@ export class ResultatsRechercheComponent implements OnInit {
             if (this.communeResultat.meteo.ensoleillement > 66) {
               this.icon = "http://openweathermap.org/img/wn/01d@2x.png";
             }
-          });
-      },
-      err => {
-        this.erreur = err.error;
+
+            if (this.communeResultat == null) {
+              this.erreur = "Désolés, nous n'avons pas de données pour cette recherche"
+            }
+          },
+            err => {
+              this.erreur = err.error;
+            });
       }
     );
   }
