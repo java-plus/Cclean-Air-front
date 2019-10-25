@@ -3,8 +3,11 @@ import {UtilisateurInscription} from '../entities/utilisateur-inscription';
 import {InscriptionService} from '../services/inscription-service';
 import {NgForm} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
+import {DataService} from '../services/data.service';
+import {Commune} from '../entities/commune';
+import {CommuneCarte} from '../entities/CommuneCarte';
 import {CommuneService} from "../services/commune-service";
-import {Commune} from "../entities/commune";
+
 
 /**
  * Composant gérant la page d'inscription.
@@ -16,6 +19,8 @@ import {Commune} from "../entities/commune";
 })
 export class InscriptionComponent implements OnInit {
 
+  listeCommunes: Array<CommuneCarte>;
+  communeSelectionne =  '';
   champsInvalideMsg = 'Champ invalide.';
   motDePasseDeConfirmation: string;
   utilisateur: UtilisateurInscription = new UtilisateurInscription(null, null, null, null, ['MEMBRE'], null, null, false);
@@ -24,7 +29,6 @@ export class InscriptionComponent implements OnInit {
   fonctionnalite = 'create';
   erreurMsg: string;
   isRGPDCoche: boolean;
-  listeCommunes: Commune[];
   isErreurRecuperationCommunes: boolean;
 
   /**
@@ -32,9 +36,9 @@ export class InscriptionComponent implements OnInit {
    * @param inscriptionService : InscriptionService le service gérant les inscriptions
    * @param communeService : CommuneService
    */
-  constructor(private inscriptionService: InscriptionService,
-              private communeService: CommuneService) {
+  constructor(private inscriptionService: InscriptionService, private dataService: DataService, private communeService: CommuneService) {
   }
+
 
   /**
    * Méthode de création d'un compte qui appelle la méthode dans le service d'inscription.
@@ -74,13 +78,20 @@ export class InscriptionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.communeService.recupererCommunes()
-      .subscribe(
-        liste => {
-          this.isErreurRecuperationCommunes = false;
-          this.listeCommunes = liste;
-        },
-        () => this.isErreurRecuperationCommunes = true
-      );
+
+
+    this.dataService.recupererCommunesAvecNiveauAlerte().subscribe((communes) => {
+      this.isErreurRecuperationCommunes = false;
+      this.listeCommunes = communes;
+    }, () => this.isErreurRecuperationCommunes = true);
+  }
+
+  modifierSelection(): void {
+    this.listeCommunes.forEach(c => {
+      if (c.nomCommune === this.communeSelectionne) {
+        this.utilisateur.nomCommune = c.nomCommune;
+        this.utilisateur.codePostal = c.codePostal;
+      }
+    });
   }
 }
