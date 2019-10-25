@@ -37,7 +37,7 @@ export class AlerteComponent implements OnInit {
    * @param value
    */
   onChangeSelect(value) {
-    this.alerte.communeInsee = (JSON.stringify(value));
+    this.alerte.communeInsee = value;
   }
 
   /**
