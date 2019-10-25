@@ -99,16 +99,9 @@
         <div class="row p-2">
           <label class="col-sm-4" for="commune">Commune</label>
           <div class="col-sm-8">
-            <select #commune="ngModel" [(ngModel)]="utilisateur.nomCommune"
-                    class="text-dark form-control" id="commune" name="commune"
-                    required>
-              <option *ngFor="let commune of listeCommunes" ngDefaultControl
-                      value="{{commune.nom}}">
-                {{commune.nom}}
-              </option>
-            </select>
-            <ng-container
-              *ngIf="(commune.dirty && commune.invalid)">
+            <input list="listeCommunes" [(ngModel)]="communeSelectionne" class="w-100 text-dark form-control"  type= "text" #commune="ngModel"
+                   id="commune" name="commune" [ngModelOptions]="{updateOn: 'blur'}" value="{{communeSelectionne}}" (ngModelChange)="modifierSelection()" required>
+            <ng-container *ngIf="(commune.dirty && commune.invalid)">
               <p class="text-danger">
                 {{champsInvalideMsg}}
               </p>
@@ -183,6 +176,13 @@
       </button>
     </div>
   </div>
+
+
+  <datalist id="listeCommunes">
+    <option *ngFor="let commune of listeCommunes" [value]="commune.nomCommune">{{commune.codePostal}}</option>
+  </datalist>
+
+
 </section>
 <ng-container *ngIf="fonctionnalite === 'rgpd'">
   <section class="container p-5">
