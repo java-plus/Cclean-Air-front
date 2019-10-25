@@ -1,7 +1,7 @@
 <div class="container mt-5" *ngIf="affichageIndicateurs">
-  <div class="card">
-    <div class="card-header">
-      <h2>Vos indicateurs</h2>
+  <div class="card border-dark">
+    <div class="card-header text-white bg-dark mb-3">
+      <h2 class="text-center">Vos indicateurs</h2>
     </div>
     <div class="card-body">
       <div *ngIf="indicateurVide" class="mt-5">
@@ -31,10 +31,11 @@
 </div>
 
 <div class="container mt-5 " *ngIf="suppressionIndicateur">
-  <div class="card">
+  <div class="card border-dark">
 
-    <div class="card-header">
-      Confirmez-vous la suppression de l'indicateur pour la commune : {{communeSuppression.nomCommune}} ?
+    <div class="card-header text-white bg-dark mb-3">
+      <h3 class="text-center">Confirmez-vous la suppression de l'indicateur pour la commune :
+        {{communeSuppression.nomCommune}} ?</h3>
     </div>
 
 

@@ -1,60 +1,91 @@
-<div class="container">
-<h3 class="text-center">Resultat pour la commune : {{communeResultat.nom}}</h3>
-<h4 class="text-center" *ngIf="communeResultat.date && communeResultat.heure">Le {{communeResultat.date | date:'dd/MM/yyyy'}} à {{communeResultat.heure}}h</h4>
-<h4 class="font-weight-bold">Alerte pollution :
-<p *ngIf="communeResultat?.niveauAlerte === null" class="text-success">Aucune alerte</p>
-  <p *ngIf="communeResultat?.niveauAlerte != null" class="text-danger">{{communeResultat?.niveauAlerte}}</p>
-</h4>
+<app-menu></app-menu>
 
-<div class="mt-4">
-  <h4 class="font-weight-bold">Polluants</h4>
+<div class="container pt-5" *ngIf="erreur == null">
+  <div class="card border-dark">
+    <div class="card-header  text-white bg-dark mb-3">
+      <h2 class="d-flex justify-content-center ">
+        Résulats pour la commune : {{ communeResultat.nom | uppercase }}
+      </h2>
+      <h3 class="d-flex justify-content-center ">
+        ({{ communeResultat.nbHabitants }} habitants)
+      </h3>
+      <h3 class="text-center">
+        Le {{communeResultat.date | date: "dd/MM/yyyy"}} à {{communeResultat?.heure | slice:0:5}}
+      </h3>
+    </div>
 
+    <div class="card-body">
+      <div class="row d-flex justify-content-center">
+        <button type="button" class="btn btn-primary mr-5" (click)="retourRecherche()">
+          Retour
+        </button>
+        <button type="button" class="btn btn-primary ml-5" routerLink="/historique/{{ communeResultat.codeInsee }}">
+          Historique
+        </button>
+      </div>
+
+      <div class=" pt-5">
+        <div class="row d-flex justify-content-around ">
+          <img src="{{ icon }}" alt="" />
+        </div>
+
+        <div class="pt-5 ">
+          <div class="card mx-auto border-dark mb-3" style="width: 24rem;">
+            <div class="card-body">
+              <h5 class="card-title text-center">Conditions météo</h5>
+              <div class="row mx-auto">
+                <div class="col-6 ">
+                  Température:
+                </div>
+                <div class="col-6 text-left">
+                  {{ communeResultat?.meteo?.temperature | number: "1.0-0" }}°C
+                </div>
+
+                <div class="col-6 ">
+                  Ensoleillement:
+                </div>
+                <div class="col-6 text-left">
+                  {{ communeResultat?.meteo?.ensoleillement }}%
+                </div>
+
+                <div class="col-6 ">
+                  Humidité:
+                </div>
+                <div class="col-6 text-left">
+                  {{ communeResultat?.meteo?.humidite }}%
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mx-auto border-dark mb-3" style="width: 24rem;">
+            <div class="card-body">
+              <h5 class="card-title text-center">Polluants</h5>
+              <div class="row mx-auto" *ngFor="let polluant of communeResultat.polluants">
+                <div class="col-6">{{ polluant.nom }}:</div>
+                <div class="col-6 text-left">
+                  {{ polluant.valeur }} {{ polluant.unite }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="row" *ngFor="let polluant of communeResultat.polluants">
-<div  class="col">
-  {{polluant?.nom}}
+
+<div class="container pt-5" *ngIf="erreur != null">
+  <div class="card">
+    <div class="card-header">
+      Nous sommes vraiment désolé, nous ne pouvons afficher les données de cette
+      commune pour la raison suivante :
+    </div>
+    <div class="card-body text-danger">
+      <div>{{ erreur }}</div>
+      <button type="button" class="btn btn-primary mt-3" (click)="retourRecherche()">
+        Retour
+      </button>
+    </div>
+  </div>
 </div>
-  <div  class="col">
-    {{polluant?.valeur}}
-  </div>
-  <div  class="col">
-    {{polluant?.unite}}
-  </div>
-</div>
-
-  <div class="mt2 row">
-    <div class="col font-weight-bold">Nombre d'habitants :</div>
-    <div class="col">{{communeResultat?.nbHabitants}}</div>
-    <div class="col"></div>
-  </div>
-
-  <div class="mt-4">
-    <h4 class="font-weight-bold">Conditions météo</h4>
-
-  </div>
-  <div class="row">
-    <div class="col">Température</div>
-    <div class="col">{{communeResultat?.meteo?.temperature}}°C</div>
-    <div class="col"></div>
-  </div>
-  <div class="row">
-    <div class="col">Humidité</div>
-    <div class="col">{{communeResultat?.meteo?.humidite}}%</div>
-    <div class="col"></div>
-  </div>
-  <div class="row">
-    <div class="col">Ensoleillement</div>
-    <div class="col">{{communeResultat?.meteo?.ensoleillement}}%</div>
-    <div class="col"></div>
-  </div>
-
-
-
-</div>
-
-
-
-
-
-
-

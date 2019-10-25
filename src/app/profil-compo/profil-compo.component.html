@@ -1,7 +1,7 @@
 <app-menu></app-menu>
 <section class="container p-5" *ngIf="suppression == false">
-  <div class="card bg-light text-dark">
-    <h1 class="p-3 card-header text-center">Mon Profil</h1>
+  <div class="card border-dark">
+    <h1 class="p-3 card-header text-white bg-dark mb-3 text-center">Mon Profil</h1>
     <form class="card-body">
       <div class="form-group text-left">
         <div class="row p-2">
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="row p-2">
-          <label class="col-sm-4" for="statutNotification">Alerte ma commune</label>
+          <label class="col-sm-4" for="statutNotification">Alerte pour ma commune</label>
           <div class="col-sm-8">
             <div class="row p-2">
               <input type="checkbox" class="text-dark" id="statutNotification" name="statutNotification"
@@ -88,7 +88,7 @@
           <div class="col-sm-6">
             <button type="submit" class="btn btn-primary float-right" (click)="modifierProfil()"
               [disabled]="nom.value=='' || prenom.value=='' || email.value=='' || commune.value=='' || (mdp.dirty && mdp.invalid)">Modifier
-              Profil</button>              
+              Profil</button>
           </div>
           <div class="col-sm-auto">
             <button type="submit" class="btn btn-primary float-right" (click)="demanderSuppression()">Supprimer

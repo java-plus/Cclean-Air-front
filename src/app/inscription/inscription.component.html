@@ -9,44 +9,39 @@
         Merci de vérifier votre connexion ou de réessayer plus tard.
       </p>
     </ng-container>
-    <form #formInscription="ngForm" *ngIf="fonctionnalite !== 'read'"
-          class="card-body">
+    <form #formInscription="ngForm" *ngIf="fonctionnalite !== 'read'" class="card-body">
+
       <div class="form-group text-left">
         <div class="row p-2">
           <label class="col-sm-4" for="nom">Nom</label>
           <div class="col-sm-8">
-            <input #nom="ngModel" [(ngModel)]="utilisateur.nom"
-                   [ngModelOptions]="{updateOn: 'blur'}"
-                   class="w-100 text-dark form-control"
-                   id="nom" name="nom" placeholder="Holliway" required>
-            <p *ngIf="(nom.dirty && nom.invalid)"
-               class="text-danger">{{champsInvalideMsg}}</p>
+
+            <input #nom="ngModel" [(ngModel)]="utilisateur.nom" [ngModelOptions]="{updateOn: 'blur'}"
+              class="w-100 text-dark form-control" id="nom" name="nom" placeholder="Holliway" required>
+            <p *ngIf="(nom.dirty && nom.invalid)" class="text-danger">{{champsInvalideMsg}}</p>
+
           </div>
         </div>
         <div class="row p-2">
           <label class="col-sm-4" for="prenoms">Prénom</label>
           <div class="col-sm-8">
-            <input #prenoms="ngModel" [(ngModel)]="utilisateur.prenom"
-                   [ngModelOptions]="{updateOn: 'blur'}"
-                   class="w-100 text-dark form-control"
-                   id="prenoms" name="prenoms" placeholder="Louis" required>
-            <p *ngIf="(prenoms.dirty && prenoms.invalid)"
-               class="text-danger">{{champsInvalideMsg}}</p>
+
+            <input #prenoms="ngModel" [(ngModel)]="utilisateur.prenom" [ngModelOptions]="{updateOn: 'blur'}"
+              class="w-100 text-dark form-control" id="prenoms" name="prenoms" placeholder="Louis" required>
+            <p *ngIf="(prenoms.dirty && prenoms.invalid)" class="text-danger">{{champsInvalideMsg}}</p>
+
           </div>
         </div>
         <div class="row p-2">
           <label class="col-sm-4" for="email">Email</label>
           <div class="col-sm-8">
-            <input #email="ngModel" [(ngModel)]="utilisateur.email"
-                   [ngModelOptions]="{updateOn: 'blur'}"
-                   class="w-100 text-dark form-control"
-                   id="email"
-                   name="email"
-                   pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
-                   placeholder="louis@mail.fr" required
-                   type="email">
-            <ng-container
-              *ngIf="(email.dirty && email.invalid)">
+
+            <input #email="ngModel" [(ngModel)]="utilisateur.email" [ngModelOptions]="{updateOn: 'blur'}"
+              class="w-100 text-dark form-control" id="email" name="email"
+              pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+              placeholder="louis@mail.fr" required type="email">
+            <ng-container *ngIf="(email.dirty && email.invalid)">
+
               <p class="text-danger">
                 {{champsInvalideMsg}}
               </p>
@@ -56,21 +51,17 @@
         <div class="row p-2">
           <label class="col-sm-4" for="motDePasse">Mot de passe</label>
           <div class="col-sm-8">
-            <input
-              #mdp="ngModel"
-              [(ngModel)]="utilisateur.motDePasse"
-              [ngModelOptions]="{updateOn: 'blur'}" aria-describedby="mdpAide"
-              class="w-100 text-dark form-control" id="motDePasse"
-              name="motDePasse"
-              pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
-              placeholder="$5dsfIUH!è" type="password">
+
+            <input #mdp="ngModel" [(ngModel)]="utilisateur.motDePasse" [ngModelOptions]="{updateOn: 'blur'}"
+              aria-describedby="mdpAide" class="w-100 text-dark form-control" id="motDePasse" name="motDePasse"
+              pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" placeholder="$5dsfIUH!è"
+              type="password">
             <small class="form-text text-muted" id="mdpAide">
               Doit comporter au moins 8 caractères dont 1 majuscule, 1
               minuscule,
               1 caractère spécial et 1 chiffre.
             </small>
-            <ng-container
-              *ngIf="(mdp.dirty && mdp.invalid)">
+            <ng-container *ngIf="(mdp.dirty && mdp.invalid)">
               <p class="text-danger">
                 {{champsInvalideMsg}}
               </p>
@@ -82,14 +73,12 @@
             Valider le mot de passe
           </label>
           <div class="col-sm-8">
-            <input #mdp2="ngModel" [(ngModel)]="motDePasseDeConfirmation"
-                   [ngModelOptions]="{updateOn: 'blur'}"
-                   class="w-100 text-dark form-control"
-                   id="motDePasse2" name="motDePasse2"
-                   placeholder="$5dsfIUH!è"
-                   type="password">
-            <ng-container
-              *ngIf="(mdp2.dirty && motDePasseDeConfirmation !== utilisateur.motDePasse)">
+
+            <input #mdp2="ngModel" [(ngModel)]="motDePasseDeConfirmation" [ngModelOptions]="{updateOn: 'blur'}"
+              class="w-100 text-dark form-control" id="motDePasse2" name="motDePasse2" placeholder="$5dsfIUH!è"
+              type="password">
+            <ng-container *ngIf="(mdp2.dirty && motDePasseDeConfirmation !== utilisateur.motDePasse)">
+
               <p class="text-danger">
                 Les mots de passe ne correspondent pas.
               </p>
@@ -99,9 +88,11 @@
         <div class="row p-2">
           <label class="col-sm-4" for="commune">Commune</label>
           <div class="col-sm-8">
-            <input list="listeCommunes" [(ngModel)]="communeSelectionne" class="w-100 text-dark form-control"  type= "text" #commune="ngModel"
-                   id="commune" name="commune" [ngModelOptions]="{updateOn: 'blur'}" value="{{communeSelectionne}}" (ngModelChange)="modifierSelection()" required>
+            <input list="listeCommunes" [(ngModel)]="communeSelectionne" class="w-100 text-dark form-control"
+              type="text" #commune="ngModel" id="commune" name="commune" [ngModelOptions]="{updateOn: 'blur'}"
+              value="{{communeSelectionne}}" (ngModelChange)="modifierSelection()" required>
             <ng-container *ngIf="(commune.dirty && commune.invalid)">
+
               <p class="text-danger">
                 {{champsInvalideMsg}}
               </p>
@@ -111,13 +102,11 @@
         <div class="row p-2">
           <label class="col-sm-4" for="codePostal">Code postal</label>
           <div class="col-sm-8">
-            <input #codePostal="ngModel" [(ngModel)]="utilisateur.codePostal"
-                   [ngModelOptions]="{updateOn: 'blur'}"
-                   class="w-100 text-dark form-control" id="codePostal"
-                   name="codePostal" placeholder="44000"
-                   required>
-            <ng-container
-              *ngIf="(codePostal.dirty && codePostal.invalid)">
+
+            <input #codePostal="ngModel" [(ngModel)]="utilisateur.codePostal" [ngModelOptions]="{updateOn: 'blur'}"
+              class="w-100 text-dark form-control" id="codePostal" name="codePostal" placeholder="44000" required>
+            <ng-container *ngIf="(codePostal.dirty && codePostal.invalid)">
+
               <p class="text-danger">
                 {{champsInvalideMsg}}
               </p>
@@ -126,36 +115,30 @@
         </div>
       </div>
       <div class="form-check p-2 ml-5">
-        <input [(ngModel)]="utilisateur.statutNotification"
-               class="form-check-input" id="checkboxAlerte"
-               name="alerteCheckbox"
-               type="checkbox">
+        <input [(ngModel)]="utilisateur.statutNotification" class="form-check-input" id="checkboxAlerte"
+          name="alerteCheckbox" type="checkbox">
+
         <label class="form-check-label" for="checkboxAlerte">
           Je souhaite recevoir des alertes pollution pour ma commune.
         </label>
       </div>
       <div class="form-check p-2 ml-5">
-        <input [(ngModel)]="isRGPDCoche" class="form-check-input"
-               id="checkboxRGPD" name="RGPDCheckbox" required
-               type="checkbox">
+        <input [(ngModel)]="isRGPDCoche" class="form-check-input" id="checkboxRGPD" name="RGPDCheckbox" required
+          type="checkbox">
         <label class="form-check-label" for="checkboxRGPD">
           <span class="text-secondary">[Requis]</span> J'accepte que Cclean-Air
           reccueille les données de ce formulaire.
           Pour plus d'informations sur le traitement de ces données, consultez
           notre page :
         </label>
-        <button (click)="afficherRGPD()"
-                class="text-primary btn btn-dark">
+        <button (click)="afficherRGPD()" class="text-primary btn btn-dark">
           informations relatives à la gestion des données
         </button>
       </div>
-      <button (click)="creerCompte(formInscription)"
-              class="btn btn-primary float-right"
-              type="submit">
+      <button (click)="creerCompte(formInscription)" class="btn btn-primary float-right" type="submit">
         Créer mon compte
       </button>
-      <button class="btn btn-dark text-primary float-right"
-              routerLink="/connexion">
+      <button class="btn btn-dark text-primary float-right" routerLink="/connexion">
         J'ai déjà un compte
       </button>
       <p *ngIf="isErreurCreation" class="text-danger font-weight-bold">
@@ -164,8 +147,7 @@
           {{erreurMsg}}
         </ng-container>
       </p>
-      <p *ngIf="!isFormulaireValide"
-         class="text-danger text-center font-weight-bold">
+      <p *ngIf="!isFormulaireValide" class="text-danger text-center font-weight-bold">
         Le formulaire n'est pas valide. Merci de le corriger.
       </p>
     </form>

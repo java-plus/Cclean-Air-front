@@ -10,10 +10,8 @@
           <div class="form-group row">
             <label class="col-md-4 col-12" for="email">Email :</label>
             <div class="col-12 col-md-8">
-              <input #email="ngModel" [(ngModel)]="utilisateur.email"
-                     class="w-100 form-control"
-                     id="email" name="email"
-                     placeholder="exemple@mail.com" required type="email">
+              <input #email="ngModel" [(ngModel)]="utilisateur.email" class="w-100 form-control" id="email" name="email"
+                placeholder="exemple@mail.com" required type="email">
               <ng-container *ngIf="(email.dirty && email.invalid)">
                 <p class="text-danger">
                   Ce champ est invalide.
@@ -26,11 +24,8 @@
               Mot de passe :
             </label>
             <div class="col-12 col-md-8">
-              <input #motDePasse="ngModel"
-                     [(ngModel)]="utilisateur.motDePasse"
-                     class="w-100 form-control"
-                     id="motDePasse" name="motDePasse" placeholder="Abcd123$"
-                     required type="password">
+              <input #motDePasse="ngModel" [(ngModel)]="utilisateur.motDePasse" class="w-100 form-control"
+                id="motDePasse" name="motDePasse" placeholder="Abcd123$" required type="password">
               <ng-container *ngIf="(motDePasse.dirty && motDePasse.invalid)">
                 <p class="text-danger">
                   Ce champ est invalide.
@@ -38,19 +33,17 @@
               </ng-container>
             </div>
           </div>
-          <button (click)="authentifier(formAuthentification)"
-                  class="btn btn-primary float-right">Valider
+          <button (click)="authentifier(formAuthentification)" class="btn btn-primary float-right">Valider
           </button>
-          <button class="btn btn-dark text-primary float-right"
-                  routerLink="/inscription">
+          <button class="btn btn-dark text-primary float-right" routerLink="/inscription">
             Je n'ai pas de compte
           </button>
-          <p *ngIf="statutErreur==true"
-             class="text-danger font-weight-bold text-center">
+          <p *ngIf="statutErreur==true" class="text-danger font-weight-bold text-center">
             Identifiants incorrects, merci de réessayer.
           </p>
         </form>
       </div>
+
     </div>
   </div>
 

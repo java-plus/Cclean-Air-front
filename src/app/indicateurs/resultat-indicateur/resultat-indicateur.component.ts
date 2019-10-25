@@ -6,6 +6,8 @@ import { CommuneIndicateur } from 'src/app/entities/commune-indicateur';
 import { CommuneDtoVisualisation } from 'src/app/entities/CommuneDtovisualisation';
 import { PolluantDtoVisualisation } from 'src/app/entities/PolluantDtoVisualisation';
 import { ConditionMeteoDtoVisualisation } from 'src/app/entities/ConditionMeteoDtoVisualisation';
+import { NotificationService } from 'src/app/services/notification.service';
+import { CommuneAlerte } from 'src/app/entities/commune-alerte';
 
 @Component({
   selector: 'app-resultat-indicateur',
@@ -16,6 +18,8 @@ export class ResultatIndicateurComponent implements OnInit {
 
   codeInsee: string;
 
+  icon: string;
+
   commune = new CommuneDtoVisualisation('', null);
   meteo = new ConditionMeteoDtoVisualisation(null, null, null);
   polluant: PolluantDtoVisualisation[] = [];
@@ -25,6 +29,12 @@ export class ResultatIndicateurComponent implements OnInit {
     this.polluant, this.meteo, null);
 
   erreur: string;
+
+  listeCommuneAlertes: CommuneAlerte[] = [];
+
+  alerte = false;
+
+  listePolluantsAlerte: string[] = [];
 
   /**
   * indicateur à modifier récupérer depuis la page de visualisation
@@ -46,7 +56,7 @@ export class ResultatIndicateurComponent implements OnInit {
    * constructeur
    * @param communeService
    */
-  constructor(private route: ActivatedRoute, private communeService: CommuneService) { }
+  constructor(private route: ActivatedRoute, private communeService: CommuneService, private notificationService: NotificationService) { }
 
   /**
    * méthode qui initialise les résultats pour la commune lorsque l'on visualise un indicateur
@@ -60,6 +70,32 @@ export class ResultatIndicateurComponent implements OnInit {
         donnees => {
 
           this.donneesLocales = donnees;
+
+
+          if (this.donneesLocales.conditionMeteo.humidite > 66) {
+            this.icon = 'http://openweathermap.org/img/wn/09d@2x.png';
+          } else {
+            this.icon = 'http://openweathermap.org/img/wn/02d@2x.png';
+          }
+          if (this.donneesLocales.conditionMeteo.ensoleillement > 66) {
+            this.icon = 'http://openweathermap.org/img/wn/01d@2x.png';
+          }
+
+          this.notificationService.recupererAlertesPollutionPourTousIndicateurs()
+            .subscribe(
+              data => {
+                this.listeCommuneAlertes = data;
+                if (this.listeCommuneAlertes != null) {
+                  this.listeCommuneAlertes.forEach(commune => {
+                    if (commune.nomCommune === this.donneesLocales.commune.nom) {
+                      this.alerte = true;
+                      this.listePolluantsAlerte.push(commune.nomPolluant);
+                    }
+                  });
+                }
+              }
+            );
+
         }, err => {
           this.erreur = err.error;
 

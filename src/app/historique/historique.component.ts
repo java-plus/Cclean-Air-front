@@ -115,7 +115,8 @@ export class HistoriqueComponent implements OnInit {
         this.dataTab = [];
         this.labels = [];
       }
-
+      this.erreur = null;
+      this.polluantVide = false;
       this.donneesRecherchees.dateDebut = this.donneesRecherchees.dateDebut.concat('T00:00:00.000+02:00');
       this.donneesRecherchees.dateFin = this.donneesRecherchees.dateFin.concat('T23:59:00.000+02:00');
       this.communeService
