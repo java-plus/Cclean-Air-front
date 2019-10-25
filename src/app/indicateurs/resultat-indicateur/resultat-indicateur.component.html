@@ -1,31 +1,24 @@
 <div class="container pt-5" *ngIf="erreur == null">
-  <div class="card border-dark">
+  <div class="card border-dark mb-3">
     <div class="card-header  text-white bg-dark mb-3">
-      <h2 class="d-flex justify-content-center ">
-        Résulats pour la commune : {{ donneesLocales.commune.nom | uppercase }}
+      <h2 class="text-center ">
+        Résulats pour la commune :
       </h2>
-      <h3 class="d-flex justify-content-center ">
+      <h2 class="text-center ">{{ donneesLocales.commune.nom | uppercase }}</h2>
+      <h3 class="text-center">
         ({{ donneesLocales?.commune?.nbHabitants }} habitants)
       </h3>
-      <h3 class="d-flex justify-content-center ">
+      <h3 class="text-center">
         Le {{ donneesLocales.date | date: "dd/MM/yyyy à HH:mm" }}
       </h3>
     </div>
 
     <div class="card-body">
       <div class="row d-flex justify-content-center">
-        <button
-          type="button"
-          class="btn btn-primary mr-5"
-          (click)="retourIndicateur()"
-        >
+        <button type="button" class="btn btn-primary mr-5" (click)="retourIndicateur()">
           Retour
         </button>
-        <button
-          type="button"
-          class="btn btn-primary ml-5"
-          routerLink="/historique/{{ indicateurCourant.codeInsee }}"
-        >
+        <button type="button" class="btn btn-primary ml-5" routerLink="/historique/{{ indicateurCourant.codeInsee }}">
           Historique
         </button>
       </div>
@@ -64,10 +57,13 @@
           <div class="card mx-auto border-dark mb-3" style="width: 24rem;">
             <div class="card-body">
               <h5 class="card-title text-center">Polluants</h5>
-              <div
-                class="row mx-auto"
-                *ngFor="let polluant of donneesLocales.listePolluants"
-              >
+              <div class="alert alert-success" role="alert" *ngIf="!alerte">
+                Aucune alerte pollution
+              </div>
+              <div class="alert alert-danger text-center" role="alert" *ngIf="alerte">
+                Alerte pollution en cours
+              </div>
+              <div class="row mx-auto" *ngFor="let polluant of donneesLocales.listePolluants">
                 <div class="col-6 ">{{ polluant.nom }}:</div>
                 <div class="col-6 text-left">
                   {{ polluant.valeur }} {{ polluant.unite }}
@@ -89,11 +85,7 @@
     </div>
     <div class="card-body text-danger">
       <div>{{ erreur }}</div>
-      <button
-        type="button"
-        class="btn btn-primary mt-3"
-        (click)="retourIndicateur()"
-      >
+      <button type="button" class="btn btn-primary mt-3" (click)="retourIndicateur()">
         Retour
       </button>
     </div>
