@@ -1,4 +1,4 @@
-import {PolluantDto} from './PolluantDto';
+import { PolluantDto } from './PolluantDto';
 
 export class CommuneRecherche {
   public codeEtNom: {
@@ -10,6 +10,6 @@ export class CommuneRecherche {
 
 
   // A CORRIGER
-  public heure: number;
+  public heure: string;
   public date: Date;
 }

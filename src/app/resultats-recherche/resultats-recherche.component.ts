@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ResultatRechercheCommune } from "../entities/ResultatRechercheCommune";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, RouterLink, Router } from "@angular/router";
 import { DataService } from "../services/data.service";
 import { CommuneRecherche } from "../entities/CommuneRecherche";
 
@@ -16,8 +16,8 @@ export class ResultatsRechercheComponent implements OnInit {
 
   constructor(
     private service: DataService,
-    private activatedroute: ActivatedRoute
-  ) {}
+    private activatedroute: ActivatedRoute, private router: Router
+  ) { }
 
   public communeResultat = new ResultatRechercheCommune();
   public communeRecherche = new CommuneRecherche();
@@ -53,5 +53,9 @@ export class ResultatsRechercheComponent implements OnInit {
         this.erreur = err.error;
       }
     );
+  }
+
+  retourRecherche() {
+    this.router.navigate(["/recherche"]);
   }
 }
