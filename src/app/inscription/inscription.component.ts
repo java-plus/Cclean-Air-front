@@ -80,7 +80,7 @@ export class InscriptionComponent implements OnInit {
   ngOnInit() {
 
 
-    this.dataService.recupererCommunesAvecNiveauAlerte().subscribe((communes) => {
+    this.dataService.recupererCommunesInscription().subscribe((communes) => {
       this.isErreurRecuperationCommunes = false;
       this.listeCommunes = communes;
     }, () => this.isErreurRecuperationCommunes = true);
