@@ -4,6 +4,7 @@ import {Commune} from '../../entities/commune';
 import {AlerteAdministrateur} from '../../entities/alerte-administeur';
 import {NgForm} from '@angular/forms';
 import {AdministrationService} from '../../services/administration-service';
+import {Router} from "@angular/router";
 
 /**
  * Composant gérant la page de création et d'envoi d'une alerte aux membres
@@ -28,8 +29,11 @@ export class AlerteComponent implements OnInit {
    * Constructeur
    * @param _dataService : DataService
    * @param _administrationService : AdministrationService
+   * @param router : Router
    */
-  constructor(private _dataService: DataService, private _administrationService: AdministrationService) {
+  constructor(private _dataService: DataService,
+              private _administrationService: AdministrationService,
+              private router: Router) {
   }
 
   /**
@@ -51,7 +55,10 @@ export class AlerteComponent implements OnInit {
     } else {
       this.isErreurFormulaire = false;
       this._administrationService.envoyerAlerte(this.alerte).subscribe(
-        () => this.isAlerteEnvoyee = true,
+        () => {
+          this.isAlerteEnvoyee = true;
+          this.router.navigate(['/admin']);
+        },
         (error => {
           this.isErreurAlerte = true;
           this.erreurAlerteMsg = error.error;
