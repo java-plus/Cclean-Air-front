@@ -37,6 +37,20 @@ export class DataService {
     return this.http.get<Array<CommuneCarte>>(URL_BACKEND.concat('/donnees_carte'), httpOptions);
   }
 
+  /**
+   * Récupère la liste des communes nécéssaires à l'autocomplétion lors de l'inscription
+   */
+  recupererCommunesInscription(): Observable<Array<CommuneCarte>> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      withCredentials: true,
+    };
+
+    return this.http.get<Array<CommuneCarte>>(URL_BACKEND.concat('/communes/inscription'), httpOptions);
+  }
+
 
   recupererDonneesCommune(commune: CommuneRecherche): Observable<ResultatRechercheCommune> {
     const httpOptions = {
